@@ -88,9 +88,49 @@ Concretly, this thesis makes the following contributions:
 
 \section{Outline of this Paper}
 
-While ModelDB Server has functionality for storing and extracting information from
-all kinds of models, it stores extra information and provides richer APIs for 
-Logistic Regression, Linear Regression, Decision Tree, Random Forest, and 
-Gradient Boosted Tree models. Therefore, it is worth discussing those models
-here.
+Chapter 2 covers related work. It first discusses machine learning in general,
+exposing the key concepts that are relevant in the model building process. The
+discussion then shifts to linear and tree models in particular, because ModelDB
+Server and Spark Client have special support for these kinds of models. Next, Spark
+and Spark ML are briefly described. The chapter then proceeds to discuss popular
+machine libraries and their abstractions and concludes by discussing other machine
+learning support systems.
 
+Chapter 3 covers the abstractions used in ModelDB Server and ModelDB Spark Client.
+It begins with a discussion of Transformer, TransformerSpec, and DataFrame, which 
+the primitives that are used to create the other abstractions. Next, the chapter
+introduces the Syncable Event abstraction, which represents a machine learning
+operation that can logged. Then, some of the simple Syncable Events, like FitEvent,
+which represents the fitting of a model, are described. Next, more complicated Syncable
+Events, like PipelineEvent are discussed. The chapter then moves on to discuss the
+abstractions for representing linear and tree models. Finally, the ModelDBSyncer,
+a client side abstraction for sending events to ModelDB Server, is discussed.
+
+Chapter 4 covers algorithms used in ModelDB Server and ModelDB Spark Client. It 
+begins with storage algorithms which capture the complexities involved in storing
+and connecting the Syncable Events. The next topic is ancestry algorithms, which
+operate on the ancestry chain of DataFrames. The chapter then talks about algorithms
+that operate on the feature sets of models and and algorithms that compare, rank,
+and group models. Finally, the chapter discusses algorithms for linear models
+and tree models.
+
+Chapter 5 covers implementation. It starts with an overall view of the system,
+including ModelDB Server, the database, the model filesystem, Spark, and more. 
+Then, attention shifts to an outline of the ModelDB Server's implementation. Next,
+the chapter discusses the Spark Client implementation. The chapter concludes with
+a discussion of how applications can be built on top of ModelDB Server.
+
+Chapter 6 is the evaluation. It first describes an experiment run to measure the
+time and space overhead of collecting operations and models from Spark and recording
+them in the ModelDB Server. The chapter then describes an experiment to measure
+the time taken to run some of the more complicated API methods exposed by ModelDB Server.
+Finally, the chapter presents the results of the experiments and discusses potential performance
+improvements.
+
+Chapter 7 describes the role of ModelDB Server and ModelDB Spark Client in ModelDB,
+a larger system that includes other components like a client library for Scikit-learn,
+a command line toolkit, a prediction store, and a visualization application.
+
+Chapter 8 covers potential future work that could be done on ModelDB Server and Spark Client.
+
+Chapter 9 concludes the paper.
