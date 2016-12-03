@@ -2,9 +2,30 @@
   \newcommand{\singleletter}[1]{#1} \newcommand{\switchargs}[2]{#2#1}
 \begin{thebibliography}{1}
 
-\bibitem{Breiman}
-Leo~Breiman Statistics and Leo Breiman.
-\newblock Random forests.
-\newblock pages 5--32, 2001.
+\bibitem{kaggledirectory}
+Kaggle.
+\newblock Kaggle: How to manage machine learning projects.
+\newblock
+  \url{https://www.kaggle.com/forums/f/15/kaggle-forum/t/4815/how-to-manage-machine-learning-projects?forumMessageId=25484#post25484}.
+\newblock Accessed 2016-12-03.
+
+\bibitem{netflixprize}
+Yehuda Koren.
+\newblock The bellkor solution to the netflix grand prize.
+\newblock {\em Netflix prize documentation}, 81:1--10, 2009.
+
+\bibitem{tumorprediction}
+Konstantina Kourou, Themis~P Exarchos, Konstantinos~P Exarchos, Michalis~V
+  Karamouzis, and Dimitrios~I Fotiadis.
+\newblock Machine learning applications in cancer prognosis and prediction.
+\newblock {\em Computational and structural biotechnology journal}, 13:8--17,
+  2015.
+
+\bibitem{deepface}
+Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
+\newblock Deepface: Closing the gap to human-level performance in face
+  verification.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 1701--1708, 2014.
 
 \end{thebibliography}

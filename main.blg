@@ -7,46 +7,44 @@ A level-1 auxiliary file: chap1.aux
 A level-1 auxiliary file: biblio.aux
 The style file: plain.bst
 Database file #1: main.bib
-Warning--empty journal in Breiman
-You've used 1 entry,
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            508 strings with 4240 characters,
-and the built_in function-call counts, 378 in all, are:
-= -- 37
-> -- 13
+            527 strings with 4991 characters,
+and the built_in function-call counts, 1447 in all, are:
+= -- 144
+> -- 65
 < -- 1
-+ -- 5
-- -- 4
-* -- 22
-:= -- 64
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 5
++ -- 27
+- -- 22
+* -- 91
+:= -- 237
+add.period$ -- 13
+call.type$ -- 4
+change.case$ -- 23
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 16
-empty$ -- 28
-format.name$ -- 4
-if$ -- 79
+cite$ -- 4
+duplicate$ -- 54
+empty$ -- 113
+format.name$ -- 22
+if$ -- 304
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 9
-num.names$ -- 2
-pop$ -- 7
+int.to.str$ -- 4
+missing$ -- 3
+newline$ -- 25
+num.names$ -- 8
+pop$ -- 28
 preamble$ -- 2
-purify$ -- 4
+purify$ -- 19
 quote$ -- 0
-skip$ -- 13
+skip$ -- 41
 stack$ -- 0
-substring$ -- 24
-swap$ -- 5
+substring$ -- 93
+swap$ -- 16
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
-warning$ -- 1
-while$ -- 5
-width$ -- 2
-write$ -- 13
-(There was 1 warning)
+type$ -- 16
+warning$ -- 0
+while$ -- 15
+width$ -- 5
+write$ -- 47

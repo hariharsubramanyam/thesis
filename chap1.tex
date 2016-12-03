@@ -7,8 +7,8 @@
 \chapter{Introduction}
 \section{The Model Building Process}
 Machine learning models have been used in to solve problems in a large number of
-domains. They can be used to recommend movies~\cite{Breiman}, 
-classify tumors as benign or malignant, label objects in images, and more. 
+domains. They can be used to recommend movies~\cite{netflixprize}, 
+classify tumors as benign or malignant~\cite{tumorprediction}, recognize faces~\cite{deepface}, and more. 
 Building these highly predictive machine learning models, however, is not easy. 
 
 A data scientist engaged in the model building process goes through many cycles of
@@ -21,20 +21,20 @@ following steps:
   \item Select a model type and optimization criterion for training.
   \item Define a hyperparameter search grid for the model.
   \item Use cross validation to evaluate hyperparameter configurations and select a 
-    promising mode.
+    promising model.
   \item Evaluate the model on the test set
 \end{enumerate}
 
 Over many cycles, the data scientist will have created and evaluated many models,
 applied various preprocessing pipelines, and tried numerous feature sets and hyperparameter
 configurations. Currently, recording the operations performed in these cycles requires
-a lot of manual effort. They must write their intermediate data files, models, evaluation metrics,
+a lot of manual effort. The data scientist must write their intermediate data files, models, evaluation metrics,
 and preprocessing code to different files. They may invent some ad-hoc directory layout 
-and a set of naming conventions to organize this information. Even if the data scientist
+and a set of naming conventions to organize this information~\cite{kaggledirectory}. Even if the data scientist
 diligently records all their cycles, it is not easy for them to glean information from their
 recorded data without writing some custom scripts.
 
-Recording information about the model building process help the data scientist 
+Recording information about the model building process can help the data scientist 
 make better decisions on improving model performance. Comparing hyperparameters
 and feature sets may provide insight into why two models differ in performance. 
 Examining the most important features may highlight what parts of the dataset are
@@ -50,7 +50,7 @@ questions, but currently it is difficult and time-consuming to do.
 ModelDB Server and ModelDB Spark Client aim to simplify the challenge of recording, storing,
 and learning from the model building process. 
 
-ModelDB Spark Client is a lighweight library for Apache Spark's machine learning library (Spark.ML) 
+ModelDB Spark Client is a lighweight library for Apache Spark's machine learning framework (Spark.ML) 
 that allows the user to collect information about their machine learning operations with minimal changes to their code. 
 
 The Spark Client sends the information it collects to ModelDB Server, which 
@@ -100,7 +100,7 @@ Chapter 3 covers the abstractions used in ModelDB Server and ModelDB Spark Clien
 It begins with a discussion of Transformer, TransformerSpec, and DataFrame, which 
 the primitives that are used to create the other abstractions. Next, the chapter
 introduces the Syncable Event abstraction, which represents a machine learning
-operation that can logged. Then, some of the simple Syncable Events, like FitEvent,
+operation that can be logged. Then, some of the simple Syncable Events, like FitEvent,
 which represents the fitting of a model, are described. Next, more complicated Syncable
 Events, like PipelineEvent are discussed. The chapter then moves on to discuss the
 abstractions for representing linear and tree models. Finally, the ModelDBSyncer,
