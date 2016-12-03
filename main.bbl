@@ -2,6 +2,21 @@
   \newcommand{\singleletter}[1]{#1} \newcommand{\switchargs}[2]{#2#1}
 \begin{thebibliography}{1}
 
+\bibitem{introtoml}
+Ethem Alpaydin.
+\newblock {\em Introduction to machine learning}.
+\newblock MIT press, 2014.
+
+\bibitem{deeplearningbook}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock Deep learning.
+\newblock Book in preparation for MIT Press, 2016.
+
+\bibitem{introtostatlearn}
+Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
+\newblock {\em An introduction to statistical learning}, volume~6.
+\newblock Springer, 2013.
+
 \bibitem{kaggledirectory}
 Kaggle.
 \newblock Kaggle: How to manage machine learning projects.
@@ -20,6 +35,11 @@ Konstantina Kourou, Themis~P Exarchos, Konstantinos~P Exarchos, Michalis~V
 \newblock Machine learning applications in cancer prognosis and prediction.
 \newblock {\em Computational and structural biotechnology journal}, 13:8--17,
   2015.
+
+\bibitem{introtorl}
+Richard~S Sutton and Andrew~G Barto.
+\newblock {\em Introduction to reinforcement learning}, volume 135.
+\newblock MIT Press Cambridge, 1998.
 
 \bibitem{deepface}
 Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
