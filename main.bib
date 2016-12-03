@@ -3,354 +3,143 @@
 	# "\newcommand{\singleletter}[1]{#1} "
 	# "\newcommand{\switchargs}[2]{#2#1} " }
 
-@ARTICLE{article-minimal,
-   author = {L[eslie] A. Aamport},
-   title = {The Gnats and Gnus Document Preparation System},
-   journal = {\mbox{G-Animal's} Journal},
-   year = 1986,
+
+@ARTICLE{Breiman,
+    author = {Leo Breiman Statistics and Leo Breiman},
+    title = {Random Forests},
+    booktitle = {Machine Learning},
+    year = {2001},
+    pages = {5--32}
 }
 
-@ARTICLE{article-full,
-   author = {L[eslie] A. Aamport},
-   title = {The Gnats and Gnus Document Preparation System},
-   journal = {\mbox{G-Animal's} Journal},
-   year = 1986,
-   volume = 41,
-   number = 7,
-   pages = "73+",
-   month = jul,
-   note = "This is a full ARTICLE entry",
+@incollection{NIPS2014_5234, 
+    Publisher = {Curran Associates, Inc.}, 
+    Author = {Balaji Lakshminarayanan and Daniel M. Roy and Yee W. Teh}, 
+    Url = {http://papers.nips.cc/paper/5234-mondrian-forests-efficient-online-random-forests.pdf}, 
+    Booktitle = {Advances in Neural Information Processing Systems 27}, 
+    Title = {Mondrian Forests: Efficient Online Random Forests}, 
+    Editor = {Z. Ghahramani and M. Welling and C. Cortes and N.d. Lawrence and K.q. Weinberger}, 
+    Year = {2014}, 
+    Pages = {3140--3148} 
 }
 
-The KEY field is here to override the KEY field in the journal being
-cross referenced (so is the NOTE field, in addition to its imparting
-information).
-
-@ARTICLE{article-crossref,
-   crossref = {WHOLE-JOURNAL},
-   key = "",
-   author = {L[eslie] A. Aamport},
-   title = {The Gnats and Gnus Document Preparation System},
-   pages = "73+",
-   note = "This is a cross-referencing ARTICLE entry",
+@inproceedings{Dietterich,
+ author = {Dietterich, Thomas G.},
+ title = {Ensemble Methods in Machine Learning},
+ booktitle = {Proceedings of the First International Workshop on Multiple Classifier Systems},
+ series = {MCS '00},
+ year = {2000},
+ isbn = {3-540-67704-6},
+ pages = {1--15},
+ numpages = {15},
+ url = {http://dl.acm.org/citation.cfm?id=648054.743935},
+ acmid = {743935},
+ publisher = {Springer-Verlag},
+ address = {London, UK, UK},
 }
 
-@ARTICLE{whole-journal,
-   key = "GAJ",
-   journal = {\mbox{G-Animal's} Journal},
-   year = 1986,
-   volume = 41,
-   number = 7,
-   month = jul,
-   note = {The entire issue is devoted to gnats and gnus
-		(this entry is a cross-referenced ARTICLE (journal))},
+@MISC{Saffari,
+    author = {Amir Saffari and Christian Leistner and Jakob Santner and Martin Godec and Horst Bischof},
+    title = {On-line Random Forests},
+    year = {}
 }
 
-@INBOOK{inbook-minimal,
-   author = "Donald E. Knuth",
-   title = "Fundamental Algorithms",
-   publisher = "Addison-Wesley",
-   year = "{\noopsort{1973b}}1973",
-   chapter = "1.2",
+@inproceedings{Denil,
+  added-at = {2013-11-19T00:00:00.000+0100},
+  author = {Denil, Misha and Matheson, David and de Freitas, Nando},
+  biburl = {http://www.bibsonomy.org/bibtex/2a9a5d60c7d1fb2f25586ef55a3590e8e/dblp},
+  booktitle = {ICML (3)},
+  ee = {http://jmlr.org/proceedings/papers/v28/denil13.html},
+  interhash = {2739dfcf7f7a775111529f587c1141c5},
+  intrahash = {a9a5d60c7d1fb2f25586ef55a3590e8e},
+  keywords = {dblp},
+  pages = {1256-1264},
+  publisher = {JMLR.org},
+  series = {JMLR Proceedings},
+  timestamp = {2015-06-19T11:34:08.000+0200},
+  title = {Consistency of Online Random Forests.},
+  url = {http://dblp.uni-trier.de/db/conf/icml/icml2013.html#DenilMF13},
+  volume = 28,
+  year = 2013
 }
 
-@INBOOK{inbook-full,
-   author = "Donald E. Knuth",
-   title = "Fundamental Algorithms",
-   volume = 1,
-   series = "The Art of Computer Programming",
-   publisher = "Addison-Wesley",
-   address = "Reading, Massachusetts",
-   edition = "Second",
-   month = "10~" # jan,
-   year = "{\noopsort{1973b}}1973",
-   type = "Section",
-   chapter = "1.2",
-   pages = "10--119",
-   note = "This is a full INBOOK entry",
+@inproceedings{Domingos,
+ author = {Domingos, Pedro and Hulten, Geoff},
+ title = {Mining High-speed Data Streams},
+ booktitle = {Proceedings of the Sixth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+ series = {KDD '00},
+ year = {2000},
+ isbn = {1-58113-233-6},
+ location = {Boston, Massachusetts, USA},
+ pages = {71--80},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/347090.347107},
+ doi = {10.1145/347090.347107},
+ acmid = {347107},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Hoeffding bounds, decision trees, disk-based algorithms, incremental learning, subsampling},
+} 
+
+
+@inproceedings{Bifet,
+ author = {Bifet, Albert and Holmes, Geoff and Pfahringer, Bernhard and Kirkby, Richard and Gavald\`{a}, Ricard},
+ title = {New Ensemble Methods for Evolving Data Streams},
+ booktitle = {Proceedings of the 15th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+ series = {KDD '09},
+ year = {2009},
+ isbn = {978-1-60558-495-9},
+ location = {Paris, France},
+ pages = {139--148},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/1557019.1557041},
+ doi = {10.1145/1557019.1557041},
+ acmid = {1557041},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {concept drift, data streams, decision trees, ensemble methods},
 }
 
-@INBOOK{inbook-crossref,
-   crossref = "whole-set",
-   title = "Fundamental Algorithms",
-   volume = 1,
-   series = "The Art of Computer Programming",
-   edition = "Second",
-   year = "{\noopsort{1973b}}1973",
-   type = "Section",
-   chapter = "1.2",
-   note = "This is a cross-referencing INBOOK entry",
+@inproceedings{Abdulsalam,
+ author = {H. Abdulsalam, D. B. Skillicorn, P. Martin},
+ title = {Streaming Random Forests},
+ booktitle = {Database Engineering and Applications Symposium, 2007},
+ series = {IDEAS 2007},
+ year = {2007},
+ isbn = {978-0-7695-2947-9},
+ location = {Banff, Alta.},
+ pages = {225--232},
+ numpages = {8},
+ url = {http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4318108},
+ doi = {10.1109/IDEAS.2007.4318108},
+ publisher = {IEEE Xplore Digital Library},
 }
 
-@BOOK{book-minimal,
-   author = "Donald E. Knuth",
-   title = "Seminumerical Algorithms",
-   publisher = "Addison-Wesley",
-   year = "{\noopsort{1973c}}1981",
+@misc{Plane,
+  author = {US Department of Transportation},
+  title = {Airline On-Time Statistics and Delay Causes},
+  year = 2015,
+  url = {http://www.transtats.bts.gov/ot_delay/ot_delaycause1.asp?display=data&pn=1},
+  urldate = {2010-09-30}
 }
 
-@BOOK{book-full,
-   author = "Donald E. Knuth",
-   title = "Seminumerical Algorithms",
-   volume = 2,
-   series = "The Art of Computer Programming",
-   publisher = "Addison-Wesley",
-   address = "Reading, Massachusetts",
-   edition = "Second",
-   month = "10~" # jan,
-   year = "{\noopsort{1973c}}1981",
-   note = "This is a full BOOK entry",
+@misc{Homesite,
+  title = {Homesite Quote Conversion},
+  author = {Kaggle},
+  url = {https://www.kaggle.com/c/homesite-quote-conversion},
+  note = {Accessed: 2016-04-14}
 }
 
-@BOOK{book-crossref,
-   crossref = "whole-set",
-   title = "Seminumerical Algorithms",
-   volume = 2,
-   series = "The Art of Computer Programming",
-   edition = "Second",
-   year = "{\noopsort{1973c}}1981",
-   note = "This is a cross-referencing BOOK entry",
+@misc{Otto,
+  title = {Otto Group Product Classification Challenge},
+  author = {Kaggle},
+  url = {https://www.kaggle.com/c/otto-group-product-classification-challenge},
+  note = {Accessed: 2016-04-28}
 }
 
-@BOOK{whole-set,
-   author = "Donald E. Knuth",
-   publisher = "Addison-Wesley",
-   title = "The Art of Computer Programming",
-   series = "Four volumes",
-   year = "{\noopsort{1973a}}{\switchargs{--90}{1968}}",
-   note = "Seven volumes planned (this is a cross-referenced set of BOOKs)",
-}
-
-@BOOKLET{booklet-minimal,
-   key = "Kn{\printfirst{v}{1987}}",
-   title = "The Programming of Computer Art",
-}
-
-@BOOKLET{booklet-full,
-   author = "Jill C. Knvth",
-   title = "The Programming of Computer Art",
-   howpublished = "Vernier Art Center",
-   address = "Stanford, California",
-   month = feb,
-   year = 1988,
-   note = "This is a full BOOKLET entry",
-}
-
-@INCOLLECTION{incollection-minimal,
-   author = "Daniel D. Lincoll",
-   title = "Semigroups of Recurrences",
-   booktitle = "High Speed Computer and Algorithm Organization",
-   publisher = "Academic Press",
-   year = 1977,
-}
-
-@INCOLLECTION{incollection-full,
-   author = "Daniel D. Lincoll",
-   title = "Semigroups of Recurrences",
-   editor = "David J. Lipcoll and D. H. Lawrie and A. H. Sameh",
-   booktitle = "High Speed Computer and Algorithm Organization",
-   number = 23,
-   series = "Fast Computers",
-   chapter = 3,
-   type = "Part",
-   pages = "179--183",
-   publisher = "Academic Press",
-   address = "New York",
-   edition = "Third",
-   month = sep,
-   year = 1977,
-   note = "This is a full INCOLLECTION entry",
-}
-
-@INCOLLECTION{incollection-crossref,
-   crossref = "whole-collection",
-   author = "Daniel D. Lincoll",
-   title = "Semigroups of Recurrences",
-   pages = "179--183",
-   note = "This is a cross-referencing INCOLLECTION entry",
-}
-
-@BOOK{whole-collection,
-   editor = "David J. Lipcoll and D. H. Lawrie and A. H. Sameh",
-   title = "High Speed Computer and Algorithm Organization",
-   booktitle = "High Speed Computer and Algorithm Organization",
-   number = 23,
-   series = "Fast Computers",
-   publisher = "Academic Press",
-   address = "New York",
-   edition = "Third",
-   month = sep,
-   year = 1977,
-   note = "This is a cross-referenced BOOK (collection) entry",
-}
-
-@MANUAL{manual-minimal,
-   key = "Manmaker",
-   title = "The Definitive Computer Manual",
-}
-
-@MANUAL{manual-full,
-   author = "Larry Manmaker",
-   title = "The Definitive Computer Manual",
-   organization = "Chips-R-Us",
-   address = "Silicon Valley",
-   edition = "Silver",
-   month = apr # "-" # may,
-   year = 1986,
-   note = "This is a full MANUAL entry",
-}
-
-@MASTERSTHESIS{mastersthesis-minimal,
-   author = "{\'{E}}douard Masterly",
-   title = "Mastering Thesis Writing",
-   school = "Stanford University",
-   year = 1988,
-}
-
-@MASTERSTHESIS{mastersthesis-full,
-   author = "{\'{E}}douard Masterly",
-   title = "Mastering Thesis Writing",
-   school = "Stanford University",
-   type = "Master's project",
-   address = "English Department",
-   month = jun # "-" # aug,
-   year = 1988,
-   note = "This is a full MASTERSTHESIS entry",
-}
-
-@MISC{misc-minimal,
-   key = "Missilany",
-   note = "This is a minimal MISC entry",
-}
-
-@MISC{misc-full,
-   author = "Joe-Bob Missilany",
-   title = "Handing out random pamphlets in airports",
-   howpublished = "Handed out at O'Hare",
-   month = oct,
-   year = 1984,
-   note = "This is a full MISC entry",
-}
-
-@STRING{STOC-key = "OX{\singleletter{stoc}}"}
-
-@STRING{ACM = "The OX Association for Computing Machinery"}
-
-@STRING{STOC = " Symposium on the Theory of Computing"}
-
-@INPROCEEDINGS{inproceedings-minimal,
-   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
-   title = "On Notions of Information Transfer in {VLSI} Circuits",
-   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
-   year = 1983,
-}
-
-@INPROCEEDINGS{inproceedings-full,
-   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
-   title = "On Notions of Information Transfer in {VLSI} Circuits",
-   editor = "Wizard V. Oz and Mihalis Yannakakis",
-   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
-   number = 17,
-   series = "All ACM Conferences",
-   pages = "133--139",
-   month = mar,
-   year = 1983,
-   address = "Boston",
-   organization = ACM,
-   publisher = "Academic Press",
-   note = "This is a full INPROCEDINGS entry",
-}
-
-@INPROCEEDINGS{inproceedings-crossref,
-   crossref = "whole-proceedings",
-   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
-   title = "On Notions of Information Transfer in {VLSI} Circuits",
-   organization = "",
-   pages = "133--139",
-   note = "This is a cross-referencing INPROCEEDINGS entry",
-}
-
-@PROCEEDINGS{proceedings-minimal,
-   key = STOC-key,
-   title = "Proc. Fifteenth Annual" # STOC,
-   year = 1983,
-}
-
-@PROCEEDINGS{proceedings-full,
-   editor = "Wizard V. Oz and Mihalis Yannakakis",
-   title = "Proc. Fifteenth Annual" # STOC,
-   number = 17,
-   series = "All ACM Conferences",
-   month = mar,
-   year = 1983,
-   address = "Boston",
-   organization = ACM,
-   publisher = "Academic Press",
-   note = "This is a full PROCEEDINGS entry",
-}
-
-@PROCEEDINGS{whole-proceedings,
-   key = STOC-key,
-   organization = ACM,
-   title = "Proc. Fifteenth Annual" # STOC,
-   address = "Boston",
-   year = 1983,
-   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
-   note = "This is a cross-referenced PROCEEDINGS",
-}
-
-@PHDTHESIS{phdthesis-minimal,
-   author = "F. Phidias Phony-Baloney",
-   title = "Fighting Fire with Fire: Festooning {F}rench Phrases",
-   school = "Fanstord University",
-   year = 1988,
-}
-
-@PHDTHESIS{phdthesis-full,
-   author = "F. Phidias Phony-Baloney",
-   title = "Fighting Fire with Fire: Festooning {F}rench Phrases",
-   school = "Fanstord University",
-   type = "{PhD} Dissertation",
-   address = "Department of French",
-   month = jun # "-" # aug,
-   year = 1988,
-   note = "This is a full PHDTHESIS entry",
-}
-
-@TECHREPORT{techreport-minimal,
-   author = "Tom Terrific",
-   title = "An {$O(n \log n / \! \log\log n)$} Sorting Algorithm",
-   institution = "Fanstord University",
-   year = 1988,
-}
-
-@TECHREPORT{techreport-full,
-   author = "Tom T{\'{e}}rrific",
-   title = "An {$O(n \log n / \! \log\log n)$} Sorting Algorithm",
-   institution = "Fanstord University",
-   type = "Wishful Research Result",
-   number = "7",
-   address = "Computer Science Department, Fanstord, California",
-   month = oct,
-   year = 1988,
-   note = "This is a full TECHREPORT entry",
-}
-
-@UNPUBLISHED{unpublished-minimal,
-   author = "Ulrich {\"{U}}nderwood and Ned {\~N}et and Paul {\={P}}ot",
-   title = "Lower Bounds for Wishful Research Results",
-   note = "Talk at Fanstord University (this is a minimal UNPUBLISHED entry)",
-}
-
-@UNPUBLISHED{unpublished-full,
-   author = "Ulrich {\"{U}}nderwood and Ned {\~N}et and Paul {\={P}}ot",
-   title = "Lower Bounds for Wishful Research Results",
-   month = nov # ", " # dec,
-   year = 1988,
-   note = "Talk at Fanstord University (this is a full UNPUBLISHED entry)",
-}
-
-@MISC{random-note-crossref,
-   key = {Volume-2},
-   note = "Volume~2 is listed under Knuth \cite{book-full}"
+@misc{Bikeshare,
+  title = {Bike Sharing Dataset Data Set},
+  author = {UCI Machine Learning Repository},
+  url = {https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset},
+  note = {Accessed: 2016-05-04}
 }
