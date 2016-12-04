@@ -1,16 +1,67 @@
 \newcommand{\noopsort}[1]{} \newcommand{\printfirst}[2]{#1}
   \newcommand{\singleletter}[1]{#1} \newcommand{\switchargs}[2]{#2#1}
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{tensorflow}
+Mart{\i}n Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
+  Craig Citro, Greg~S Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, et~al.
+\newblock Tensorflow: Large-scale machine learning on heterogeneous systems,
+  2015.
+\newblock {\em Software available from tensorflow. org}, 1, 2015.
 
 \bibitem{introtoml}
 Ethem Alpaydin.
 \newblock {\em Introduction to machine learning}.
 \newblock MIT press, 2014.
 
+\bibitem{azureml}
+Roger Barga, Valentine Fontama, Wee~Hyong Tok, and Luis Cabrera-Cordon.
+\newblock {\em Predictive analytics with Microsoft Azure machine learning}.
+\newblock Springer, 2015.
+
+\bibitem{scikitlearn}
+Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
+  Mueller, Olivier Grisel, Vlad Niculae, Peter Prettenhofer, Alexandre
+  Gramfort, Jaques Grobler, et~al.
+\newblock Api design for machine learning software: experiences from the
+  scikit-learn project.
+\newblock {\em arXiv preprint arXiv:1309.0238}, 2013.
+
+\bibitem{velox}
+Daniel Crankshaw, Peter Bailis, Joseph~E Gonzalez, Haoyuan Li, Zhao Zhang,
+  Michael~J Franklin, Ali Ghodsi, and Michael~I Jordan.
+\newblock The missing piece in complex analytics: Low latency, scalable model
+  management and serving with velox.
+\newblock {\em arXiv preprint arXiv:1409.3809}, 2014.
+
+\bibitem{mldb}
+Datacratic.
+\newblock The machine learning database.
+\newblock 2016.
+
 \bibitem{deeplearningbook}
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 \newblock Deep learning.
 \newblock Book in preparation for MIT Press, 2016.
+
+\bibitem{pylearn2}
+Ian~J Goodfellow, David Warde-Farley, Pascal Lamblin, Vincent Dumoulin, Mehdi
+  Mirza, Razvan Pascanu, James Bergstra, Fr{\'e}d{\'e}ric Bastien, and Yoshua
+  Bengio.
+\newblock Pylearn2: a machine learning research library.
+\newblock {\em arXiv preprint arXiv:1308.4214}, 2013.
+
+\bibitem{pmml}
+Alex Guazzelli, Michael Zeller, Wen-Ching Lin, Graham Williams, et~al.
+\newblock Pmml: An open standard for sharing models.
+\newblock {\em The R Journal}, 1(1):60--65, 2009.
+
+\bibitem{weka}
+Geoffrey Holmes, Andrew Donkin, and Ian~H Witten.
+\newblock Weka: A machine learning workbench.
+\newblock In {\em Intelligent Information Systems, 1994. Proceedings of the
+  1994 Second Australian and New Zealand Conference on}, pages 357--361. IEEE,
+  1994.
 
 \bibitem{introtostatlearn}
 Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
@@ -36,6 +87,25 @@ Konstantina Kourou, Themis~P Exarchos, Konstantinos~P Exarchos, Michalis~V
 \newblock {\em Computational and structural biotechnology journal}, 13:8--17,
   2015.
 
+\bibitem{mlbase}
+Tim Kraska, Ameet Talwalkar, John~C Duchi, Rean Griffith, Michael~J Franklin,
+  and Michael~I Jordan.
+\newblock Mlbase: A distributed machine-learning system.
+\newblock In {\em CIDR}, volume~1, pages 2--1, 2013.
+
+\bibitem{modelhub}
+Hui Miao, Ang Li, Larry~S Davis, and Amol Deshpande.
+\newblock Modelhub: Towards unified data and lifecycle management for deep
+  learning.
+\newblock {\em arXiv preprint arXiv:1611.06224}, 2016.
+
+\bibitem{mli}
+Evan~R Sparks, Ameet Talwalkar, Virginia Smith, Jey Kottalam, Xinghao Pan,
+  Joseph Gonzalez, Michael~J Franklin, Michael~I Jordan, and Tim Kraska.
+\newblock Mli: An api for distributed machine learning.
+\newblock In {\em 2013 IEEE 13th International Conference on Data Mining},
+  pages 1187--1192. IEEE, 2013.
+
 \bibitem{introtorl}
 Richard~S Sutton and Andrew~G Barto.
 \newblock {\em Introduction to reinforcement learning}, volume 135.
@@ -47,5 +117,13 @@ Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
   verification.
 \newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
   Pattern Recognition}, pages 1701--1708, 2014.
+
+\bibitem{spark}
+Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
+  McCauley, Michael~J Franklin, Scott Shenker, and Ion Stoica.
+\newblock Resilient distributed datasets: A fault-tolerant abstraction for
+  in-memory cluster computing.
+\newblock In {\em Proceedings of the 9th USENIX conference on Networked Systems
+  Design and Implementation}, pages 2--2. USENIX Association, 2012.
 
 \end{thebibliography}

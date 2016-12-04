@@ -67,10 +67,10 @@ similar models, rank models, fetch the steps that produced a model, and more.
 
 While ModelDB Server has functionality for storing and extracting information from
 all kinds of models, it stores extra information and provides richer APIs for 
-Logistic Regression, Linear Regression, Decision Tree, Random Forest, and 
-Gradient Boosted Tree models. 
+logistic regression, linear regression, decision tree, random forest, and 
+gradient boosted tree models. 
 
-Concretly, this thesis makes the following contributions:
+Concretely, this thesis makes the following contributions:
 
 \begin{enumerate}
   \item A set of library-agnostic abstractions that can be used to
@@ -85,18 +85,20 @@ Concretly, this thesis makes the following contributions:
     minimal required changes to a data scientist's code.
 \end{enumerate}
 
+For the rest of this paper, ModelDB Server and the Spark Client will be referred
+to as ModelDB S+C.
 
 \section{Outline of this Paper}
 
 Chapter 2 covers related work. It first discusses machine learning in general,
 exposing the key concepts that are relevant in the model building process. The
-discussion then shifts to linear and tree models in particular, because ModelDB
-Server and Spark Client have special support for these kinds of models. Next, Spark
-and Spark ML are briefly described. The chapter then proceeds to discuss popular
-machine libraries and their abstractions and concludes by discussing other machine
+discussion then shifts to linear and tree models in particular, because ModelDB S+C has 
+special support for these kinds of models. 
+Next, Spark and Spark ML are briefly described. The chapter then proceeds to discuss popular
+machine learning libraries and their abstractions and concludes by discussing other machine
 learning support systems.
 
-Chapter 3 covers the abstractions used in ModelDB Server and ModelDB Spark Client.
+Chapter 3 covers the abstractions used in ModelDB S+C.
 It begins with a discussion of Transformer, TransformerSpec, and DataFrame, which 
 the primitives that are used to create the other abstractions. Next, the chapter
 introduces the Syncable Event abstraction, which represents a machine learning
@@ -106,7 +108,7 @@ Events, like PipelineEvent are discussed. The chapter then moves on to discuss t
 abstractions for representing linear and tree models. Finally, the ModelDBSyncer,
 a client side abstraction for sending events to ModelDB Server, is discussed.
 
-Chapter 4 covers algorithms used in ModelDB Server and ModelDB Spark Client. It 
+Chapter 4 covers algorithms used in ModelDB S+C. It 
 begins with storage algorithms which capture the complexities involved in storing
 and connecting the Syncable Events. The next topic is ancestry algorithms, which
 operate on the ancestry chain of DataFrames. The chapter then talks about algorithms
@@ -127,10 +129,10 @@ the time taken to run some of the more complicated API methods exposed by ModelD
 Finally, the chapter presents the results of the experiments and discusses potential performance
 improvements.
 
-Chapter 7 describes the role of ModelDB Server and ModelDB Spark Client in ModelDB,
+Chapter 7 describes the role of ModelDB S+C in ModelDB,
 a larger system that includes other components like a client library for Scikit-learn,
 a command line toolkit, a prediction store, and a visualization application.
 
-Chapter 8 covers potential future work that could be done on ModelDB Server and Spark Client.
+Chapter 8 covers potential future work that could be done on ModelDB S+C.
 
 Chapter 9 concludes the paper.
