@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{GridSearchCrossValidationEvent} \PYG{p}{(}
+  \PYG{n}{best} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{FitEvent}\PYG{p}{,}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{GridCellCrossValidation} \PYG{p}{(}
+  \PYG{n}{gridSearch} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{GridSearchCrossValidationEvent}\PYG{p}{,}
+  \PYG{n}{crossValidation} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{CrossValidationEvent}
+\PYG{p}{);}
+\end{Verbatim}

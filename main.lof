@@ -2,6 +2,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2-1}{\ignorespaces This is a decision tree model that could be used to predict whether the weather will be snowy (output 1), rainy (output 1), or neither (output 2) by looking at the cloud cover and temperature. The tree first checks if the cloud cover is high. If not, then it predicts there will be neither rain nor snow. Otherwise, the tree checks if the temperature is below 0. If so, then it predicts snow. Otherwise, it predicts rain.}}{24}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3-1}{\ignorespaces Diagrammatic representation of cross validation in ModelDB S+C. Green boxes represent primitives and blue boxes represent Syncable Events. Arrows represent foreign key relationships. }}{43}
+\contentsline {figure}{\numberline {3-2}{\ignorespaces Creation of a pre-processing pipeline. First, the user chains together some Transformers and Estimators (objects that can apply their TransformerSpec to create a Transformer from a DataFrame). Next, the user feed a DataFrame into the pipeline. The Transformers transform their input DataFrame, produce an output DataFrame, and pass the output on to the next step in the pipeline. The Estimators use the input DataFrame to create a Transformer, and then they replace themselves with this Transformer - the Transformer then transforms the input DataFrame and passes the output to the next step. }}{45}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

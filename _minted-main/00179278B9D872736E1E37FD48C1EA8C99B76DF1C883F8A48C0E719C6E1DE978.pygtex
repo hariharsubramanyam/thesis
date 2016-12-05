@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{DataFrame} \PYG{p}{(}
+  \PYG{n}{numRows} \PYG{n+nb}{INTEGER}\PYG{p}{,}
+  \PYG{n}{dataSource} \PYG{n+nb}{TEXT}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{DataFrameColumn} \PYG{p}{(}
+  \PYG{n}{dfId} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
+  \PYG{n}{name} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{k}{type} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{columnIndex} \PYG{n+nb}{INTEGER}
+\PYG{p}{);}
+\end{Verbatim}

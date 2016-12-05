@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{PipelineStage} \PYG{p}{(}
+  \PYG{n}{pipelineFitEvent} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{FitEvent}\PYG{p}{,}
+  \PYG{n}{transformStage} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TransformEvent}\PYG{p}{,}
+  \PYG{n}{fitStage} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{FitEvent}\PYG{p}{,}
+  \PYG{n}{stageNumber} \PYG{n+nb}{INTEGER}
+\PYG{p}{);}
+\end{Verbatim}

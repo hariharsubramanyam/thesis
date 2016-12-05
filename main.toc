@@ -22,31 +22,43 @@
 \contentsline {subsection}{\numberline {2.5.6}PMML}{30}
 \contentsline {subsection}{\numberline {2.5.7}Longview}{31}
 \contentsline {chapter}{\numberline {3}Abstractions}{33}
-\contentsline {section}{\numberline {3.1}Primitives}{33}
-\contentsline {section}{\numberline {3.2}Syncable Events}{33}
-\contentsline {section}{\numberline {3.3}Core Events}{33}
-\contentsline {section}{\numberline {3.4}Composite Events}{33}
-\contentsline {section}{\numberline {3.5}Specific Models}{33}
-\contentsline {section}{\numberline {3.6}ModelDB Syncer}{33}
-\contentsline {chapter}{\numberline {4}Algorithms}{35}
-\contentsline {section}{\numberline {4.1}Storage Algorithms}{35}
-\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{35}
-\contentsline {section}{\numberline {4.3}Feature Algorithms}{35}
-\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{35}
-\contentsline {section}{\numberline {4.5}Linear Model Algorithms}{35}
-\contentsline {section}{\numberline {4.6}Tree Model Algorithms}{35}
-\contentsline {chapter}{\numberline {5}Implementation}{37}
-\contentsline {section}{\numberline {5.1}System Architecture}{37}
-\contentsline {section}{\numberline {5.2}Server}{37}
-\contentsline {section}{\numberline {5.3}Spark Client}{37}
-\contentsline {chapter}{\numberline {6}Evaluation}{39}
-\contentsline {section}{\numberline {6.1}Overview}{39}
-\contentsline {section}{\numberline {6.2}Datasets}{39}
-\contentsline {section}{\numberline {6.3}Methodology}{39}
-\contentsline {section}{\numberline {6.4}Time Overhead Results}{39}
-\contentsline {section}{\numberline {6.5}Storage Overhead Results}{39}
-\contentsline {section}{\numberline {6.6}Operation Time Results}{39}
-\contentsline {section}{\numberline {6.7}Improvements}{39}
-\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{41}
-\contentsline {chapter}{\numberline {8}Future Work}{43}
-\contentsline {chapter}{\numberline {9}Conclusion}{45}
+\contentsline {section}{\numberline {3.1}Primitives}{34}
+\contentsline {subsection}{\numberline {3.1.1}DataFrame}{34}
+\contentsline {subsection}{\numberline {3.1.2}Transformer}{35}
+\contentsline {subsection}{\numberline {3.1.3}TransformerSpec}{36}
+\contentsline {section}{\numberline {3.2}Syncable Events}{38}
+\contentsline {section}{\numberline {3.3}Core Events}{38}
+\contentsline {subsection}{\numberline {3.3.1}TransformEvent}{38}
+\contentsline {subsection}{\numberline {3.3.2}FitEvent}{40}
+\contentsline {subsection}{\numberline {3.3.3}MetricEvent}{40}
+\contentsline {section}{\numberline {3.4}Composite Events}{41}
+\contentsline {subsection}{\numberline {3.4.1}CrossValidationEvent}{42}
+\contentsline {subsection}{\numberline {3.4.2}GridSearchCrossValidationEvent}{43}
+\contentsline {subsection}{\numberline {3.4.3}PipelineEvent}{44}
+\contentsline {subsection}{\numberline {3.4.4}Annotation}{47}
+\contentsline {section}{\numberline {3.5}Linear and Tree Models}{48}
+\contentsline {subsection}{\numberline {3.5.1}Linear Models}{49}
+\contentsline {subsection}{\numberline {3.5.2}Tree Models}{49}
+\contentsline {section}{\numberline {3.6}ModelDB Syncer}{51}
+\contentsline {chapter}{\numberline {4}Algorithms}{53}
+\contentsline {section}{\numberline {4.1}Storage Algorithms}{53}
+\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{53}
+\contentsline {section}{\numberline {4.3}Feature Algorithms}{53}
+\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{53}
+\contentsline {section}{\numberline {4.5}Linear Model Algorithms}{53}
+\contentsline {section}{\numberline {4.6}Tree Model Algorithms}{53}
+\contentsline {chapter}{\numberline {5}Implementation}{55}
+\contentsline {section}{\numberline {5.1}System Architecture}{55}
+\contentsline {section}{\numberline {5.2}Server}{55}
+\contentsline {section}{\numberline {5.3}Spark Client}{55}
+\contentsline {chapter}{\numberline {6}Evaluation}{57}
+\contentsline {section}{\numberline {6.1}Overview}{57}
+\contentsline {section}{\numberline {6.2}Datasets}{57}
+\contentsline {section}{\numberline {6.3}Methodology}{57}
+\contentsline {section}{\numberline {6.4}Time Overhead Results}{57}
+\contentsline {section}{\numberline {6.5}Storage Overhead Results}{57}
+\contentsline {section}{\numberline {6.6}Operation Time Results}{57}
+\contentsline {section}{\numberline {6.7}Improvements}{57}
+\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{59}
+\contentsline {chapter}{\numberline {8}Future Work}{61}
+\contentsline {chapter}{\numberline {9}Conclusion}{63}

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{TreeModel} \PYG{p}{(}
+  \PYG{n}{model} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
+  \PYG{n}{modelType} \PYG{n+nb}{TEXT} \PYG{k}{NOT} \PYG{k}{NULL} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be \PYGZdq{}Decision Tree\PYGZdq{}, \PYGZdq{}GBT\PYGZdq{}, or \PYGZdq{}Random Forest\PYGZdq{}}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{TreeModelComponent} \PYG{p}{(}
+  \PYG{n}{model} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
+  \PYG{n}{componentIndex} \PYG{n+nb}{INTEGER}\PYG{p}{,}
+  \PYG{n}{componentWeight} \PYG{n}{DOUBLE}\PYG{p}{,}
+  \PYG{n}{rootNode} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TreeNode}
+\PYG{p}{);}
+\end{Verbatim}

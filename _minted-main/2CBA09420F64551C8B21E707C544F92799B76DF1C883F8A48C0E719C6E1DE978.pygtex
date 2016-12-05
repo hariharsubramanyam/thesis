@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{Annotation} \PYG{p}{(}
+  \PYG{n}{posted} \PYG{k}{TIMESTAMP}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{AnnotationFragment} \PYG{p}{(}
+  \PYG{n}{annotation} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Annotation}\PYG{p}{,}
+  \PYG{n}{fragmentIndex} \PYG{n+nb}{INTEGER}\PYG{p}{,}
+  \PYG{n}{transformer} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
+  \PYG{n}{dataFrame} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
+  \PYG{n}{spec} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TransformerSpec}\PYG{p}{,}
+  \PYG{n}{message} \PYG{n+nb}{TEXT}\PYG{p}{,}
+\PYG{p}{);}
+\end{Verbatim}

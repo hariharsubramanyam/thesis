@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{LinearModelTerm} \PYG{p}{(}
+    \PYG{n}{model} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
+    \PYG{n}{termIndex} \PYG{n+nb}{INTEGER}\PYG{p}{,}
+    \PYG{n}{coefficient} \PYG{n}{DOUBLE}\PYG{p}{,}
+    \PYG{n}{tStat} \PYG{n}{DOUBLE}\PYG{p}{,}
+    \PYG{n}{stdErr} \PYG{n}{DOUBLE}\PYG{p}{,}
+    \PYG{n}{pValue} \PYG{n}{DOUBLE}
+\PYG{p}{);}
+\end{Verbatim}

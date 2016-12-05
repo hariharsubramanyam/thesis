@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{Transformer} \PYG{p}{(}
+  \PYG{n}{transformerType} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{filepath} \PYG{n+nb}{TEXT}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{Feature} \PYG{p}{(}
+  \PYG{n}{name} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{featureIndex} \PYG{n+nb}{INTEGER}\PYG{p}{,}
+  \PYG{n}{importance} \PYG{n}{DOUBLE}\PYG{p}{,}
+  \PYG{n}{transformer} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TRANSFORMER}
+\PYG{p}{);}
+\end{Verbatim}

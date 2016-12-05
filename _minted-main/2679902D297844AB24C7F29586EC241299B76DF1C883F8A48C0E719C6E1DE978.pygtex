@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{TransformerSpec} \PYG{p}{(}
+  \PYG{n}{transformerType} \PYG{n+nb}{TEXT}
+\PYG{p}{);}
+
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{HyperParameter} \PYG{p}{(}
+  \PYG{n}{spec} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TransformerSpec}\PYG{p}{,}
+  \PYG{n}{paramName} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{paramType} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{paramValue} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{paramMinValue} \PYG{n+nb}{REAL}\PYG{p}{,}
+  \PYG{n}{paramMaxValue} \PYG{n+nb}{REAL}
+\PYG{p}{);}
+\end{Verbatim}

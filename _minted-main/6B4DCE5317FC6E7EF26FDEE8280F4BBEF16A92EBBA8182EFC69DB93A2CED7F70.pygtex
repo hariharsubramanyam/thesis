@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{n+nc}{ModelDbSyncer}\PYG{o}{.}\PYG{n}{get}\PYG{o}{.}\PYG{n}{annotate}\PYG{o}{(}
+    \PYG{l+s}{\PYGZdq{}I\PYGZsq{}m getting poor performance on\PYGZdq{}}\PYG{o}{,}
+    \PYG{n}{testDf1}\PYG{o}{,}
+    \PYG{l+s}{\PYGZdq{}with model\PYGZdq{}}\PYG{o}{,}
+    \PYG{n}{model1}\PYG{o}{,}
+    \PYG{l+s}{\PYGZdq{}Is there a bug with this model? Should investigate tomorrow.\PYGZdq{}}
+  \PYG{o}{)}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{Event} \PYG{p}{(}
+  \PYG{n}{eventType} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{eventId} \PYG{n+nb}{INTEGER}
+\PYG{p}{);}
+\end{Verbatim}

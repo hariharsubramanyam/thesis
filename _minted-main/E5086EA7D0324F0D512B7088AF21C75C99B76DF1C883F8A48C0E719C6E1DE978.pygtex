@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{MetricEvent} \PYG{p}{(}
+  \PYG{n}{transformer} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
+  \PYG{n}{df} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
+  \PYG{n}{metricType} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{n}{metricValue} \PYG{n+nb}{REAL}
+\PYG{p}{);}
+\end{Verbatim}

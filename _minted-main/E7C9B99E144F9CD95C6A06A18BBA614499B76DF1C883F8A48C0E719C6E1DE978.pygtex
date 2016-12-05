@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE} \PYG{k}{TABLE} \PYG{n}{PipelineStage} \PYG{p}{(}
+  \PYG{n}{pipelineFitEvent} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{FitEvent}\PYG{p}{,}
+  \PYG{n}{transformOrFitEvent} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Event}\PYG{p}{,}
+  \PYG{n}{isFit} \PYG{n+nb}{INTEGER}\PYG{p}{,} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} 0 if transform stage and 1 if this is a fit stage.}
+  \PYG{n}{stageNumber} \PYG{n+nb}{INTEGER}
+\PYG{p}{);}
+\end{Verbatim}
