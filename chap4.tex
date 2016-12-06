@@ -1,13 +1,356 @@
 \chapter{Algorithms}
+The abstractions discussed in the previous chapter are stored in SQL tables in
+ModelDB Server's database. This database is useful on its own because the user can
+query it or build applications on top of it. Nevertheless, ModelDB Server provides
+a number of algorithms that can be run on the database to glean useful information
+about the model building process.
+
+This chapter covers some of the algorithms used in ModelDB Server.
 
 \section{Storage Algorithms}
+Before discussing the algorithms that glean information about model building, it
+is important to first consider the algorithms that store data in ModelDB Server's 
+database. These algorithms are straightforward, but it is illustrative to see
+how they store data and what tables they affect.
+
+\subsection{DataFrame, Transformer, and TransformerSpec}
+To begin, consider the algorithms for storing the three primitives: DataFrame, 
+Transformer, and TransformerSpec.
+
+When ModelDB Server is asked to store a primitive, it first checks if there is already
+a primitive in the database with the same ID. If not, then ModelDB Server stores the primitive
+in the corresponding table. Next, it stores any auxiliary data (e.g. DataFrameColumns for a DataFrame, 
+HyperParameters for a TransformerSpec) associated with the primitive.
+
+\subsection{TransformEvent, FitEvent, MetricEvent}
+The core Syncable Events are TransformEvent, FitEvent, and MetricEvent. They
+are defined as compositions of the three primitives. Similarly, the algorithms
+that store the core Syncable Events to the database utilize the storage algorithms
+for the primitive events.
+
+Consider the TransformEvent. When ModelDB Server is asked to store a TransformEvent, it
+first stores the input DataFrame, output DataFrame, and Transforer using the corresponding
+storage algorithm for the primitive. Then, it performs some processing specific to
+TransformEvent (e.g. sorting and de-duplicating the input and output columns). Next,
+it stores an entry in TransformEvent. Finally, it stores an entry in the Event table.
+
+FitEvent and MetricEvent have storage algorithms that are similar in structure to TransformEvent's
+storage algorithm.
+
+\subsection{Annotation}
+In order to store an Annotation, the client sends ModelDB Server a list containing 
+the annotation fragments (each is a Transformer, TransformerSpec, DataFrame, or a String).
+ModelDB Server first stores the primitives that the fragments refer to. Then, it stores
+an entry in Annotation. Next, it stores an AnnotationFragment for each fragment. Finally,
+it makes an entry in the Event table. ModelDB Server also verifies that each fragment refer
+to exactly one primitive or contain a String. This check could also potentially be done at the database level.
+
+\subsection{RandomSplitEvent}
+This is a Syncable Event which represents the random splitting of a DataFrame
+to create smaller DataFrames according to a weight vector. For example, doing
+a random split of a 100-row DataFrame with weights of 0.7 and 0.3 would produce
+DataFrames with row-counts of 70 and 30.
+
+To store a RandomSplitEvent, ModelDB Server first makes an entry in a table
+called RandomSplitEvent and an entry in Event. Next, it stores the input DataFrame
+as well as all the output DataFrames. Then, it indicates the weight of each output
+DataFrame in a table called DataFrameSplit. Finally, it stores TransformEvents to
+indicate that the output DataFrames were derived from the input DataFrame (it uses
+a synthetic Transformer called "RandomSplitTransformer" to reflect this operation).
+
+Note that RandomSplitEvent demonstrates how to overcome TransformEvent's single-input,
+single-output limitation. A RandomSplitEvent has a single input and multiple outputs.
+
+\subsection{PipelineEvent}
+Recall that PipelineEvent represents the creation of a Pipeline Model from a Pipeline.
+A Pipeline is a chain of Transformers and Estimators (i.e. an object that applies a TransformerSpec
+to a DataFrame create a Transformer). When a DataFrame is fed into the Pipeline, a Pipeline Model (a
+chain of Transformers) is produced.  The storage algorithm is shown below:
+
+\begin{algorithm}[H]
+ \KwData{A PipelineEvent, denoted $pe$}
+ Store $pe.pipelineFitEvent$, which stores the actual FitEvent that created the
+ PipelineModel from the input DataFrame using a dummy Pipeline TransformerSpec.
+
+ Sort $pe.transformStages$ and $pe.fitStages$ by stageNumber.
+
+ Apply the merge procedure (i.e. from merge sort) to order all the stages by
+ increasing stageNumber. Also require that a fit stage precede a transform stage
+ if they have the same stageNumber.
+
+ $currentDataFrame \gets pe.inputDataFrame$ 
+
+ \For{each $stage$ in increasing stageNumber} {
+   \eIf{$stage$ is a fit stage} {
+     Store a FitEvent for the stage where $currentDataFrame$ is the the input DataFrame
+     for the FitEvent.
+
+     $currentDataFrame \gets stage.inputDataFrame$
+   } {
+     Store a TransformEvent for the stage where $currentDataFrame$ is the input DataFrame
+     for the TransformEvent.
+
+     $currentDataFrame \gets stage.outputDataFrame$
+   }
+ }
+
+ \For{$fitStage$ in $pe.fitStages$} {
+   Store an entry in the PipelineStage table.
+ }
+
+ \For{$transformStage$ in $pe.transformStages$} {
+   Store an entry in the PipelineStage table.
+ }
+
+ \caption{Storage of a PipelineEvent}
+\end{algorithm}
+
+The key challenge in the PipelineEvent algorithm is enforcing the constraint that
+the output of one pipeline stage is the input to the next pipeline stage. This is
+done by processing the stages in increasing stageNumber (with fit stages put before
+transform stages if they have equal stageNumbers). The $currentDataFrame$ variable
+marks the input into the next pipeline stage.
+
+\subsection{CrossValidationEvent}
+Recall that a CrossValidationEvent corresponds to a single hyperparameter configuration.
+
+To store a CrossValidationEvent, ModelDB Server first stores the input DataFrame and the
+TransformerSpec (i.e. the hyperparameter configuration under consideration). Then, it
+stores an entry in the CrossValidationEvent table and an entry in the Event table. Next,
+ModelDB Server iterates through each fold in cross validation and, for each fold, it 
+stores a FitEvent, MetricEvent, and an entry in CrossValidationFold. ModelDB Server also
+enforces that the same input DataFrame is used for all the folds.
+
+\subsection{GridSearchCrossValidationEvent}
+Recall that grid search cross validation considers multiple hyperparameter configurations and
+performs cross validation event for each one. GridSearchCrossValidationEvent's storage
+algorithm is the following. First, a FitEvent is stored that represents the creation of
+the final model over all the data. Next, an entry is made into the GridSearchCrossValidationEvent
+table and an entry is made into the Event table. Then, all the DataFrames used for validation
+and all the DataFrames used for training are stored, and a TransformEvent is logged for each to indicate
+that they originated from the original input DataFrame. Next, the CrossValidationEvent storage algorithm
+is run for each cross validation that was performed. ModelDB Server includes some additional logic to
+ensure that the validation DataFrames and training DataFrames are shared across the different cross validations.
+
+\subsection{LinearModel}
+Recall that ModelDB S+C can augment the Transformer table with tables to store the
+weights of a linear model. To store a linear model, ModelDB Server requires that the user
+indicate (via ID) an existing Transformer to augment. Next, ModelDB Server makes an 
+entry in the LinearModel table for the linear model. It then
+stores a LinearModelTerm for each coefficient of the linear model. Next, it updates the Feature rows
+associated with the Transformer with the feature importance scores computed by the linear model. Finally,
+ModelDB Server logs the history of the objective function used for training into a table called ObjectiveFunctionHistory.
+
+\subsection{TreeModel}
+Recall that ModelDB S+C can augment the Transformer table with tables to store
+ensembles of trees. In addition, recall that a decision tree model can be thought of
+as an ensemble of one tree. 
+
+The storage algorithm for a tree model goes as follows. First, ModelDB Server requires
+the user to indicate (via ID) an existing Transformer to augment. ModelDB makes an entry in the TreeModel
+table for the tree model. Then, for each tree in the model, ModelDB Server stores an entry in the TreeModelComponent table, 
+then does a breadth first search starting
+at the root for the tree, and for each encountered node, it stores an entry in TreeNode and (if the 
+node is not the root node) an entry in TreeLink. Finally, after storing all the trees in the tree model, ModelDB Server
+updates the Feature rows of the associated Transformer to indicate their feature importance scores as computed by the tree model.
 
 \section{Ancestry Algorithms}
+Recall that a TransformEvent indicates an input DataFrame and an output DataFrame. If each DataFrame is a node,
+and there is a directed edge from input DataFrame to output DataFrame, then the TransformEvent table defines
+a forest over all the DataFrames. This forest is hereafter referred to as the "DataFrame Ancestry Forest", or $\mathcal{F}$.
+Suppose that each DataFrame, $df$, in $\mathcal{F}$ has a field $df.parent$ that points to the DataFrame that created it
+and suppose that it also has a field $df.children$ that points to a list of the DataFrames that it produced.
+
+There are a number of interesting algorithms that can be run on $\mathcal{F}$.
+
+\subsection{Ancestry of a DataFrame}
+The simplest algorithm is to find the ancestry of a DataFrame. That is, given a DataFrame $df$ in $\mathcal{F}$, we
+follow parent pointers all the way up to a root DataFrame (i.e. a DataFrame with an empty parent pointer). The reverse
+of this path is the ancestry of a given DataFrame. This operation allows a data scientist to see how a particular DataFrame
+was created and identify where potential bugs in the data may have been introduced.
+
+\subsection{Ancestry of a Model}
+It is also possible to find the ancestry of a model. Recall that a model is simply a Transformer with an associated
+FitEvent. Finding the ancestry of a model involves looking up the DataFrame in its associated FitEvent and finding the
+ancestry of that DataFrame. This allows the user to see what DataFrames contributed towards the data used to train a model.
+
+\subsection{Common Ancestor of Two DataFrames}
+Given two DataFrames $df1$ and $df2$ in $\mathcal{F}$, it is possible to find the common ancestor DataFrame (if there is one)
+that led to their creation. This can be useful in finding commonalities between intermediate DataFrames (e.g. $df1$ is producing
+good results and $df2$ is producing bad results - where in their lineage did they start to differ?). Finding the common ancestor
+is implemented by simplying finding the ancestry of $df1$ and the ancestry of $df2$, and finding youngest DataFrame common to both
+the ancestries.
+
+\subsection{Descendent Models of DataFrame}
+In addition to following parent pointers in $\mathcal{F}$, it is also useful to follow child pointers. A data scientist
+may be interested in determining all the models that used data that originated in a DataFrame $df$. To compute this,
+a breadth-first search is performed starting at $df$ and following child pointers. All the DataFrames encountered in 
+the search are added to a list $descendentDfs$. Then, a scan is made of the FitEvent table to find all Transformers that
+were created by fitting a DataFrame in $descendentDfs$. These are the models that descended from $df$.
+
+\subsection{Pipeline Extraction}
+The user may explicitly create Pipeline Models via ModelDB S+C's PipelineEvent. However, since Pipeline Models are 
+simply chains of Transformers (some of which were produced by fitting a TransformerSpec to a DataFrame),
+the user implictly creates Pipeline Models as they make FitEvents and TransformEvents. ModelDB Server offers a mechanism
+for extracting pipelines from $\mathcal{F}$. The algorithm for extracting a pipeline is specified below.
+
+First the user specifies the ID, $mId$, of a model (i.e. Transformer with assocaited FitEvent) that they'd like to extract
+a pipeline for.
+
+Second, the FitEvent table is scanned to find the DataFrame $df$ that is associated with the Transformer with ID $mId$.
+
+Third, the ancestry of $df$ is computed, and all the TransformEvents along the chain are noted down in a list (call it $transformEvents$).
+
+Fourth, the Transformer for each TransformEvent in $transformEvents$ is extracted and put into a list (call it $transformers$).
+
+Fifth, the FitEvent table is scanned and the TransformerSpec is extracted for all the FitEvents who have a Transformer appearing in $transformer$ 
+(call the resulting list of TransformerSpecs $specs$).
+
+Finally, $transformers$ and $specs$ are returned to the user, sorted by the position of their corresponding TransformEvent in the ancestry chain.
 
 \section{Feature Algorithms}
+The Feature table lists the features that are used by a model (i.e. Transformer with associated FitEvent).
+There are a number of useful operations we can perform using this table.
+
+\subsection{Original Feature-set of Model}
+Suppose that there is a DataFrame $df1$ with the columns $labScore$ and $homeworkScore$. Then,
+suppose that $df1$ is transformed to produce $df2$, which contains a column called $assignmentScore$ that is
+computed by combining $labScore$ and $homeworkScore$ in some way. Finally, suppose that a model, $m$, is created to
+predict a new column, called $finalExamScore$, based on the value of $assignmentScore$.
+
+In the above example, $m$ has a single feature column, $assignmentScore$. However, the data scientist may find
+it useful to find the original features that produced the $assignmentScore$ column (i.e. $labScore$ and $homeworkScore$).
+
+It is possible to use the Feature table and the DataFrame ancestry forest ($\mathcal{F}$) to compute the original
+features. The algorithm for doing so is presented below.
+
+First, the user must specify the ID (call it $mId$) of a model.
+
+Second, the corresponding FitEvent for model $mId$ is found, and its DataFrame (call it $df$) is extracted.
+
+Third, a set called $originalFeatures$ is initialized to contain the features (from the Features table) of model $mId$.
+
+Fourth, the ancestry of $df$ is computed, with the TransformEvents noted down in the list $transformEvents$.
+
+Fifth, the $transformEvents$ list is scanned such that the TransformEvent that directly produced $df$ is first and the
+TransformEvent that operated on a root DataFrame is last. For each such TransformEvent $transformEvent$, the following steps are
+performed:
+\begin{enumerate}
+  \item If none of the columns listed in $originalFeatures$ appears 
+
+    in $transformEvent.outputColumns$, then $transformEvent$ 
+
+    is skipped and the next TransformEvent is considered.
+  \item Otherwise, all the columns in $originalFeatures$ that are also 
+
+    in $transformEvent.outputColumns$ are removed from $originalFeatures$.
+  \item All columns in $transformEvent.inputColumns$ are added to $originalFeatures$.
+\end{enumerate}
+
+Finally, $originalFeatures$ is returned.
+
+The above algorithm simply starts with the model's described feature columns and walks up the ancestry chain trying to find
+the columns that originated these columns.
+
+\subsection{Models using a Given Feature-set}
+ModelDB Server can also find models that use any of the features listed in a given set of features, $featureSet$. Basically,
+the Feature table is scanned for rows whose feature name is included in $featureSet$. The Transformer IDs for these
+Feature rows are extracted, de-duplicated, and returned to the user.
+
+Note that a data scientist may find it useful to find all the models that indirectly OR directly use any features in a 
+given feature set. The above algorithm handles the "directly" case, but a variation of the Original Features algorithm would
+be needed to handle the "indirectly" case. This has not been implemented, but may be a useful algorithm to implement in the future.
 
 \section{Multi-model Algorithms}
+A data scientist creates multiple models in the model building process, and therefore may want
+to compare models in some way to help select the best ones. The algorithms
+described in this section offer some useful ways of doing this.
 
-\section{Linear Model Algorithms}
+\subsection{Compare Features of Two Models}
+One simple operation is to find the features shared by two models. Given the IDs
+of two models, $mId1$ and $mId2$, ModelDB Server finds their corresponding features 
+(by scanning the Feature table) and returns the features they have in common, 
+as well as the features that appear in only one of them.
 
-\section{Tree Model Algorithms}
+While it has not been implemented, it would not be hard to utilize the Original Features algorithm here
+so that the original, rather than direct, features of the models are compared.
+
+\subsection{Common Ancestor DataFrame of Two Models}
+Identifying the DataFrame from which two models are derived can be useful in
+understanding their commonalities. Given the IDs, call them $mId1$ and $mid2$, 
+of two models, ModelDB Server finds the common ancestor DataFrame as follows.
+
+First, the FitEvent table is scanned to yield the DataFrames $df1$ and $df2$
+that produced the models with IDs $mId1$ and $mId2$.
+
+Then, the common ancestor DataFrame (using the algorithm described earlier in
+this chapter) of $df1$ and $df2$ is computed and returned.
+
+\subsection{Compare Hyperparameters of Two Models}
+Models of the same type (e.g. Random Forest) can have wildly different performance
+outcomes on the same training DataFrame because they have different hyperparameters.
+ModelDB Server makes it possible to compare the hyperparameters of two models given their
+IDs (call them $mId1$ and $mId2$).
+
+First, the FitEvents for $mId1$ and $mid2$ are read and their TransformerSpecs $spec1$ and
+$spec2$, respectively, are extracted.
+
+Second, the hyperparameters for $spec1$ and $spec2$ are read from the HyperParameter table
+and put into lists $hyperparameters1$ and $hyperparameters2$, respectively,
+
+Third, hyperparameters in $hyperparameters1$ and $hyperparameters2$ with the same name are
+extracted and put into a list called $commonHyperparameters$. Hyperparameters with names unique to just
+one of lists are put into lists $model1Hyperparameters$ and $model2Hyperparameters$.
+
+Finally, $commonHyperparameters$, $model1Hyperparameters$, and $model2Hyperparameters$ are
+returned to the user.
+
+\subsection{Rank Models}
+Sometimes, a user may want to find the model that performs best in a given set of
+models. Since ModelDB Server stores MetricEvents for these models, it can sort the models
+according to a given metric type (e.g. accuracy) when evaluated on a given DataFrame.
+
+\subsection{Find Similar Models}
+A user may want to find other models similar to a given model. ModelDB Server
+allows the user to do search for models that match the given model's type (e.g. 
+Random Forest), problem type (e.g. regression, binary classification), performance,
+and more.
+
+\section{Linear Model and Tree Model Algorithms}
+ModelDB S+C stores extra data about linear and tree models, and this section 
+summarizes a few of the algorithms that can be run on these models.
+
+\subsection{Features ordered by Importance}
+One operation of great value in model building is computing the most important
+features in a model. ModelDB Server stores an importance column in the Feature
+vector for its linear and tree models. Thus, it simply sorts the features in
+descending importance and returns them to the user.
+
+For linear models, ModelDB Server only computes feature importance if the linear model
+is standardized (i.e. all feature columns were scaled to have zero mean and unit variance).
+In this case, the feature importance is taken to be the absolute value of the weight 
+associated with the feature.
+
+For tree models, ModelDB Server defers to Spark.ML's implementation of feature importance. Thus,
+the Spark Client uses Spark.ML's algorithm to compute feature importances and then notifies 
+ModelDB Server. However, since ModelDB Server stores the entire tree model in its database, this algorithm
+could also just be implemented in ModelDB Server directly.
+
+\subsection{Iterations Until Convergence}
+ModelDB Server has a table called ObjectiveFunctionHistory, which stores, for a given model,
+the value of the objective function over several iterations of training. With this table in hand,
+it is easy for ModelDB Server to simply return the number of iterations taken for a model to converge
+(convergence occurs when the value of the objective function changes by less than $\epsilon$ in a single
+iteration).
+
+\subsection{Compare Feature Importances}
+ModelDB Server also supports comparing the importance of features between two models. First, it gets
+the list of features for each model, ordered by importance. Using the order, it then computes the
+percentile ranking of the feature's importance. Then, ModelDB Server finds features common to both features
+and returns the percentile ranking of the feature in each model. It also returns the percentile rankings for
+the features that appear in only one of the models.
+
+\section{Other Algorithms}
+There are a number other algorithms that ModelDB Server supports (e.g. building confidence intervals
+for linear model coefficients) and even more that can be implemented without much code (e.g. for a given model, see if there is another
+model that has scored higher than it for every MetricEvent). For brevity, however, these algorithms will not be discussed.

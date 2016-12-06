@@ -42,23 +42,47 @@
 \contentsline {section}{\numberline {3.6}ModelDB Syncer}{51}
 \contentsline {chapter}{\numberline {4}Algorithms}{53}
 \contentsline {section}{\numberline {4.1}Storage Algorithms}{53}
-\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{53}
-\contentsline {section}{\numberline {4.3}Feature Algorithms}{53}
-\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{53}
-\contentsline {section}{\numberline {4.5}Linear Model Algorithms}{53}
-\contentsline {section}{\numberline {4.6}Tree Model Algorithms}{53}
-\contentsline {chapter}{\numberline {5}Implementation}{55}
-\contentsline {section}{\numberline {5.1}System Architecture}{55}
-\contentsline {section}{\numberline {5.2}Server}{55}
-\contentsline {section}{\numberline {5.3}Spark Client}{55}
-\contentsline {chapter}{\numberline {6}Evaluation}{57}
-\contentsline {section}{\numberline {6.1}Overview}{57}
-\contentsline {section}{\numberline {6.2}Datasets}{57}
-\contentsline {section}{\numberline {6.3}Methodology}{57}
-\contentsline {section}{\numberline {6.4}Time Overhead Results}{57}
-\contentsline {section}{\numberline {6.5}Storage Overhead Results}{57}
-\contentsline {section}{\numberline {6.6}Operation Time Results}{57}
-\contentsline {section}{\numberline {6.7}Improvements}{57}
-\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{59}
-\contentsline {chapter}{\numberline {8}Future Work}{61}
-\contentsline {chapter}{\numberline {9}Conclusion}{63}
+\contentsline {subsection}{\numberline {4.1.1}DataFrame, Transformer, and TransformerSpec}{53}
+\contentsline {subsection}{\numberline {4.1.2}TransformEvent, FitEvent, MetricEvent}{54}
+\contentsline {subsection}{\numberline {4.1.3}Annotation}{54}
+\contentsline {subsection}{\numberline {4.1.4}RandomSplitEvent}{55}
+\contentsline {subsection}{\numberline {4.1.5}PipelineEvent}{55}
+\contentsline {subsection}{\numberline {4.1.6}CrossValidationEvent}{57}
+\contentsline {subsection}{\numberline {4.1.7}GridSearchCrossValidationEvent}{57}
+\contentsline {subsection}{\numberline {4.1.8}LinearModel}{57}
+\contentsline {subsection}{\numberline {4.1.9}TreeModel}{58}
+\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{58}
+\contentsline {subsection}{\numberline {4.2.1}Ancestry of a DataFrame}{59}
+\contentsline {subsection}{\numberline {4.2.2}Ancestry of a Model}{59}
+\contentsline {subsection}{\numberline {4.2.3}Common Ancestor of Two DataFrames}{59}
+\contentsline {subsection}{\numberline {4.2.4}Descendent Models of DataFrame}{59}
+\contentsline {subsection}{\numberline {4.2.5}Pipeline Extraction}{60}
+\contentsline {section}{\numberline {4.3}Feature Algorithms}{60}
+\contentsline {subsection}{\numberline {4.3.1}Original Feature-set of Model}{61}
+\contentsline {subsection}{\numberline {4.3.2}Models using a Given Feature-set}{62}
+\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{62}
+\contentsline {subsection}{\numberline {4.4.1}Compare Features of Two Models}{62}
+\contentsline {subsection}{\numberline {4.4.2}Common Ancestor DataFrame of Two Models}{63}
+\contentsline {subsection}{\numberline {4.4.3}Compare Hyperparameters of Two Models}{63}
+\contentsline {subsection}{\numberline {4.4.4}Rank Models}{64}
+\contentsline {subsection}{\numberline {4.4.5}Find Similar Models}{64}
+\contentsline {section}{\numberline {4.5}Linear Model and Tree Model Algorithms}{64}
+\contentsline {subsection}{\numberline {4.5.1}Features ordered by Importance}{64}
+\contentsline {subsection}{\numberline {4.5.2}Iterations Until Convergence}{65}
+\contentsline {subsection}{\numberline {4.5.3}Compare Feature Importances}{65}
+\contentsline {section}{\numberline {4.6}Other Algorithms}{65}
+\contentsline {chapter}{\numberline {5}Implementation}{67}
+\contentsline {section}{\numberline {5.1}System Architecture}{67}
+\contentsline {section}{\numberline {5.2}Server}{67}
+\contentsline {section}{\numberline {5.3}Spark Client}{67}
+\contentsline {chapter}{\numberline {6}Evaluation}{69}
+\contentsline {section}{\numberline {6.1}Overview}{69}
+\contentsline {section}{\numberline {6.2}Datasets}{69}
+\contentsline {section}{\numberline {6.3}Methodology}{69}
+\contentsline {section}{\numberline {6.4}Time Overhead Results}{69}
+\contentsline {section}{\numberline {6.5}Storage Overhead Results}{69}
+\contentsline {section}{\numberline {6.6}Operation Time Results}{69}
+\contentsline {section}{\numberline {6.7}Improvements}{69}
+\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{71}
+\contentsline {chapter}{\numberline {8}Future Work}{73}
+\contentsline {chapter}{\numberline {9}Conclusion}{75}
