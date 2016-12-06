@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{val} \PYG{n}{model} \PYG{k}{=} \PYG{n}{estimator}\PYG{o}{.}\PYG{n}{fit}\PYG{o}{(}\PYG{n}{dataframe}\PYG{o}{)}
+\end{Verbatim}

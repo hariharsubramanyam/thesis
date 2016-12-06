@@ -73,16 +73,25 @@
 \contentsline {section}{\numberline {4.6}Other Algorithms}{65}
 \contentsline {chapter}{\numberline {5}Implementation}{67}
 \contentsline {section}{\numberline {5.1}System Architecture}{67}
-\contentsline {section}{\numberline {5.2}Server}{67}
-\contentsline {section}{\numberline {5.3}Spark Client}{67}
-\contentsline {chapter}{\numberline {6}Evaluation}{69}
-\contentsline {section}{\numberline {6.1}Overview}{69}
-\contentsline {section}{\numberline {6.2}Datasets}{69}
-\contentsline {section}{\numberline {6.3}Methodology}{69}
-\contentsline {section}{\numberline {6.4}Time Overhead Results}{69}
-\contentsline {section}{\numberline {6.5}Storage Overhead Results}{69}
-\contentsline {section}{\numberline {6.6}Operation Time Results}{69}
-\contentsline {section}{\numberline {6.7}Improvements}{69}
-\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{71}
-\contentsline {chapter}{\numberline {8}Future Work}{73}
-\contentsline {chapter}{\numberline {9}Conclusion}{75}
+\contentsline {section}{\numberline {5.2}Server}{69}
+\contentsline {subsection}{\numberline {5.2.1}Database}{69}
+\contentsline {subsection}{\numberline {5.2.2}Model Filesystem}{70}
+\contentsline {subsection}{\numberline {5.2.3}Configuration}{70}
+\contentsline {subsection}{\numberline {5.2.4}Stateless, Separated, Logic}{71}
+\contentsline {section}{\numberline {5.3}Spark Client}{71}
+\contentsline {subsection}{\numberline {5.3.1}Sample Usage}{71}
+\contentsline {subsection}{\numberline {5.3.2}Syncable Event}{74}
+\contentsline {subsection}{\numberline {5.3.3}ModelDBSyncer}{75}
+\contentsline {subsection}{\numberline {5.3.4}Implicit Classes and Traits}{75}
+\contentsline {subsection}{\numberline {5.3.5}FeatureVectorizer}{77}
+\contentsline {chapter}{\numberline {6}Evaluation}{79}
+\contentsline {section}{\numberline {6.1}Overview}{79}
+\contentsline {section}{\numberline {6.2}Datasets}{79}
+\contentsline {section}{\numberline {6.3}Methodology}{79}
+\contentsline {section}{\numberline {6.4}Time Overhead Results}{79}
+\contentsline {section}{\numberline {6.5}Storage Overhead Results}{79}
+\contentsline {section}{\numberline {6.6}Operation Time Results}{79}
+\contentsline {section}{\numberline {6.7}Improvements}{79}
+\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{81}
+\contentsline {chapter}{\numberline {8}Future Work}{83}
+\contentsline {chapter}{\numberline {9}Conclusion}{85}

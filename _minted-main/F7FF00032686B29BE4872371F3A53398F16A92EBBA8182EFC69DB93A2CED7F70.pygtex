@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// New line.}
+\PYG{k}{import} \PYG{n+nn}{edu.mit.csail.db.ml.modeldb.client.ModelDbSyncer.\PYGZus{}}
+
+\PYG{c+c1}{// New line.}
+\PYG{k}{val} \PYG{n}{syncer} \PYG{k}{=} \PYG{n+nc}{ModelDbSyncer}\PYG{o}{.}\PYG{n}{setSyncer}\PYG{o}{(}\PYG{k}{new} \PYG{n+nc}{ModelDbSyncer}\PYG{o}{())}
+
+\PYG{c+c1}{// Use randomSplitSync instead of randomSplit.}
+\PYG{k}{val} \PYG{n+nc}{Array}\PYG{o}{(}\PYG{n}{train}\PYG{o}{,} \PYG{n}{test}\PYG{o}{)} \PYG{k}{=} \PYG{n}{data}\PYG{o}{.}\PYG{n}{randomSplitSync}\PYG{o}{(}\PYG{n+nc}{Array}\PYG{o}{(}\PYG{l+m+mf}{0.7}\PYG{o}{,} \PYG{l+m+mf}{0.3}\PYG{o}{))}
+\PYG{k}{val} \PYG{n}{lr} \PYG{k}{=} \PYG{k}{new} \PYG{n+nc}{LogisticRegression}\PYG{o}{()}
+      \PYG{o}{.}\PYG{n}{setMaxIter}\PYG{o}{(}\PYG{l+m+mi}{20}\PYG{o}{)}
+      \PYG{o}{.}\PYG{n}{setLabelCol}\PYG{o}{(}\PYG{n+nc}{FeatureVectorizer}\PYG{o}{.}\PYG{n}{indexed}\PYG{o}{(}\PYG{n}{labelCol}\PYG{o}{))}
+      \PYG{o}{.}\PYG{n}{setPredictionCol}\PYG{o}{(}\PYG{n}{predictionCol}\PYG{o}{)}
+      \PYG{o}{.}\PYG{n}{setFeaturesCol}\PYG{o}{(}\PYG{n}{featuresCol}\PYG{o}{)}
+\PYG{k}{val} \PYG{n}{ovr} \PYG{k}{=} \PYG{k}{new} \PYG{n+nc}{OneVsRest}\PYG{o}{()}
+      \PYG{o}{.}\PYG{n}{setClassifier}\PYG{o}{(}\PYG{n}{lr}\PYG{o}{)}
+      \PYG{o}{.}\PYG{n}{setLabelCol}\PYG{o}{(}\PYG{n+nc}{FeatureVectorizer}\PYG{o}{.}\PYG{n}{indexed}\PYG{o}{(}\PYG{n}{labelCol}\PYG{o}{))}
+      \PYG{o}{.}\PYG{n}{setPredictionCol}\PYG{o}{(}\PYG{n}{predictionCol}\PYG{o}{)}
+      \PYG{o}{.}\PYG{n}{setFeaturesCol}\PYG{o}{(}\PYG{n}{featuresCol}\PYG{o}{)}
+
+\PYG{c+c1}{// Use fitSync instead of fit.}
+\PYG{k}{val} \PYG{n}{model} \PYG{k}{=} \PYG{n}{ovr}\PYG{o}{.}\PYG{n}{fitSync}\PYG{o}{(}\PYG{n}{train}\PYG{o}{)}
+
+\PYG{c+c1}{// Use transformSync instead of transform.}
+\PYG{k}{val} \PYG{n}{predictions} \PYG{k}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{transformSync}\PYG{o}{(}\PYG{n}{test}\PYG{o}{)}
+\PYG{k}{val} \PYG{n}{eval} \PYG{k}{=} \PYG{k}{new} \PYG{n+nc}{MulticlassClassificationEvaluator}\PYG{o}{()}
+      \PYG{o}{.}\PYG{n}{setLabelCol}\PYG{o}{(}\PYG{n+nc}{FeatureVectorizer}\PYG{o}{.}\PYG{n}{indexed}\PYG{o}{(}\PYG{n}{labelCol}\PYG{o}{))}
+      \PYG{o}{.}\PYG{n}{setPredictionCol}\PYG{o}{(}\PYG{n}{predictionCol}\PYG{o}{)}
+      \PYG{o}{.}\PYG{n}{setMetricName}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}f1\PYGZdq{}}\PYG{o}{)}
+
+\PYG{c+c1}{// Use evaluateSync instead of evaluate.}
+\PYG{k}{val} \PYG{n}{score} \PYG{k}{=} \PYG{n}{eval}\PYG{o}{.}\PYG{n}{evaluateSync}\PYG{o}{(}\PYG{n}{predictions}\PYG{o}{,} \PYG{n}{model}\PYG{o}{)}
+\end{Verbatim}
