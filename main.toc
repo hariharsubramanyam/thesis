@@ -93,5 +93,9 @@
 \contentsline {section}{\numberline {6.6}Operation Time Results}{79}
 \contentsline {section}{\numberline {6.7}Improvements}{79}
 \contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{81}
-\contentsline {chapter}{\numberline {8}Future Work}{83}
-\contentsline {chapter}{\numberline {9}Conclusion}{85}
+\contentsline {section}{\numberline {7.1}Scikit-learn Client}{83}
+\contentsline {section}{\numberline {7.2}Command Line Toolkit}{83}
+\contentsline {section}{\numberline {7.3}Web Application}{83}
+\contentsline {section}{\numberline {7.4}Possible Database Applications}{83}
+\contentsline {chapter}{\numberline {8}Future Work}{85}
+\contentsline {chapter}{\numberline {9}Conclusion}{87}

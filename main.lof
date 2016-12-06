@@ -9,5 +9,6 @@
 \contentsline {figure}{\numberline {5-1}{\ignorespaces The overall architecture of ModelDB S+C. The arrows indicates the flow of operations + models data. Notice that the data originates at the Spark workers and finds its way into the SQLite database or model filesystem. }}{68}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {7-1}{\ignorespaces The overall architecture of ModelDB that shows the components that interact with ModelDB S+C. The arrows indicates the flow of operations + models data. }}{82}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

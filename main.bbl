@@ -19,6 +19,13 @@ Roger Barga, Valentine Fontama, Wee~Hyong Tok, and Luis Cabrera-Cordon.
 \newblock {\em Predictive analytics with Microsoft Azure machine learning}.
 \newblock Springer, 2015.
 
+\bibitem{datahub}
+Anant Bhardwaj, Souvik Bhattacherjee, Amit Chavan, Amol Deshpande, Aaron~J
+  Elmore, Samuel Madden, and Aditya~G Parameswaran.
+\newblock Datahub: Collaborative data science \& dataset version management at
+  scale.
+\newblock {\em arXiv preprint arXiv:1409.0798}, 2014.
+
 \bibitem{scikitlearn}
 Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
   Mueller, Olivier Grisel, Vlad Niculae, Peter Prettenhofer, Alexandre
