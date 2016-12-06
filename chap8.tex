@@ -1,1 +1,30 @@
 \chapter{Future Work}
+ModelDB S+C is a usable end-to-end system with other systems being built on top of it.
+However, there are a number of areas for improvement.
+
+\section{Neural Networks}
+ModelDB S+C supports special storage and algorithms for linear and tree models. It
+may be interesting to also add support for neural network models. This was omitted 
+for this thesis because Spark.ML supports only simple multi-layer perceptron models,
+which is one kind of neural network. Adding support for more general neural network models,
+especially deep neural networks, could be valuable.
+
+\section{Library Agnostic Model Format}
+ModelDB S+C stores detailed data about linear and tree models that could be used
+to reconstruct them. Consequently, ModelDB Server's database tables could serve as a library agnostic
+storage format for machine learning models. It may be interesting to implement classes in
+Spark Client and Scikit-learn Client to read ModelDB Server's tables and reconstruct a Spark Transformer or Scikit-learn
+Predictor from the contents of the table. This would make it possible, for example, to create a model in Scikit-learn,
+store it in ModelDB Server's database, and then read it and use it in Spark.ML. Currently, ModelDB supports
+storage of serialized model files, so a model created in Spark.ML can later be read and used in Spark.ML.
+
+\section{Scalability}
+ModelDB Server currently runs on a single node, but its design is stateless. Therefore,
+it may be interesting to see how ModelDB Server scales to multiple nodes.
+
+\section{New clients, API methods, columns}
+It would be useful to create client libraries for other machine learning libraries,
+such as those in R. There are a number of interesting operations that could be performed
+on the data stored in ModelDB Server, so it may be useful to implement more API methods. Finally,
+storing additional data in the columns of ModelDB Server's tables (e.g. descriptive statistics for each DataFrameColumn),
+may enable a whole new set of API methods.
