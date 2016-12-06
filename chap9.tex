@@ -1,1 +1,29 @@
 \chapter{Conclusion}
+This thesis describes ModelDB Server and ModelDB Spark Client, which together
+comprise an end-to-end system for logging operations and models created in
+the model building process.
+
+The primitives and Syncable Event abstractions in ModelDB S+C were presented as
+building blocks for representing a wide range of operations, such as random splitting
+of a DataFrame, grid search cross validation, and creation of pre-processing pipelines.
+
+ModelDB Server provides a number of algorithms, exposed as Thrift API endpoints, which
+leverage the aforementioned abstractions to glean useful information, like model rankings and comparisons,
+about the model building process. 
+
+ModelDB S+C stores detailed data about logistic regression, linear regression,
+decision tree, random forest, and gradient boosted tree models. They also support storing
+of serialized models in a filesystem.
+
+ModelDB Spark Client allows automatic logging of machine learning operations performed in Spark.ML,
+requiring only minor changes to code. Its client side abstractions, such as ModelDB Syncer and SyncableEvent, 
+are general and can be applied to other machine learning libraries (e.g. Scikit-learn).
+
+ModelDB S+C serves as a foundation for the overall ModelDB system, and other systems have been
+built on top of it.
+
+Recording model building process but is currently difficult and time-consuming to do. 
+ModelDB S+C aims to make this process much easier and utilize
+data about the model building process to provide insights for the data scientist.
+ModelDB S+C hopes to be a step towards an era of applications that use data about the model
+building process to make the model building process easier, more efficient, and less time consuming.
