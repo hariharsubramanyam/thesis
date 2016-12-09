@@ -468,6 +468,9 @@ at the
 \par
 \@copyrightnotice
 \par
+The author hereby grants to M.I.T. permission to reproduce and to distribute 
+publicly paper and electronic copies of this thesis document in whole and in part
+in any medium now known or hereafter created.
 \vskip 3\baselineskip
 \signature{Author}{\@department \\ \@thesisdate}
 \par
