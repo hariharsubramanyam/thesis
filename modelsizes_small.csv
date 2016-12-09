@@ -1,0 +1,10 @@
+dataset, workflow, size
+animal, full, 144
+housing, simple,  24
+imdb, full,  24
+housing, exploratory, 1200
+animal, exploratory, 1300
+imdb, exploratory, 2300
+imdb, simple,  24
+housing, full,  24
+animal, simple, 144

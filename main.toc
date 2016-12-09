@@ -95,18 +95,18 @@
 \contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{85}
 \contentsline {section}{\numberline {6.4}Time Overhead Results}{86}
 \contentsline {section}{\numberline {6.5}Storage Overhead Results}{88}
-\contentsline {section}{\numberline {6.6}API Method Time Results}{91}
-\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{91}
-\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{91}
-\contentsline {section}{\numberline {6.9}Improvements}{91}
-\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{93}
-\contentsline {section}{\numberline {7.1}Scikit-learn Client}{95}
-\contentsline {section}{\numberline {7.2}Command Line Toolkit}{95}
-\contentsline {section}{\numberline {7.3}Web Application}{95}
-\contentsline {section}{\numberline {7.4}Possible Database Applications}{95}
-\contentsline {chapter}{\numberline {8}Future Work}{97}
-\contentsline {section}{\numberline {8.1}Neural Networks}{97}
-\contentsline {section}{\numberline {8.2}Library Agnostic Model Format}{97}
-\contentsline {section}{\numberline {8.3}Scalability}{98}
-\contentsline {section}{\numberline {8.4}New clients, API methods, columns}{98}
-\contentsline {chapter}{\numberline {9}Conclusion}{99}
+\contentsline {section}{\numberline {6.6}API Method Time Results}{92}
+\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{92}
+\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{92}
+\contentsline {section}{\numberline {6.9}Improvements}{92}
+\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{95}
+\contentsline {section}{\numberline {7.1}Scikit-learn Client}{97}
+\contentsline {section}{\numberline {7.2}Command Line Toolkit}{97}
+\contentsline {section}{\numberline {7.3}Web Application}{97}
+\contentsline {section}{\numberline {7.4}Possible Database Applications}{97}
+\contentsline {chapter}{\numberline {8}Future Work}{99}
+\contentsline {section}{\numberline {8.1}Neural Networks}{99}
+\contentsline {section}{\numberline {8.2}Library Agnostic Model Format}{99}
+\contentsline {section}{\numberline {8.3}Scalability}{100}
+\contentsline {section}{\numberline {8.4}New clients, API methods, columns}{100}
+\contentsline {chapter}{\numberline {9}Conclusion}{101}

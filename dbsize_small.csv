@@ -1,0 +1,10 @@
+dataset, workflow, dbsizeKB,origDbSize
+animal, full,80
+housing, simple,96
+imdb, full,100
+housing, exploratory,1276
+animal, exploratory,1576
+imdb, exploratory,284
+imdb, simple,60
+housing, full,976
+animal, simple,60
