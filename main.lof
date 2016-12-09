@@ -1,14 +1,19 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2-1}{\ignorespaces This is a decision tree model that could be used to predict whether the weather will be snowy (output 1), rainy (output 1), or neither (output 2) by looking at the cloud cover and temperature. The tree first checks if the cloud cover is high. If not, then it predicts there will be neither rain nor snow. Otherwise, the tree checks if the temperature is below 0. If so, then it predicts snow. Otherwise, it predicts rain.}}{24}
+\contentsline {figure}{\numberline {2-1}{\ignorespaces This is a decision tree model that could be used to predict whether the weather will be snowy (output 1), rainy (output 1), or neither (output 2) by looking at the cloud cover and temperature. The tree first checks if the cloud cover is high. If not, then it predicts there will be neither rain nor snow. Otherwise, the tree checks if the temperature is below 0. If so, then it predicts snow. Otherwise, it predicts rain.}}{26}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3-1}{\ignorespaces Diagrammatic representation of cross validation in ModelDB S+C. Green boxes represent primitives and blue boxes represent Syncable Events. Arrows represent foreign key relationships. }}{43}
-\contentsline {figure}{\numberline {3-2}{\ignorespaces Creation of a pre-processing pipeline. First, the user chains together some Transformers and Estimators (objects that can apply their TransformerSpec to create a Transformer from a DataFrame). Next, the user feed a DataFrame into the pipeline. The Transformers transform their input DataFrame, produce an output DataFrame, and pass the output on to the next step in the pipeline. The Estimators use the input DataFrame to create a Transformer, and then they replace themselves with this Transformer - the Transformer then transforms the input DataFrame and passes the output to the next step. }}{45}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces The overall architecture of ModelDB S+C. The arrows indicates the flow of operations + models data. Notice that the data originates at the Spark workers and finds its way into the SQLite database or model filesystem. }}{68}
+\contentsline {figure}{\numberline {3-1}{\ignorespaces Diagrammatic representation of cross validation in ModelDB S+C. Green boxes represent primitives and blue boxes represent Syncable Events. Arrows represent foreign key relationships. }}{45}
+\contentsline {figure}{\numberline {3-2}{\ignorespaces Creation of a pre-processing pipeline. First, the user chains together some Transformers and Estimators (objects that can apply their TransformerSpec to create a Transformer from a DataFrame). Next, the user feed a DataFrame into the pipeline. The Transformers transform their input DataFrame, produce an output DataFrame, and pass the output on to the next step in the pipeline. The Estimators use the input DataFrame to create a Transformer, and then they replace themselves with this Transformer - the Transformer then transforms the input DataFrame and passes the output to the next step. }}{47}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7-1}{\ignorespaces The overall architecture of ModelDB that shows the components that interact with ModelDB S+C. The arrows indicates the flow of operations + models data. }}{82}
+\contentsline {figure}{\numberline {5-1}{\ignorespaces The overall architecture of ModelDB S+C. The arrows indicates the flow of operations + models data. Notice that the data originates at the Spark workers and finds its way into the SQLite database or model filesystem. }}{70}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6-1}{\ignorespaces Time overhead of ModelDB S+C. }}{86}
+\contentsline {figure}{\numberline {6-2}{\ignorespaces Average time overhead percentage by event. }}{87}
+\contentsline {figure}{\numberline {6-3}{\ignorespaces Database size (in KB) for each (dataset, workflow) pair. }}{89}
+\contentsline {figure}{\numberline {6-4}{\ignorespaces Size of tables (in number of rows) for exploratory workflow for Animal Shelter dataset. }}{89}
+\contentsline {figure}{\numberline {6-5}{\ignorespaces Size of model files for each (dataset, workflow) pair. }}{91}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7-1}{\ignorespaces The overall architecture of ModelDB that shows the components that interact with ModelDB S+C. The arrows indicates the flow of operations + models data. }}{94}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

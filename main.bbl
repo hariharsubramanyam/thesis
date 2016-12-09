@@ -9,10 +9,20 @@ Mart{\i}n Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
   2015.
 \newblock {\em Software available from tensorflow. org}, 1, 2015.
 
+\bibitem{spam}
+Tiago~A. Almeida and José María~Gómez Hidalgo.
+\newblock Sms spam collection v. 1.
+\newblock Accessed: 2016-12-09.
+
 \bibitem{introtoml}
 Ethem Alpaydin.
 \newblock {\em Introduction to machine learning}.
 \newblock MIT press, 2014.
+
+\bibitem{airline}
+American~Statistical Association.
+\newblock Airline on-time performance.
+\newblock Accessed: 2016-12-09.
 
 \bibitem{azureml}
 Roger Barga, Valentine Fontama, Wee~Hyong Tok, and Luis Cabrera-Cordon.
@@ -33,6 +43,16 @@ Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
 \newblock Api design for machine learning software: experiences from the
   scikit-learn project.
 \newblock {\em arXiv preprint arXiv:1309.0238}, 2013.
+
+\bibitem{titanicworkflow}
+P.~Bustios.
+\newblock Machine learning on titanic disaster.
+\newblock Accessed: 2016-12-09.
+
+\bibitem{titanic}
+T.~Cason.
+\newblock Titanic data.
+\newblock Accessed: 2016-12-09.
 
 \bibitem{velox}
 Daniel Crankshaw, Peter Bailis, Joseph~E Gonzalez, Haoyuan Li, Zhao Zhang,
@@ -58,6 +78,10 @@ Ian~J Goodfellow, David Warde-Farley, Pascal Lamblin, Vincent Dumoulin, Mehdi
 \newblock Pylearn2: a machine learning research library.
 \newblock {\em arXiv preprint arXiv:1308.4214}, 2013.
 
+\bibitem{pmmlwebsite}
+Data~Mining Group.
+\newblock Pmml sample files.
+
 \bibitem{pmml}
 Alex Guazzelli, Michael Zeller, Wen-Ching Lin, Graham Williams, et~al.
 \newblock Pmml: An open standard for sharing models.
@@ -75,12 +99,27 @@ Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
 \newblock {\em An introduction to statistical learning}, volume~6.
 \newblock Springer, 2013.
 
+\bibitem{housing}
+Kaggle.
+\newblock House prices: Advanced regression techniques.
+\newblock Accessed: 2016-12-09.
+
+\bibitem{imdb}
+Kaggle.
+\newblock Imdb 5000 movie dataset.
+\newblock Accessed: 2016-12-09.
+
 \bibitem{kaggledirectory}
 Kaggle.
 \newblock Kaggle: How to manage machine learning projects.
 \newblock
   \url{https://www.kaggle.com/forums/f/15/kaggle-forum/t/4815/how-to-manage-machine-learning-projects?forumMessageId=25484#post25484}.
 \newblock Accessed 2016-12-03.
+
+\bibitem{animal}
+Kaggle.
+\newblock Shelter animal outcomes.
+\newblock Accessed: 2016-12-09.
 
 \bibitem{netflixprize}
 Yehuda Koren.
@@ -99,6 +138,10 @@ Tim Kraska, Ameet Talwalkar, John~C Duchi, Rean Griffith, Michael~J Franklin,
   and Michael~I Jordan.
 \newblock Mlbase: A distributed machine-learning system.
 \newblock In {\em CIDR}, volume~1, pages 2--1, 2013.
+
+\bibitem{iris}
+M.~Lichman.
+\newblock {UCI} machine learning repository, 2013.
 
 \bibitem{modelhub}
 Hui Miao, Ang Li, Larry~S Davis, and Amol Deshpande.
@@ -125,6 +168,11 @@ Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
 \newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
   Pattern Recognition}, pages 1701--1708, 2014.
 
+\bibitem{flightworkflow}
+Q.~Wang.
+\newblock Spark machine learning pipeline by example.
+\newblock Accessed: 2016-12-09.
+
 \bibitem{spark}
 Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
   McCauley, Michael~J Franklin, Scott Shenker, and Ion Stoica.
@@ -132,5 +180,10 @@ Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
   in-memory cluster computing.
 \newblock In {\em Proceedings of the 9th USENIX conference on Networked Systems
   Design and Implementation}, pages 2--2. USENIX Association, 2012.
+
+\bibitem{spamworkflow}
+ZeppelinHub.
+\newblock Mllib spam classification example.
+\newblock Accessed: 2016-12-09.
 
 \end{thebibliography}
