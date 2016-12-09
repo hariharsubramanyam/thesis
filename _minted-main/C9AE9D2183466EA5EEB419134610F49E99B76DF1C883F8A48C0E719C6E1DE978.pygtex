@@ -3,8 +3,10 @@
   \PYG{n}{transformerSpec} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{TransformerSpec}\PYG{p}{,}
   \PYG{n}{transformer} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
   \PYG{n}{df} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
-  \PYG{n}{predictionColumns} \PYG{n+nb}{TEXT}\PYG{p}{,} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
-  \PYG{n}{labelColumns} \PYG{n+nb}{TEXT}\PYG{p}{,} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{n}{predictionColumns} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{n}{labelColumns} \PYG{n+nb}{TEXT}\PYG{p}{,}
   \PYG{n}{problemType} \PYG{n+nb}{TEXT}
 \PYG{p}{);}
 \end{Verbatim}

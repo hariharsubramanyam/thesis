@@ -3,7 +3,9 @@
   \PYG{n}{oldDf} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
   \PYG{n}{newDf} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{DataFrame}\PYG{p}{,}
   \PYG{n}{transformer} \PYG{n+nb}{INTEGER} \PYG{k}{REFERENCES} \PYG{n}{Transformer}\PYG{p}{,}
-  \PYG{n}{inputColumns} \PYG{n+nb}{TEXT}\PYG{p}{,} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
-  \PYG{n}{outputColumns} \PYG{n+nb}{TEXT} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{n}{inputColumns} \PYG{n+nb}{TEXT}\PYG{p}{,}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Should be comma\PYGZhy{}separated, no spaces, alphabetical.}
+  \PYG{n}{outputColumns} \PYG{n+nb}{TEXT}
 \PYG{p}{);}
 \end{Verbatim}

@@ -30,14 +30,14 @@
 \contentsline {section}{\numberline {3.3}Core Events}{38}
 \contentsline {subsection}{\numberline {3.3.1}TransformEvent}{38}
 \contentsline {subsection}{\numberline {3.3.2}FitEvent}{40}
-\contentsline {subsection}{\numberline {3.3.3}MetricEvent}{40}
-\contentsline {section}{\numberline {3.4}Composite Events}{41}
+\contentsline {subsection}{\numberline {3.3.3}MetricEvent}{41}
+\contentsline {section}{\numberline {3.4}Composite Events}{42}
 \contentsline {subsection}{\numberline {3.4.1}CrossValidationEvent}{42}
 \contentsline {subsection}{\numberline {3.4.2}GridSearchCrossValidationEvent}{43}
 \contentsline {subsection}{\numberline {3.4.3}PipelineEvent}{44}
-\contentsline {subsection}{\numberline {3.4.4}Annotation}{47}
+\contentsline {subsection}{\numberline {3.4.4}Annotation}{46}
 \contentsline {section}{\numberline {3.5}Linear and Tree Models}{48}
-\contentsline {subsection}{\numberline {3.5.1}Linear Models}{49}
+\contentsline {subsection}{\numberline {3.5.1}Linear Models}{48}
 \contentsline {subsection}{\numberline {3.5.2}Tree Models}{49}
 \contentsline {section}{\numberline {3.6}ModelDB Syncer}{51}
 \contentsline {chapter}{\numberline {4}Algorithms}{53}

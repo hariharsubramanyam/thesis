@@ -188,8 +188,10 @@ CREATE TABLE TransformEvent (
   oldDf INTEGER REFERENCES DataFrame,
   newDf INTEGER REFERENCES DataFrame,
   transformer INTEGER REFERENCES Transformer,
-  inputColumns TEXT, -- Should be comma-separated, no spaces, alphabetical.
-  outputColumns TEXT -- Should be comma-separated, no spaces, alphabetical.
+  -- Should be comma-separated, no spaces, alphabetical.
+  inputColumns TEXT, 
+  -- Should be comma-separated, no spaces, alphabetical.
+  outputColumns TEXT 
 );
 \end{minted}
 
@@ -230,8 +232,10 @@ CREATE TABLE FitEvent (
   transformerSpec INTEGER REFERENCES TransformerSpec,
   transformer INTEGER REFERENCES Transformer,
   df INTEGER REFERENCES DataFrame,
-  predictionColumns TEXT, -- Should be comma-separated, no spaces, alphabetical.
-  labelColumns TEXT, -- Should be comma-separated, no spaces, alphabetical.
+  -- Should be comma-separated, no spaces, alphabetical.
+  predictionColumns TEXT, 
+  -- Should be comma-separated, no spaces, alphabetical.
+  labelColumns TEXT, 
   problemType TEXT 
 );
 \end{minted}
@@ -306,7 +310,7 @@ To illustrate, consider the diagrammatic representation of cross validation in F
 
 \begin{figure}
   \centering
-  \includegraphics[width=7.0in]{cross_validation_event}
+  \includegraphics[width=5.0in]{cross_validation_event}
   \caption{
     Diagrammatic representation of cross validation in ModelDB S+C. Green boxes
     represent primitives and blue boxes represent Syncable Events. Arrows
@@ -518,21 +522,28 @@ this using the following tables:
 
 \begin{minted}{sql}
 CREATE TABLE TreeNode (
-  isLeaf INTEGER, -- 1 if node is leaf, 0 if node is internal
-  prediction DOUBLE, -- Internal nodes obviously do not use their predictions
-  impurity DOUBLE, -- Impurity of node.
-  gain DOUBLE, -- Information gain at node. NULL for leaf nodes.
-  splitIndex INTEGER, -- Index of feature that the internal node is splitting. 
-                      -- NULL if this is a leaf node.
-  rootNode INTEGER REFERENCES TreeNode -- NULL for the root node
+  -- 1 if node is leaf, 0 if node is internal
+  isLeaf INTEGER, 
+  -- Internal nodes obviously do not use their predictions
+  prediction DOUBLE, 
+  -- Impurity of node.
+  impurity DOUBLE, 
+  -- Information gain at node. NULL for leaf nodes.
+  gain DOUBLE, 
+  -- Index of feature that the internal node is splitting. 
+  -- NULL if this is a leaf node.
+  splitIndex INTEGER, 
+  -- NULL for the root node
+  rootNode INTEGER REFERENCES TreeNode 
 );
 
 DROP TABLE IF EXISTS TreeLink;
 CREATE TABLE TreeLink (
   parent INTEGER REFERENCES TreeNode,
   child INTEGER REFERENCES TreeNode,
-  isLeft INTEGER NOT NULL -- 1 if the child is a left child 
-                          -- 0 if the child is a right child.
+  -- 1 if the child is a left child 
+  -- 0 if the child is a right child.
+  isLeft INTEGER NOT NULL 
 );
 \end{minted}
 
@@ -557,7 +568,8 @@ defines the following tables:
 \begin{minted}{sql}
 CREATE TABLE TreeModel (
   model INTEGER REFERENCES Transformer,
-  modelType TEXT NOT NULL -- Should be "Decision Tree", "GBT", or "Random Forest"
+  -- Should be "Decision Tree", "GBT", or "Random Forest"
+  modelType TEXT NOT NULL 
 );
 
 CREATE TABLE TreeModelComponent (
@@ -585,4 +597,4 @@ a global ModelDB Syncer object. This ModelDB Syncer maintains an ordered buffer 
 that it periodically flushes to the ModelDB Server. Each Syncable Event is imbued with logic for converting
 the Spark objects it represents into the corresponding ModelDB S+C abstraction and sending that information to
 ModelDB Server. The ModelDB Syncer performs other roles as well, such as maintaining a mapping between Spark
-objects and their IDs in ModelDB S+C. The ModelDB Syncer will be described in greater detail in the Implementation chapter.
+objects and their IDs in ModelDB S+C. ModelDB Syncer is described in greater detail in the Implementation chapter.
