@@ -168,6 +168,13 @@ Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, and Lior Wolf.
 \newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
   Pattern Recognition}, pages 1701--1708, 2014.
 
+\bibitem{hilda}
+Manasi Vartak, Harihar Subramanyam, Wei-En Lee, Srinidhi Viswanathan, Saadiyah
+  Husnoo, Samuel Madden, and Matei Zaharia.
+\newblock Modeldb: a system for machine learning model management.
+\newblock In {\em Proceedings of the Workshop on Human-In-the-Loop Data
+  Analytics}, page~14. ACM, 2016.
+
 \bibitem{flightworkflow}
 Q.~Wang.
 \newblock Spark machine learning pipeline by example.

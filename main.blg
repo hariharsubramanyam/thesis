@@ -16,45 +16,45 @@ A level-1 auxiliary file: biblio.aux
 The style file: plain.bst
 Database file #1: main.bib
 Warning--empty journal in mldb
-You've used 32 entries,
+You've used 33 entries,
             2118 wiz_defined-function locations,
-            648 strings with 9222 characters,
-and the built_in function-call counts, 10610 in all, are:
-= -- 961
-> -- 682
-< -- 8
-+ -- 276
-- -- 240
-* -- 683
-:= -- 1817
-add.period$ -- 98
-call.type$ -- 32
-change.case$ -- 209
+            654 strings with 9490 characters,
+and the built_in function-call counts, 11111 in all, are:
+= -- 1006
+> -- 720
+< -- 9
++ -- 291
+- -- 254
+* -- 721
+:= -- 1900
+add.period$ -- 102
+call.type$ -- 33
+change.case$ -- 219
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 352
-empty$ -- 753
-format.name$ -- 240
-if$ -- 2170
+cite$ -- 34
+duplicate$ -- 371
+empty$ -- 784
+format.name$ -- 254
+if$ -- 2277
 int.to.chr$ -- 0
-int.to.str$ -- 32
-missing$ -- 23
-newline$ -- 163
-num.names$ -- 64
-pop$ -- 310
+int.to.str$ -- 33
+missing$ -- 24
+newline$ -- 168
+num.names$ -- 66
+pop$ -- 324
 preamble$ -- 2
-purify$ -- 181
+purify$ -- 190
 quote$ -- 0
-skip$ -- 271
+skip$ -- 282
 stack$ -- 0
-substring$ -- 359
-swap$ -- 79
-text.length$ -- 8
+substring$ -- 368
+swap$ -- 86
+text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 124
 warning$ -- 1
-while$ -- 85
-width$ -- 34
-write$ -- 324
+while$ -- 88
+width$ -- 35
+write$ -- 336
 (There was 1 warning)
