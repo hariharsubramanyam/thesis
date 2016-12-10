@@ -15,7 +15,8 @@
 \contentsline {figure}{\numberline {6-5}{\ignorespaces Size of database for each (dataset, workflow) pair when GridSearchCrossValidationEvent intermediates are not stored and when the TreeLink and TreeNode tables are only populated for the last model. }}{91}
 \contentsline {figure}{\numberline {6-6}{\ignorespaces Size of model files for each (dataset, workflow) pair. }}{92}
 \contentsline {figure}{\numberline {6-7}{\ignorespaces Size of model files for each (dataset, workflow) pair when only the final models are serialized and stored, rather than serializing and storing all produced Transformers. }}{93}
+\contentsline {figure}{\numberline {6-8}{\ignorespaces Time taken for each method, plotted as a function of the number of times that each row was duplicated. }}{93}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7-1}{\ignorespaces The overall architecture of ModelDB that shows the components that interact with ModelDB S+C. The arrows indicates the flow of operations + models data. }}{96}
+\contentsline {figure}{\numberline {7-1}{\ignorespaces The overall architecture of ModelDB that shows the components that interact with ModelDB S+C. The arrows indicates the flow of operations + models data. }}{100}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

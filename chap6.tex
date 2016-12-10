@@ -3,7 +3,7 @@ By importing ModelDBSyncer and appending "Sync" to the method names, the user
 can use ModelDB Spark Client to record and send their operations and models
 on ModelDB Server, which stores the data in its database and model filesystem.
 Naturally, this takes extra running time and storage space than if the user did
-not ModelDB S+C at all. Additionally, the API methods exposed by ModelDB Server
+not use ModelDB S+C at all. Additionally, the API methods exposed by ModelDB Server
 take some time to run too. The goal of this chapter is to measure whether the time
 and space requirements of ModelDB S+C are reasonable.
 
@@ -33,7 +33,7 @@ The \textbf{IMDB} dataset \cite{imdb} includes features like genre, number of
 reviews, language, and more for over 5000 movies in the IMDB Movie Database. The dataset
 also includes the IMDB score (i.e. a 1 to 10 rating of how good the movie is considered)
 for each movie. A machine learning model could solve a regression problem on this
-dataset in which it predicts the IMDB score for a given movie. Such a model could, for instance,
+dataset in which it predicts the IMDB score for a given movie. Such a model could
 be used to identify the best movies and recommend them to users. This dataset
 was used when measuring the time/space overhead of ModelDB S+C and was also used
 when measuring the execution time for ModelDB Server API methods.
@@ -42,8 +42,8 @@ The \textbf{Animal Shelter} dataset \cite{animal} includes features like
 animal type (cat or dog), breed, color, age, and more for over 25,000 animals. The
 dataset also includes the animal's outcome (e.g. adopted, returned to owner, transferred)
 for each animal. A machine learning model could solve a multi-class classification problem on this dataset
-in which it predicts the most likely outcome for a given animal. Such a model could, for
-instance, be used to identify the most likely outcome for an animal newly admitted into the
+in which it predicts the most likely outcome for a given animal. Such a model could 
+be used to identify the most likely outcome for an animal newly admitted into the
 an animal shelter. This dataset was used when measuring the time/space overhead
 of ModelDB S+C.
 
@@ -51,7 +51,7 @@ The \textbf{Housing Prices} dataset \cite{housing} includes features like square
 footage, number of bathrooms, neighborhood type, and more for about 1,500 houses.
 The dataset also includes the sale price of each house. A machine learning model
 could solve a regression problem on this dataset in which it predicts the sale
-price of a given home. Such a model could, for instance, be used by realtors who
+price of a given home. Such a model could be used by realtors who
 are trying to find the best price for a home when putting it up on the market. This
 dataset was used when measuring the time/space overhead of ModelDB S+C.
 
@@ -96,7 +96,7 @@ The IMDB, Housing Prices, and Animal Shelter datasets were used for this experim
 First, for each of the datasets listed above, three programs (called workflows) were
 created. The \textbf{simple} workflow simply trains and evaluates one machine learning model. 
 The \textbf{full} workflow creates a preprocessing pipeline for the data, trains 
-some models with grid search cross validation (thus trying many hyperparameters), 
+some models with grid search cross validation (thus trying many hyperparameter configurations), 
 and evaluates the best model. The \textbf{exploratory} worklow executes many full workflows, 
 trying different model types (e.g. random forest, linear regression) and different feature sets.
 
@@ -129,7 +129,7 @@ running time for each method was recorded.
 \subsection{Compare ModelDB S+C Models to PMML}
 The PMML website \cite{pmmlwebsite} includes sample files for a 200 tree random forest model
 and logistic regression model run that were trained on the Iris dataset. So, this
-experiment trained a random forest model and one vs. rest logistic regression model
+experiment trained a random forest model and a one vs. rest logistic regression model
 in Spark.ML (with ModelDB S+C enabled). The sizes of the model files and database
 were recorded.
 
@@ -175,7 +175,7 @@ in size. All data was in CSV format.
 Thus, Figure \ref{fig:time_overhead} shows that the time overhead of ModelDB S+C becomes insignificant 
 as the dataset grows beyond 300 MB. 
 
-The slowest step in recording and storing a model or operation, as determined yby 
+The slowest step in recording and storing a model or operation, as determined by 
 instrumenting various lines of code, is writing to the SQLite database. This is not a surprise
 because the SQLite file lives on disk and because SQLite is not a very performant database.
 Replacing SQLite with a more performant database may not only reduce the time overhead, it may
@@ -257,12 +257,12 @@ Therefore, it is no surprise that the TreeNode and TreeLink tables are so large.
 ModelDB S+C provides two mechanisms to reduce database size. First, as described before, it
 allows the user to forgo storing ALL the data associated with a GridSearchCrossValidationEvent and instead
 store only the most important parts.
-Second, it allows the user to forgo storing storing entries in the TreeLink and TreeNode table (the
+Second, it allows the user to forgo storing entries in the TreeLink and TreeNode table (the
 node and link data are already stored in the serialized model file) except for specified models. This can reduce the database size
 greatly, and allow the user to only store TreeNode and TreeLink rows when it is necessary. In the 
 exploratory workflow for the Animal Shelter workflow, only one (i.e. the best)  model's TreeLink and TreeNode data is really needed,
 but the workflow stores data for dozens of random forest models. When the above two mechanisms are applied,
-the size of the database falls from about 9 MB to 1.7 MB, as shown in figure \ref{fig:dbsize_small}.
+the size of the database falls from about 9 MB to 1.6 MB, as shown in figure \ref{fig:dbsize_small}.
 
 \begin{figure}
   \centering
@@ -306,9 +306,129 @@ all the produced Transformers, the model sizes in Figure \ref{fig:modelsizes_sma
 The models in \ref{fig:modelsizes_small} take up much less space.
 
 \section{API Method Time Results}
+The IMDB exploratory workflow took about 490 seconds (a little over 8 minutes)
+to execute, and the majority of this time was spent training models. Figure \ref{fig:methodtimes}
+shows the time taken by various API method, as a function of the number of times each row
+was duplicated (recall that the duplication was done to simulate multiple workflows).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=6.0in]{methodtimes}
+  \caption{
+    Time taken for each method, plotted as a function of the number of times that
+    each row was duplicated.
+  }
+  \label{fig:methodtimes}
+\end{figure}
+
+Figure \ref{fig:methodtimes} shows that the running times of the API methods are
+very small, with not a single API method taking more than 500 milliseconds. The fast running
+times are due to the indices in ModelDB Server's database, which speed up the slow queries
+and due to the fact that all of ModelDB Server's API methods run in $O(n)$ time or better, where
+$n$ is the size of the database. The running time grows slowly with the number of workflows, and
+should remain small (under a few seconds) even for a large number of workflows. That being said, there are still
+a few potential indices that could be created in order to speed up the API methods. Second, some API
+methods (e.g. descendent models) could theoretically be parallelized. Third, the overall ModelDB system includes
+abstractions for grouping together Syncable Events and primitives (e.g. ExperimentRun, Project), and queries could be
+restricted to run within a specific ExperimentRun or Project, because these tend to be small. Fourth,
+using a more performant database than SQLite could speed up the API methods. Overall, though, the running
+time of the API methods is very small compared to the time taken to run the IMDB exploratory workflow.
 
 \section{Model Files Compared to PMML Results}
+The PMML Website includes model files for a random forest model and logistic regression
+model training on the Iris dataset. To compare ModelDB S+C's storage to PMML, a
+a random forest model and one vs. rest logistic regression model were trained on the Iris
+dataset. The results are shown in Table \ref{tab:pmml}. Note that the one vs. rest classifier
+actually trains multiple logistic regression models. A one vs. rest classifier was used
+because Spark.ML does not currently support the multi-class logistic regression model. To
+compensate, only one logistic regression model is counted for the sizing below, rather than
+all of them.
+
+ \begin{table}
+   \centering
+    \begin{tabular}{ | l | l | l | l |}
+      \hline
+      Model Type & Database Size (KB) & Models Size (KB) & PMML Size (KB) \\ \hline
+      Logistic Regression & 16 & 12 & 4 \\ \hline
+      Random Forest & 116 & 224 & 420 \\ 
+      \hline
+   \end{tabular}
+   \caption{Comparing ModelDB database and model files to PMML file}
+   \label{tab:pmml}
+ \end{table}
+
+ So, for the logistic regression model, ModelDB S+C uses $16 + 12 = 28$ KB, which is
+ higher than the $4$ KB required for PMML. This is because the logistic regression model
+ is quite simple, which allows the PMML file to be small. ModelDB S+C must store information
+ about the DataFrame, TransformerSpec, DataFrameColumn, and Hyperparameters in its database and
+ it stores some metadata for the deserializer in the model file. These two factors cause ModelDB S+C
+ to use more storage space than the PMML file does.
+
+ The situation is reversed for the random forest, however. ModelDB S+C only uses $116 + 224 = 340$ KB,
+ while the PMML file uses $420$ KB. The random forest is large (200 trees), so the overhead of storing the DataFrame,
+ TransformerSpec, DataFrameColumn, and Hyperparameters and the overhead of storing deserialization metadata are now small.
+ ModelDB is able to leverage the (somewhat) efficient storage format of SQLite and efficient storage format of Parquet (for 
+ the model file), which keeps the overall storage space small. PMML, on the other hand, is an XML-like language, which becomes
+ quite verbose for a large model like the random forest.
+
+ Overall, it seems that ModelDB S+C does not require hugely more storage space than PMML for storing models. 
+ While it may require more storage space in some cases, it is worth it because PMML cannot be queried like the SQLite
+ database can and Spark.ML cannot deserialize PMML models and use them in the program. One advantage that PMML
+ has is that it is a human readable file (The Parquet file and SQLite file are not human readable) and it is more well-known. 
+ However, since ModelDB S+C is not tied to a particular storage format, the user could store their serialized model in PMML, 
+ if they so choose.
 
 \section{Evaluating Existing Workflows Results}
+Three real machine learning workflows (Flight Delays, Titanic, and SMS Spam) were
+considered and modified to use ModelDB S+C. This was done to see how many operations in the
+machine learning workflow ModelDB S+C is able to record. Note in the following paragraphs that "captures"
+means that ModelDB S+C is able to automatically record and store the operations and machine learning models
+associated with a step of the workflow.
+
+The Flight Delays workflow begins by reading the CSV file and parsing the data. These parsing
+steps (e.g. convert timestamp into Java Date) are not captured by ModelDB S+C. While it is possible
+for the user to indicate this parsing step by manually buffering a TransformEvent in the ModelDBSyncer,
+it is not done automatically. Then, the workflow creates a pre-processing pipeline, which can be captured
+completely by ModelDB S+C. Next, a decision tree model and logistic regression model are trained and
+used to make predictions on the test data - this too can be captured completely by ModelDB S+C.
+
+The Titanic workflow begins by reading the data and splitting the data into training and testing sets, which is captured by
+ModelDB S+C. Then, it creates a number of visualizations - this is completely ignored by ModelDB S+C.
+Next, some null values are are replaced with the median value of the column - this is not automatically 
+captured by ModelDB S+C, but the user could manually log a TransformEvent to indicate this cleaning step.
+Then, grid search cross validation is used to train a logistic regression model - ModelDB S+C completely 
+captures this step. Next, a random forest model is trained using grid search cross validation, and this too
+is completely captured by ModelDB S+C. Then, the feature importances of the models are listed - this too
+is captured by ModelDB S+C (it stores feature importances for linear and tree models).
+
+The SMS Spam workflow begins by reading the data and applying a HashingTF transformer to it - ModelDB S+C
+can capture this step. Then, a logistic regression mdoel is trained, which ModelDB S+C captures. Finally,
+the model is used to make some predictions, which is also captured by ModelDB S+C.
+
+The above examples illustrate that ModelDB S+C is able to log many of the machine learning operations and 
+models in actual machine learning workflows. It is not able to log any created visualizations, but that is out
+of scope for ModelDB S+C. There are some data parsing and cleaning steps that it is not able to log automatically, but
+it allows the user to manually buffer a TransformEvent for this purpose. In the case of the workflows above, it
+may actually be possible to log some of the data parsing and cleaning steps automatically (create implicit classes for
+Spark's RDD methods and log a TransformEvent when they are executed), but that has not been
+implemented yet in ModelDB Spark Client.
 
 \section{Improvements}
+While a number of potential improvements have been discussed in the previous sections,
+it is worth focusing on a few of them below.
+
+First, using a better database than SQLite may improve ModelDB S+C's storage and time
+overhead. SQLite is not designed for performance. It was used because it is simple and allows
+ModelDB S+C to be used out of the box.
+
+Second, ModelDB S+C misses a number of opportunities to parallelize queries. For example,
+when storing CrossValidationEvents in a GridSearchCrossValidationEvent, each CrossValidationEvent
+is stored one at a time. This is not strictly necessary, as they could be stored in parallel.
+Writing ModelDB's storage algorithms so that they can store multiple Syncable Events or primitives 
+in parallel may speed up the runtime significantly.
+
+Third, rather than creating a TreeLink table and TreeNode table, it may be possible to store
+tree models in a JSON column. Since JSON columns are not supported in SQLite, however, this was
+not done.
+
+Fourth, ModelDB does not apply any compression of its model files. Doing this can reduce their storage requirements.

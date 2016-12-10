@@ -1,0 +1,211 @@
+Method, NumWorkflows, TimeMs
+Compare Hyperparameters, 1, 11.0
+Compare Hyperparameters, 5, 12.0
+Compare Hyperparameters, 10, 14.0
+Compare Hyperparameters, 20, 17.0
+Compare Hyperparameters, 40, 23.0
+Compare Hyperparameters, 60, 33.0
+Compare Hyperparameters, 80, 37.0
+Compare Hyperparameters, 100, 44.0
+Compare Hyperparameters, 140, 56.0
+Compare Hyperparameters, 160, 62.0
+Compare Hyperparameters, 180, 71.0
+Compare Hyperparameters, 250, 99.0
+Compare Hyperparameters, 300, 211.0
+Compare Hyperparameters, 350, 136.0
+Compare Hyperparameters, 400, 152.0
+Group Models, 1, 2.0
+Group Models, 5, 2.0
+Group Models, 10, 2.0
+Group Models, 20, 1.0
+Group Models, 40, 2.0
+Group Models, 60, 2.0
+Group Models, 80, 2.0
+Group Models, 100, 2.0
+Group Models, 140, 2.0
+Group Models, 160, 2.0
+Group Models, 180, 1.0
+Group Models, 250, 2.0
+Group Models, 300, 3.0
+Group Models, 350, 2.0
+Group Models, 400, 2.0
+Common Ancestor Models, 1, 16.0
+Common Ancestor Models, 5, 18.0
+Common Ancestor Models, 10, 17.0
+Common Ancestor Models, 20, 21.0
+Common Ancestor Models, 40, 16.0
+Common Ancestor Models, 60, 17.0
+Common Ancestor Models, 80, 22.0
+Common Ancestor Models, 100, 23.0
+Common Ancestor Models, 140, 22.0
+Common Ancestor Models, 160, 16.0
+Common Ancestor Models, 180, 23.0
+Common Ancestor Models, 250, 23.0
+Common Ancestor Models, 300, 21.0
+Common Ancestor Models, 350, 35.0
+Common Ancestor Models, 400, 34.0
+Original Features, 1, 4.0
+Original Features, 5, 7.0
+Original Features, 10, 8.0
+Original Features, 20, 22.0
+Original Features, 40, 21.0
+Original Features, 60, 33.0
+Original Features, 80, 36.0
+Original Features, 100, 45.0
+Original Features, 140, 61.0
+Original Features, 160, 67.0
+Original Features, 180, 73.0
+Original Features, 250, 101.0
+Original Features, 300, 121.0
+Original Features, 350, 141.0
+Original Features, 400, 154.0
+Compare Importances, 1, 12.0
+Compare Importances, 5, 15.0
+Compare Importances, 10, 16.0
+Compare Importances, 20, 20.0
+Compare Importances, 40, 30.0
+Compare Importances, 60, 45.0
+Compare Importances, 80, 48.0
+Compare Importances, 100, 63.0
+Compare Importances, 140, 82.0
+Compare Importances, 160, 84.0
+Compare Importances, 180, 96.0
+Compare Importances, 250, 138.0
+Compare Importances, 300, 161.0
+Compare Importances, 350, 185.0
+Compare Importances, 400, 224.0
+Descendent Models, 1, 7.0
+Descendent Models, 5, 10.0
+Descendent Models, 10, 13.0
+Descendent Models, 20, 21.0
+Descendent Models, 40, 24.0
+Descendent Models, 60, 38.0
+Descendent Models, 80, 51.0
+Descendent Models, 100, 67.0
+Descendent Models, 140, 87.0
+Descendent Models, 160, 69.0
+Descendent Models, 180, 95.0
+Descendent Models, 250, 139.0
+Descendent Models, 300, 279.0
+Descendent Models, 350, 339.0
+Descendent Models, 400, 375.0
+Similar Models, 1, 10.0
+Similar Models, 5, 9.0
+Similar Models, 10, 9.0
+Similar Models, 20, 9.0
+Similar Models, 40, 10.0
+Similar Models, 60, 11.0
+Similar Models, 80, 12.0
+Similar Models, 100, 14.0
+Similar Models, 140, 15.0
+Similar Models, 160, 16.0
+Similar Models, 180, 16.0
+Similar Models, 250, 19.0
+Similar Models, 300, 22.0
+Similar Models, 350, 23.0
+Similar Models, 400, 34.0
+Ancestry, 1, 308.0
+Ancestry, 5, 311.0
+Ancestry, 10, 361.0
+Ancestry, 20, 317.0
+Ancestry, 40, 313.0
+Ancestry, 60, 318.0
+Ancestry, 80, 310.0
+Ancestry, 100, 323.0
+Ancestry, 140, 318.0
+Ancestry, 160, 328.0
+Ancestry, 180, 323.0
+Ancestry, 250, 319.0
+Ancestry, 300, 321.0
+Ancestry, 350, 349.0
+Ancestry, 400, 408.0
+Compare Features, 1, 5.0
+Compare Features, 5, 6.0
+Compare Features, 10, 6.0
+Compare Features, 20, 7.0
+Compare Features, 40, 6.0
+Compare Features, 60, 6.0
+Compare Features, 80, 6.0
+Compare Features, 100, 6.0
+Compare Features, 140, 5.0
+Compare Features, 160, 6.0
+Compare Features, 180, 8.0
+Compare Features, 250, 8.0
+Compare Features, 300, 8.0
+Compare Features, 350, 7.0
+Compare Features, 400, 8.0
+Models with Features, 1, 9.0
+Models with Features, 5, 12.0
+Models with Features, 10, 14.0
+Models with Features, 20, 29.0
+Models with Features, 40, 32.0
+Models with Features, 60, 50.0
+Models with Features, 80, 58.0
+Models with Features, 100, 69.0
+Models with Features, 140, 95.0
+Models with Features, 160, 103.0
+Models with Features, 180, 139.0
+Models with Features, 250, 279.0
+Models with Features, 300, 469.0
+Models with Features, 350, 423.0
+Models with Features, 400, 478.0
+Model Ancestry, 1, 25.0
+Model Ancestry, 5, 27.0
+Model Ancestry, 10, 27.0
+Model Ancestry, 20, 27.0
+Model Ancestry, 40, 25.0
+Model Ancestry, 60, 27.0
+Model Ancestry, 80, 28.0
+Model Ancestry, 100, 33.0
+Model Ancestry, 140, 28.0
+Model Ancestry, 160, 26.0
+Model Ancestry, 180, 28.0
+Model Ancestry, 250, 27.0
+Model Ancestry, 300, 31.0
+Model Ancestry, 350, 37.0
+Model Ancestry, 400, 39.0
+Common Ancestor, 1, 23.0
+Common Ancestor, 5, 25.0
+Common Ancestor, 10, 25.0
+Common Ancestor, 20, 23.0
+Common Ancestor, 40, 23.0
+Common Ancestor, 60, 22.0
+Common Ancestor, 80, 23.0
+Common Ancestor, 100, 33.0
+Common Ancestor, 140, 25.0
+Common Ancestor, 160, 22.0
+Common Ancestor, 180, 22.0
+Common Ancestor, 250, 20.0
+Common Ancestor, 300, 21.0
+Common Ancestor, 350, 24.0
+Common Ancestor, 400, 33.0
+Importances, 1, 11.0
+Importances, 5, 12.0
+Importances, 10, 13.0
+Importances, 20, 16.0
+Importances, 40, 19.0
+Importances, 60, 27.0
+Importances, 80, 29.0
+Importances, 100, 37.0
+Importances, 140, 43.0
+Importances, 160, 47.0
+Importances, 180, 53.0
+Importances, 250, 77.0
+Importances, 300, 87.0
+Importances, 350, 95.0
+Importances, 400, 114.0
+Rank Models, 1, 1.0
+Rank Models, 5, 2.0
+Rank Models, 10, 2.0
+Rank Models, 20, 1.0
+Rank Models, 40, 2.0
+Rank Models, 60, 1.0
+Rank Models, 80, 1.0
+Rank Models, 100, 1.0
+Rank Models, 140, 2.0
+Rank Models, 160, 2.0
+Rank Models, 180, 1.0
+Rank Models, 250, 1.0
+Rank Models, 300, 2.0
+Rank Models, 350, 2.0
+Rank Models, 400, 2.0
