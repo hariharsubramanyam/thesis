@@ -12,13 +12,14 @@ A level-1 auxiliary file: chap6.aux
 A level-1 auxiliary file: chap7.aux
 A level-1 auxiliary file: chap8.aux
 A level-1 auxiliary file: chap9.aux
+A level-1 auxiliary file: appa.aux
 A level-1 auxiliary file: biblio.aux
 The style file: plain.bst
 Database file #1: main.bib
 Warning--empty journal in mldb
 You've used 33 entries,
             2118 wiz_defined-function locations,
-            654 strings with 9490 characters,
+            655 strings with 9498 characters,
 and the built_in function-call counts, 11111 in all, are:
 = -- 1006
 > -- 720

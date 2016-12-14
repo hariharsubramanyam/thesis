@@ -1,112 +1,113 @@
-\contentsline {chapter}{\numberline {1}Introduction}{17}
-\contentsline {section}{\numberline {1.1}The Model Building Process}{17}
-\contentsline {section}{\numberline {1.2}ModelDB Server and ModelDB Spark Client}{18}
-\contentsline {section}{\numberline {1.3}Outline of this Thesis}{19}
-\contentsline {chapter}{\numberline {2}Related Work}{23}
-\contentsline {section}{\numberline {2.1}Machine Learning}{23}
-\contentsline {section}{\numberline {2.2}Linear and Tree Models}{25}
-\contentsline {section}{\numberline {2.3}Spark.ML}{26}
-\contentsline {section}{\numberline {2.4}Machine Learning Libraries}{27}
-\contentsline {subsection}{\numberline {2.4.1}MLI}{27}
-\contentsline {subsection}{\numberline {2.4.2}Scikit-learn}{28}
-\contentsline {subsection}{\numberline {2.4.3}Weka}{29}
-\contentsline {subsection}{\numberline {2.4.4}Pylearn 2}{29}
-\contentsline {subsection}{\numberline {2.4.5}Tensorflow}{29}
-\contentsline {subsection}{\numberline {2.4.6}Summary}{30}
-\contentsline {section}{\numberline {2.5}Model Building Support Systems}{30}
-\contentsline {subsection}{\numberline {2.5.1}ModelHub}{30}
-\contentsline {subsection}{\numberline {2.5.2}MLDB}{31}
-\contentsline {subsection}{\numberline {2.5.3}Azure ML}{31}
-\contentsline {subsection}{\numberline {2.5.4}Velox}{32}
-\contentsline {subsection}{\numberline {2.5.5}MLBase}{32}
-\contentsline {subsection}{\numberline {2.5.6}PMML}{32}
-\contentsline {subsection}{\numberline {2.5.7}Longview}{33}
-\contentsline {chapter}{\numberline {3}Abstractions}{35}
-\contentsline {section}{\numberline {3.1}Primitives}{36}
-\contentsline {subsection}{\numberline {3.1.1}DataFrame}{36}
-\contentsline {subsection}{\numberline {3.1.2}Transformer}{37}
-\contentsline {subsection}{\numberline {3.1.3}TransformerSpec}{38}
-\contentsline {section}{\numberline {3.2}Syncable Events}{40}
-\contentsline {section}{\numberline {3.3}Core Events}{40}
-\contentsline {subsection}{\numberline {3.3.1}TransformEvent}{40}
-\contentsline {subsection}{\numberline {3.3.2}FitEvent}{42}
+\contentsline {chapter}{\numberline {1}Introduction}{19}
+\contentsline {section}{\numberline {1.1}The Model Building Process}{19}
+\contentsline {section}{\numberline {1.2}ModelDB Server and ModelDB Spark Client}{20}
+\contentsline {section}{\numberline {1.3}Outline of this Thesis}{21}
+\contentsline {chapter}{\numberline {2}Related Work}{25}
+\contentsline {section}{\numberline {2.1}Machine Learning}{25}
+\contentsline {section}{\numberline {2.2}Linear and Tree Models}{27}
+\contentsline {section}{\numberline {2.3}Spark.ML}{28}
+\contentsline {section}{\numberline {2.4}Machine Learning Libraries}{29}
+\contentsline {subsection}{\numberline {2.4.1}MLI}{29}
+\contentsline {subsection}{\numberline {2.4.2}Scikit-learn}{30}
+\contentsline {subsection}{\numberline {2.4.3}Weka}{31}
+\contentsline {subsection}{\numberline {2.4.4}Pylearn 2}{31}
+\contentsline {subsection}{\numberline {2.4.5}Tensorflow}{31}
+\contentsline {subsection}{\numberline {2.4.6}Summary}{32}
+\contentsline {section}{\numberline {2.5}Model Building Support Systems}{32}
+\contentsline {subsection}{\numberline {2.5.1}ModelHub}{32}
+\contentsline {subsection}{\numberline {2.5.2}MLDB}{33}
+\contentsline {subsection}{\numberline {2.5.3}Azure ML}{33}
+\contentsline {subsection}{\numberline {2.5.4}Velox}{34}
+\contentsline {subsection}{\numberline {2.5.5}MLBase}{34}
+\contentsline {subsection}{\numberline {2.5.6}PMML}{34}
+\contentsline {subsection}{\numberline {2.5.7}Longview}{35}
+\contentsline {chapter}{\numberline {3}Abstractions}{37}
+\contentsline {section}{\numberline {3.1}Primitives}{39}
+\contentsline {subsection}{\numberline {3.1.1}DataFrame}{39}
+\contentsline {subsection}{\numberline {3.1.2}Transformer}{39}
+\contentsline {subsection}{\numberline {3.1.3}TransformerSpec}{40}
+\contentsline {section}{\numberline {3.2}Syncable Events}{41}
+\contentsline {section}{\numberline {3.3}Core Events}{42}
+\contentsline {subsection}{\numberline {3.3.1}TransformEvent}{42}
+\contentsline {subsection}{\numberline {3.3.2}FitEvent}{43}
 \contentsline {subsection}{\numberline {3.3.3}MetricEvent}{43}
 \contentsline {section}{\numberline {3.4}Composite Events}{44}
 \contentsline {subsection}{\numberline {3.4.1}CrossValidationEvent}{44}
-\contentsline {subsection}{\numberline {3.4.2}GridSearchCrossValidationEvent}{45}
+\contentsline {subsection}{\numberline {3.4.2}GridSearchCrossValidationEvent}{46}
 \contentsline {subsection}{\numberline {3.4.3}PipelineEvent}{46}
 \contentsline {subsection}{\numberline {3.4.4}Annotation}{48}
-\contentsline {section}{\numberline {3.5}Linear and Tree Models}{50}
-\contentsline {subsection}{\numberline {3.5.1}Linear Models}{50}
-\contentsline {subsection}{\numberline {3.5.2}Tree Models}{51}
-\contentsline {section}{\numberline {3.6}ModelDB Syncer}{53}
-\contentsline {chapter}{\numberline {4}Algorithms}{55}
-\contentsline {section}{\numberline {4.1}Storage Algorithms}{56}
-\contentsline {subsection}{\numberline {4.1.1}DataFrame, Transformer, and TransformerSpec}{56}
-\contentsline {subsection}{\numberline {4.1.2}TransformEvent, FitEvent, MetricEvent}{57}
-\contentsline {subsection}{\numberline {4.1.3}Annotation}{57}
-\contentsline {subsection}{\numberline {4.1.4}RandomSplitEvent}{57}
-\contentsline {subsection}{\numberline {4.1.5}PipelineEvent}{58}
-\contentsline {subsection}{\numberline {4.1.6}CrossValidationEvent}{60}
-\contentsline {subsection}{\numberline {4.1.7}GridSearchCrossValidationEvent}{60}
-\contentsline {subsection}{\numberline {4.1.8}LinearModel}{60}
-\contentsline {subsection}{\numberline {4.1.9}TreeModel}{61}
-\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{61}
-\contentsline {subsection}{\numberline {4.2.1}Ancestry of a DataFrame}{62}
-\contentsline {subsection}{\numberline {4.2.2}Ancestry of a Model}{62}
-\contentsline {subsection}{\numberline {4.2.3}Common Ancestor of Two DataFrames}{62}
-\contentsline {subsection}{\numberline {4.2.4}Descendent Models of DataFrame}{62}
-\contentsline {subsection}{\numberline {4.2.5}Pipeline Extraction}{63}
-\contentsline {section}{\numberline {4.3}Feature Algorithms}{63}
-\contentsline {subsection}{\numberline {4.3.1}Original Feature-set of Model}{64}
-\contentsline {subsection}{\numberline {4.3.2}Models using a Given Feature-set}{65}
-\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{65}
-\contentsline {subsection}{\numberline {4.4.1}Compare Features of Two Models}{65}
-\contentsline {subsection}{\numberline {4.4.2}Common Ancestor DataFrame of Two Models}{66}
-\contentsline {subsection}{\numberline {4.4.3}Compare Hyperparameters of Two Models}{66}
-\contentsline {subsection}{\numberline {4.4.4}Rank Models}{67}
-\contentsline {subsection}{\numberline {4.4.5}Find Similar Models}{67}
-\contentsline {section}{\numberline {4.5}Linear Model and Tree Model Algorithms}{67}
-\contentsline {subsection}{\numberline {4.5.1}Features ordered by Importance}{67}
-\contentsline {subsection}{\numberline {4.5.2}Iterations Until Convergence}{68}
-\contentsline {subsection}{\numberline {4.5.3}Compare Feature Importances}{68}
-\contentsline {section}{\numberline {4.6}Other Algorithms}{68}
-\contentsline {chapter}{\numberline {5}Implementation}{69}
-\contentsline {section}{\numberline {5.1}System Architecture}{69}
-\contentsline {section}{\numberline {5.2}Server}{71}
-\contentsline {subsection}{\numberline {5.2.1}Database}{71}
-\contentsline {subsection}{\numberline {5.2.2}Model Filesystem}{72}
-\contentsline {subsection}{\numberline {5.2.3}Configuration}{72}
-\contentsline {subsection}{\numberline {5.2.4}Stateless, Separated, Logic}{73}
-\contentsline {section}{\numberline {5.3}Spark Client}{73}
-\contentsline {subsection}{\numberline {5.3.1}Sample Usage}{73}
-\contentsline {subsection}{\numberline {5.3.2}Syncable Event}{76}
-\contentsline {subsection}{\numberline {5.3.3}ModelDBSyncer}{77}
-\contentsline {subsection}{\numberline {5.3.4}Implicit Classes and Traits}{77}
-\contentsline {subsection}{\numberline {5.3.5}FeatureVectorizer}{79}
-\contentsline {chapter}{\numberline {6}Evaluation}{81}
-\contentsline {section}{\numberline {6.1}Overview}{81}
-\contentsline {section}{\numberline {6.2}Datasets}{82}
-\contentsline {section}{\numberline {6.3}Methodology}{84}
-\contentsline {subsection}{\numberline {6.3.1}Machine}{84}
-\contentsline {subsection}{\numberline {6.3.2}Time and Space Overhead}{84}
-\contentsline {subsection}{\numberline {6.3.3}Computation Time of API Methods}{85}
-\contentsline {subsection}{\numberline {6.3.4}Compare ModelDB S+C Models to PMML}{85}
-\contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{86}
-\contentsline {section}{\numberline {6.4}Time Overhead Results}{86}
-\contentsline {section}{\numberline {6.5}Storage Overhead Results}{88}
-\contentsline {section}{\numberline {6.6}API Method Time Results}{92}
-\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{95}
-\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{96}
-\contentsline {section}{\numberline {6.9}Improvements}{97}
-\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{99}
-\contentsline {section}{\numberline {7.1}Scikit-learn Client}{101}
-\contentsline {section}{\numberline {7.2}Command Line Toolkit}{101}
-\contentsline {section}{\numberline {7.3}Web Application}{101}
-\contentsline {section}{\numberline {7.4}Possible Database Applications}{101}
-\contentsline {chapter}{\numberline {8}Future Work}{103}
-\contentsline {section}{\numberline {8.1}Neural Networks}{103}
-\contentsline {section}{\numberline {8.2}Library Agnostic Model Format}{103}
-\contentsline {section}{\numberline {8.3}Scalability}{104}
-\contentsline {section}{\numberline {8.4}New clients, API methods, columns}{104}
-\contentsline {chapter}{\numberline {9}Conclusion}{105}
+\contentsline {section}{\numberline {3.5}Linear and Tree Models}{49}
+\contentsline {subsection}{\numberline {3.5.1}Linear Models}{49}
+\contentsline {subsection}{\numberline {3.5.2}Tree Models}{50}
+\contentsline {section}{\numberline {3.6}ModelDB Syncer}{51}
+\contentsline {chapter}{\numberline {4}Algorithms}{53}
+\contentsline {section}{\numberline {4.1}Storage Algorithms}{54}
+\contentsline {subsection}{\numberline {4.1.1}DataFrame, Transformer, and TransformerSpec}{54}
+\contentsline {subsection}{\numberline {4.1.2}TransformEvent, FitEvent, MetricEvent}{55}
+\contentsline {subsection}{\numberline {4.1.3}Annotation}{55}
+\contentsline {subsection}{\numberline {4.1.4}RandomSplitEvent}{55}
+\contentsline {subsection}{\numberline {4.1.5}PipelineEvent}{56}
+\contentsline {subsection}{\numberline {4.1.6}CrossValidationEvent}{58}
+\contentsline {subsection}{\numberline {4.1.7}GridSearchCrossValidationEvent}{58}
+\contentsline {subsection}{\numberline {4.1.8}LinearModel}{58}
+\contentsline {subsection}{\numberline {4.1.9}TreeModel}{59}
+\contentsline {section}{\numberline {4.2}Ancestry Algorithms}{59}
+\contentsline {subsection}{\numberline {4.2.1}Ancestry of a DataFrame}{60}
+\contentsline {subsection}{\numberline {4.2.2}Ancestry of a Model}{60}
+\contentsline {subsection}{\numberline {4.2.3}Common Ancestor of Two DataFrames}{60}
+\contentsline {subsection}{\numberline {4.2.4}Descendent Models of DataFrame}{60}
+\contentsline {subsection}{\numberline {4.2.5}Pipeline Extraction}{61}
+\contentsline {section}{\numberline {4.3}Feature Algorithms}{61}
+\contentsline {subsection}{\numberline {4.3.1}Original Feature-set of Model}{62}
+\contentsline {subsection}{\numberline {4.3.2}Models using a Given Feature-set}{63}
+\contentsline {section}{\numberline {4.4}Multi-model Algorithms}{63}
+\contentsline {subsection}{\numberline {4.4.1}Compare Features of Two Models}{63}
+\contentsline {subsection}{\numberline {4.4.2}Common Ancestor DataFrame of Two Models}{64}
+\contentsline {subsection}{\numberline {4.4.3}Compare Hyperparameters of Two Models}{64}
+\contentsline {subsection}{\numberline {4.4.4}Rank Models}{65}
+\contentsline {subsection}{\numberline {4.4.5}Find Similar Models}{65}
+\contentsline {section}{\numberline {4.5}Linear Model and Tree Model Algorithms}{65}
+\contentsline {subsection}{\numberline {4.5.1}Features ordered by Importance}{65}
+\contentsline {subsection}{\numberline {4.5.2}Iterations Until Convergence}{66}
+\contentsline {subsection}{\numberline {4.5.3}Compare Feature Importances}{66}
+\contentsline {section}{\numberline {4.6}Other Algorithms}{66}
+\contentsline {chapter}{\numberline {5}Implementation}{67}
+\contentsline {section}{\numberline {5.1}System Architecture}{67}
+\contentsline {section}{\numberline {5.2}Server}{69}
+\contentsline {subsection}{\numberline {5.2.1}Database}{69}
+\contentsline {subsection}{\numberline {5.2.2}Model Filesystem}{70}
+\contentsline {subsection}{\numberline {5.2.3}Configuration}{70}
+\contentsline {subsection}{\numberline {5.2.4}Stateless, Separated, Logic}{71}
+\contentsline {section}{\numberline {5.3}Spark Client}{71}
+\contentsline {subsection}{\numberline {5.3.1}Sample Usage}{71}
+\contentsline {subsection}{\numberline {5.3.2}Syncable Event}{74}
+\contentsline {subsection}{\numberline {5.3.3}ModelDBSyncer}{75}
+\contentsline {subsection}{\numberline {5.3.4}Implicit Classes and Traits}{75}
+\contentsline {subsection}{\numberline {5.3.5}FeatureVectorizer}{77}
+\contentsline {chapter}{\numberline {6}Evaluation}{79}
+\contentsline {section}{\numberline {6.1}Overview}{79}
+\contentsline {section}{\numberline {6.2}Datasets}{80}
+\contentsline {section}{\numberline {6.3}Methodology}{82}
+\contentsline {subsection}{\numberline {6.3.1}Machine}{82}
+\contentsline {subsection}{\numberline {6.3.2}Time and Space Overhead}{82}
+\contentsline {subsection}{\numberline {6.3.3}Computation Time of API Methods}{83}
+\contentsline {subsection}{\numberline {6.3.4}Compare ModelDB S+C Models to PMML}{83}
+\contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{84}
+\contentsline {section}{\numberline {6.4}Time Overhead Results}{84}
+\contentsline {section}{\numberline {6.5}Storage Overhead Results}{86}
+\contentsline {section}{\numberline {6.6}API Method Time Results}{90}
+\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{93}
+\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{94}
+\contentsline {section}{\numberline {6.9}Improvements}{95}
+\contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{97}
+\contentsline {section}{\numberline {7.1}Scikit-learn Client}{99}
+\contentsline {section}{\numberline {7.2}Command Line Toolkit}{99}
+\contentsline {section}{\numberline {7.3}Web Application}{99}
+\contentsline {section}{\numberline {7.4}Possible Database Applications}{99}
+\contentsline {chapter}{\numberline {8}Future Work}{101}
+\contentsline {section}{\numberline {8.1}Neural Networks}{101}
+\contentsline {section}{\numberline {8.2}Library Agnostic Model Format}{101}
+\contentsline {section}{\numberline {8.3}Scalability}{102}
+\contentsline {section}{\numberline {8.4}New clients, API methods, columns}{102}
+\contentsline {chapter}{\numberline {9}Conclusion}{103}
+\contentsline {chapter}{\numberline {A}Schema}{105}

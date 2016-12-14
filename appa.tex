@@ -1,15 +1,264 @@
-\chapter{Tables}
+\chapter{Schema}
+This appendix contains the schema for the various tables
+in ModelDB Server's database. Some details (e.g. primary key,
+non-nullity constraints, indices, non-essential columns) have
+been omitted for brevity and ease of understanding.
 
-\begin{table}
-\caption{Armadillos}
-\label{arm:table}
-\begin{center}
-\begin{tabular}{||l|l||}\hline
-Armadillos & are \\\hline
-our	   & friends \\\hline
-\end{tabular}
-\end{center}
-\end{table}
+\begin{listing}
+\caption{DataFrame Schema}
+\begin{minted}{sql}
+
+CREATE TABLE DataFrame (
+  numRows INTEGER,
+  dataSource TEXT
+);
+
+CREATE TABLE DataFrameColumn (
+  dfId INTEGER REFERENCES DataFrame,
+  name TEXT,
+  type TEXT,
+  columnIndex INTEGER
+);
+\end{minted}
+\label{listing:dataframe}
+\end{listing}
+
+\begin{listing}
+\caption{Transformer Schema}
+\begin{minted}{sql}
+CREATE TABLE Transformer (
+  transformerType TEXT,
+  filepath TEXT
+);
+
+CREATE TABLE Feature (
+  name TEXT,
+  featureIndex INTEGER,
+  importance DOUBLE,
+  transformer INTEGER REFERENCES TRANSFORMER
+);
+\end{minted}
+\label{listing:transformer}
+\end{listing}
+
+\begin{listing}
+\caption{TransformerSpec Schema}
+\begin{minted}{sql}
+CREATE TABLE TransformerSpec (
+  transformerType TEXT
+);
+
+CREATE TABLE HyperParameter (
+  spec INTEGER REFERENCES TransformerSpec,
+  paramName TEXT,
+  paramType TEXT,
+  paramValue TEXT,
+  paramMinValue REAL,
+  paramMaxValue REAL
+);
+\end{minted}
+\label{listing:transformerspec}
+\end{listing}
+
+\begin{listing}
+\caption{Event Schema}
+\begin{minted}{sql}
+CREATE TABLE Event (
+  eventType TEXT,
+  eventId INTEGER
+);
+\end{minted}
+\label{listing:event}
+\end{listing}
+
+\begin{listing}
+\caption{TransformEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE TransformEvent (
+  oldDf INTEGER REFERENCES DataFrame,
+  newDf INTEGER REFERENCES DataFrame,
+  transformer INTEGER REFERENCES Transformer,
+  -- Should be comma-separated, no spaces, alphabetical.
+  inputColumns TEXT, 
+  -- Should be comma-separated, no spaces, alphabetical.
+  outputColumns TEXT 
+);
+\end{minted}
+\label{listing:transformevent}
+\end{listing}
+
+\begin{listing}
+\caption{FitEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE FitEvent (
+  transformerSpec INTEGER REFERENCES TransformerSpec,
+  transformer INTEGER REFERENCES Transformer,
+  df INTEGER REFERENCES DataFrame,
+  -- Should be comma-separated, no spaces, alphabetical.
+  predictionColumns TEXT, 
+  -- Should be comma-separated, no spaces, alphabetical.
+  labelColumns TEXT, 
+  problemType TEXT 
+);
+\end{minted}
+\label{listing:fitevent}
+\end{listing}
+
+\begin{listing}
+\caption{MetricEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE MetricEvent (
+  transformer INTEGER REFERENCES Transformer,
+  df INTEGER REFERENCES DataFrame,
+  metricType TEXT,
+  metricValue REAL
+);
+\end{minted}
+\label{listing:metricevent}
+\end{listing}
+
+\begin{listing}
+\caption{CrossValidationEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE CrossValidationEvent (
+  df INTEGER REFERENCES DataFrame,
+  spec INTEGER REFERENCES TransformerSpec
+);
+
+CREATE TABLE CrossValidationFold (
+  metric INTEGER REFERENCES MetricEvent NOT NULL,
+  event INTEGER REFERENCES CrossValidationEvent NOT NULL,
+);
+\end{minted}
+\label{listing:crossvalidationevent}
+\end{listing}
+
+\begin{listing}
+\caption{GridSearchCrossValidationEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE GridSearchCrossValidationEvent (
+  best INTEGER REFERENCES FitEvent,
+);
+
+CREATE TABLE GridCellCrossValidation (
+  gridSearch INTEGER REFERENCES GridSearchCrossValidationEvent,
+  crossValidation INTEGER REFERENCES CrossValidationEvent
+);
+\end{minted}
+\label{listing:gscve}
+\end{listing}
+
+
+\begin{listing}
+\caption{PipelineStage Schema}
+\begin{minted}{sql}
+CREATE TABLE PipelineStage (
+  pipelineFitEvent INTEGER REFERENCES FitEvent,
+  transformOrFitEvent INTEGER REFERENCES Event,
+  isFit INTEGER, -- 0 if transform stage and 1 if this is a fit stage.
+  stageNumber INTEGER 
+);
+\end{minted}
+\label{listing:pipelinestage}
+\end{listing}
+
+\begin{listing}
+\caption{PipelineStage Modified Schema}
+\begin{minted}{sql}
+CREATE TABLE PipelineStage (
+  pipelineFitEvent INTEGER REFERENCES FitEvent,
+  transformStage INTEGER REFERENCES TransformEvent,
+  fitStage INTEGER REFERENCES FitEvent,
+  stageNumber INTEGER 
+);
+\end{minted}
+\label{listing:pipelinestagemodified}
+\end{listing}
+
+\begin{listing}
+\caption{AnnotationEvent Schema}
+\begin{minted}{sql}
+CREATE TABLE Annotation (
+  posted TIMESTAMP
+);
+
+CREATE TABLE AnnotationFragment (
+  annotation INTEGER REFERENCES Annotation,
+  fragmentIndex INTEGER,
+  transformer INTEGER REFERENCES Transformer,
+  dataFrame INTEGER REFERENCES DataFrame,
+  spec INTEGER REFERENCES TransformerSpec,
+  message TEXT,
+);
+\end{minted}
+\label{listing:annotationevent}
+\end{listing}
+
+
+\begin{listing}
+\caption{LinearModelTerm Schema}
+\begin{minted}{sql}
+CREATE TABLE LinearModelTerm (
+    model INTEGER REFERENCES Transformer,
+    termIndex INTEGER,
+    coefficient DOUBLE,
+    tStat DOUBLE,
+    stdErr DOUBLE,
+    pValue DOUBLE
+);
+\end{minted}
+\label{listing:linearmodel}
+\end{listing}
+
+\begin{listing}
+\caption{TreeNode and TreeLink Schema}
+\begin{minted}{sql}
+CREATE TABLE TreeNode (
+  -- 1 if node is leaf, 0 if node is internal
+  isLeaf INTEGER, 
+  -- Internal nodes obviously do not use their predictions
+  prediction DOUBLE, 
+  -- Impurity of node.
+  impurity DOUBLE, 
+  -- Information gain at node. NULL for leaf nodes.
+  gain DOUBLE, 
+  -- Index of feature that the internal node is splitting. 
+  -- NULL if this is a leaf node.
+  splitIndex INTEGER, 
+  -- NULL for the root node
+  rootNode INTEGER REFERENCES TreeNode 
+);
+
+DROP TABLE IF EXISTS TreeLink;
+CREATE TABLE TreeLink (
+  parent INTEGER REFERENCES TreeNode,
+  child INTEGER REFERENCES TreeNode,
+  -- 1 if the child is a left child 
+  -- 0 if the child is a right child.
+  isLeft INTEGER NOT NULL 
+);
+\end{minted}
+\label{listing:treenode}
+\end{listing}
+
+\begin{listing}
+\caption{TreeModel Schema}
+\begin{minted}{sql}
+CREATE TABLE TreeModel (
+  model INTEGER REFERENCES Transformer,
+  -- Should be "Decision Tree", "GBT", or "Random Forest"
+  modelType TEXT NOT NULL 
+);
+
+CREATE TABLE TreeModelComponent (
+  model INTEGER REFERENCES Transformer,
+  componentIndex INTEGER,
+  componentWeight DOUBLE,
+  rootNode INTEGER REFERENCES TreeNode
+);
+\end{minted}
+\label{listing:treemodel}
+\end{listing}
 
 \clearpage
 \newpage

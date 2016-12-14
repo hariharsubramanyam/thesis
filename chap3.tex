@@ -7,7 +7,7 @@ Therefore, ModelDB S+C must develop its own set of abstractions that can represe
 the different operations for model building. These abstractions must be simple so
 that they are easily understood and not too difficult to implement. Since ModelDB
 Server aims to be library agnostic, they must be general enough to be applied to
-a number of different machine learning libraries. Finally, since it is impossible,
+a number of different machine learning libraries. Finally, since it is impossible
 to anticipate all the model building operations that a user may be interested in,
 the abstractions must be composable and flexible so that new abstractions can be built 
 from them that can represent other pieces of the model building process.
@@ -16,14 +16,45 @@ This chapter describes the abstractions in ModelDB S+C, building up from the
 simplest abstractions to the higher level ones.
 
 ModelDB S+C stores data in a SQL database (currently, a SQLite database is
-used). Each abstraction below will be listed with its corresponding SQL 
-tables, if any exist. 
+used). Many of the abstractions below are represented in the SQL tables in Appendix A.
+Each abstraction will be discussed with a reference to its corresponding tables, if any.
+The tables are summarized in Table \ref{tab:summary}.
 
-The SQL tables below have been simplified in order to focus on the pieces 
-of the table that are important for understanding the abstractions. Consequently,
-some details like indices, non-nullity constraints, primary key columns, 
-non-essential columns, and more have been omitted.
-
+\begin{landscape}
+\begin{table}
+ \centering
+  \begin{tabular}{ | l | l |}
+    \hline
+    Table & Schema \\ \hline
+    DataFrame & numRows, dataSource \\ \hline
+    DataFrameColumn & dfId, name, type, columnIndex \\ \hline
+    Transformer & transformerType, filepath \\ \hline
+    Feature & name, featureIndex, importance, transformer \\ \hline
+    TransformerSpec & transformerType \\ \hline
+    HyperParameter & spec, paramName paramValue, paramMinValue, paramMaxValue \\ \hline
+    Event & eventType, eventId \\ \hline
+    TransformEvent & oldDf, newDf, transformer, inputColumns, outputColumns \\ \hline
+    FitEvent & transformerSpec, transformer, df, predictionColumns, labelColumns, problemType \\ \hline
+    MetricEvent & transformer, df, metricType, metricValue \\ \hline
+    CrossValidationEvent & df, spec \\ \hline
+    CrossValidationFold & metric, event \\ \hline
+    GridSearchCrossValidationEvent & best \\ \hline
+    GridCellCrossValidation & gridSearch, crossValidation \\ \hline
+    PipelineStage & pipelineFitEvent, transformOrFitEvent, isFit, stageNumber \\ \hline
+    PipelineStage (modified) & pipelineFitEvent, transformStage, fitStage, stageNumber \\ \hline
+    Annotation & posted \\ \hline
+    AnnotationFragment & annotation, fragmentIndex, transformer, dataFrame, spec, message \\ \hline
+    LinearModelTerm & model, termIndex, coefficient, tStat, stdErr, pValue \\ \hline
+    TreeNode & isLeaf, prediction, impurity, gain, splitIndex, rootNode \\ \hline
+    TreeLink & parent, child, isLeft \\ \hline
+    TreeModel & model, modelType \\ \hline
+    TreeModelComponent & model, componentIndex, componentWeight, rootNode \\ \hline
+    \hline
+ \end{tabular}
+ \caption{Datasets used in evaluation}
+ \label{tab:summary}
+\end{table}
+\end{landscape}
 
 \section{Primitives}
 ModelDB S+C is built on three primitives: the DataFrame, Transformer, and 
@@ -32,24 +63,9 @@ TransformerSpec.
 \subsection{DataFrame}
 
 A DataFrame represents a table of data. It has a number of named, typed columns
-and it stores a count of rows. It is represented using the tables below.
+and it stores a count of rows. The schema is given in Listing \ref{listing:dataframe}.
 
-\begin{minted}{sql}
-CREATE TABLE DataFrame (
-  numRows INTEGER,
-  dataSource TEXT
-);
-
-CREATE TABLE DataFrameColumn (
-  dfId INTEGER REFERENCES DataFrame,
-  name TEXT,
-  type TEXT,
-  columnIndex INTEGER
-);
-\end{minted}
-
-Again, recall that a number of details (e.g. primary key column) have been omitted
-for brevity. The DataFrame table stores the number of rows, which is useful for
+The DataFrame table stores the number of rows, which is useful for
 understanding the sizes of various DataFrames used in the model building process.
 It also indicates its data sources, which could be a CSV in the local filesystem,
 a JSON file stored on HDFS, or something else altogether. Since users may store
@@ -71,22 +87,8 @@ load with the tool of their choice.
 \subsection{Transformer} 
 The DataFrame abstraction describes the data involved in the model building process.
 The Transformer abstraction, on the other hand, describes the operations that can
-be performed on that data. A Transformer is an object that can takes an input DataFrame
-and produces an output DataFrame. Its tables are shown below:
-
-\begin{minted}{sql}
-CREATE TABLE Transformer (
-  transformerType TEXT,
-  filepath TEXT
-);
-
-CREATE TABLE Feature (
-  name TEXT,
-  featureIndex INTEGER,
-  importance DOUBLE,
-  transformer INTEGER REFERENCES TRANSFORMER
-);
-\end{minted}
+be performed on that data. A Transformer is an object that takes an input DataFrame
+and produces an output DataFrame. Its tables are shown in Listing \ref{listing:transformer}.
 
 The Transformer table is quite simple, just storing a type (e.g. OneHotEncoder,
 LinearRegressionModel) and a path to the file containing the serialized Transformer.
@@ -109,22 +111,7 @@ and TreeModel, which will be described later in this chapter).
 The final primitive in ModelDB S+C is the TransformerSpec. Some Transformers, which
 ModelDB S+C calls models are created by fitting a DataFrame where the fitting is 
 guided by a set of hyperparameters. These hyperparameters are stored in a 
-TransformerSpec, whose tables are shown below.
-
-\begin{minted}{sql}
-CREATE TABLE TransformerSpec (
-  transformerType TEXT
-);
-
-CREATE TABLE HyperParameter (
-  spec INTEGER REFERENCES TransformerSpec,
-  paramName TEXT,
-  paramType TEXT,
-  paramValue TEXT,
-  paramMinValue REAL,
-  paramMaxValue REAL
-);
-\end{minted}
+TransformerSpec, whose tables are shown in Listing \ref{listing:transformerspec}.
 
 The TransformerSpec table is very simple, it just indicates the kind of Transformer
 being specified. Each HyperParameter points to its associated TransformerSpec and indicates
@@ -161,14 +148,7 @@ is called a Syncable Event ("Syncable" because it is shared between server and c
 sections describe several of these Syncable Events. Each Syncable Event receives its own
 table (or few tables) in the database and Syncable Events can be composed together to
 create other events. All of the Syncable Events that have that ModelDB S+C has stored
-are referenced in the Event table, which is shown below.
-
-\begin{minted}{sql}
-CREATE TABLE Event (
-  eventType TEXT,
-  eventId INTEGER
-);
-\end{minted}
+are referenced in the Event table, which is shown in Listing \ref{listing:event}.
 
 An Event includes a type (e.g. "fit", "transform") and the ID of the event
 in its corresponding table.
@@ -181,19 +161,7 @@ A TransformEvent represents the creation of a new DataFrame from an old DataFram
 applying a Transformer. This is a very general idea and can be used to represent both
 data pre-processing steps and prediction-making with a model.
 
-The TransformEvent table has the following schema:
-
-\begin{minted}{sql}
-CREATE TABLE TransformEvent (
-  oldDf INTEGER REFERENCES DataFrame,
-  newDf INTEGER REFERENCES DataFrame,
-  transformer INTEGER REFERENCES Transformer,
-  -- Should be comma-separated, no spaces, alphabetical.
-  inputColumns TEXT, 
-  -- Should be comma-separated, no spaces, alphabetical.
-  outputColumns TEXT 
-);
-\end{minted}
+The TransformEvent table has the schema shown in Listing \ref{listing:transformevent}.
 
 The event indicates both the old and new DataFrames, the Transformer performing
 the transformation, and the input and output columns. The input and output columns
@@ -225,20 +193,7 @@ a wide range of operations.
 \subsection{FitEvent}
 
 The second core Syncable Event is the FitEvent, which represents the fitting of a
-DataFrame with a TransformerSpec to produce a Transformer.
-
-\begin{minted}{sql}
-CREATE TABLE FitEvent (
-  transformerSpec INTEGER REFERENCES TransformerSpec,
-  transformer INTEGER REFERENCES Transformer,
-  df INTEGER REFERENCES DataFrame,
-  -- Should be comma-separated, no spaces, alphabetical.
-  predictionColumns TEXT, 
-  -- Should be comma-separated, no spaces, alphabetical.
-  labelColumns TEXT, 
-  problemType TEXT 
-);
-\end{minted}
+DataFrame with a TransformerSpec to produce a Transformer. It is given in Listing \ref{listing:fitevent}.
 
 The FitEvent is the main abstraction that represents the building of a model. It
 indicates the data used to produce the model, the specification that guided training,
@@ -254,18 +209,9 @@ table.
 Thus far, the chapter has explained how ModelDB S+C represents the operations that create data (TransformEvent)
 and operations that create models (FitEvent). Another potential output of an operation is a statistic, metric, or
 other number that describes or evaluates a dataset or model. For this purpose, ModelDB S+C includes a Syncable Event
-called MetricEvent.
+called MetricEvent. It is shown in Listing \ref{listing:metricevent}.
 
-\begin{minted}{sql}
-CREATE TABLE MetricEvent (
-  transformer INTEGER REFERENCES Transformer,
-  df INTEGER REFERENCES DataFrame,
-  metricType TEXT,
-  metricValue REAL
-);
-\end{minted}
-
-The above representation is quite flexible, in that it allows metrics on datasets as well as
+The representation is quite flexible, in that it allows metrics on datasets as well as
 metrics on models. For example, consider the problem of finding a the standard deviation of a column.
 This could be represented by a MetricEvent where metricType is "standard deviation", the metricValue
 is the actual numeric value for the standard deviation, the transformer is a StandardDeviationComputer (with
@@ -288,19 +234,8 @@ Cross validation is a model selection operation that is an integral part of the
 model building process. Recall that cross validation involves considering a hyperparameter
 configuration, breaking a DataFrame into pieces (folds), training a model for each fold (it
 is trained on all folds except one), and evaluating a model for each fold (it is evaluated on
-the fold that was left out for training). This operation is represented using the following tables:
-
-\begin{minted}{sql}
-CREATE TABLE CrossValidationEvent (
-  df INTEGER REFERENCES DataFrame,
-  spec INTEGER REFERENCES TransformerSpec
-);
-
-CREATE TABLE CrossValidationFold (
-  metric INTEGER REFERENCES MetricEvent NOT NULL,
-  event INTEGER REFERENCES CrossValidationEvent NOT NULL,
-);
-\end{minted}
+the fold that was left out for training). This operation is represented using 
+the tables shown in Listing \ref{listing:crossvalidationevent}.
 
 The two simple tables above are all that is needed to allow ModelDB S+C to store
 cross validation events. They are deceptively simple because ModelDB S+C leverages
@@ -336,18 +271,7 @@ combining the primitives and core Syncable Events.
 The cross validation operation is often combined with a grid search, in which several hyperparameter configurations
 are evaluated and cross validation is performed for each one. Then, the best hyperparameter configuration (i.e. the one with the largest
 average evaluation metric) is selected and used to train a model on the entire dataset. This is a complex process, but can be easily
-supported in ModelDB S+C by adding the following two tables.
-
-\begin{minted}{sql}
-CREATE TABLE GridSearchCrossValidationEvent (
-  best INTEGER REFERENCES FitEvent,
-);
-
-CREATE TABLE GridCellCrossValidation (
-  gridSearch INTEGER REFERENCES GridSearchCrossValidationEvent,
-  crossValidation INTEGER REFERENCES CrossValidationEvent
-);
-\end{minted}
+supported in ModelDB S+C by adding the tables shown in Listing \ref{listing:gscve}.
 
 The GridSearchCrossValidationEvent table simply stores a reference to a FitEvent
 that produced the final model (a Transformer) by using the best TransformerSpec to
@@ -388,16 +312,7 @@ add post-processing steps by adding more Transformers at the end.
   \label{fig:preprocessing_pipeline}
 \end{figure}
 
-ModelDB S+C represents the creation of Pipelines using the following table:
-
-\begin{minted}{sql}
-CREATE TABLE PipelineStage (
-  pipelineFitEvent INTEGER REFERENCES FitEvent,
-  transformOrFitEvent INTEGER REFERENCES Event,
-  isFit INTEGER, -- 0 if transform stage and 1 if this is a fit stage.
-  stageNumber INTEGER 
-);
-\end{minted}
+ModelDB S+C represents the creation of Pipelines using the table in Listing \ref{listing:pipelinestage}.
 
 First, ModelDB S+C represents the creation of a Pipeline Model (which is a Transformer) from
 a DataFrame using a FitEvent. The TransformerSpec associated with this FitEvent can have an empty
@@ -409,16 +324,7 @@ one fit stage and one transform stage. The stages are ordered using the stageNum
 stages.
 
 The transformOrFitEvent and isFit fields are used to distinguish the stage as a transform stage or fit stage. Admittedly,
-this is a bit inelegant. A cleaner solution would be the following:
-
-\begin{minted}{sql}
-CREATE TABLE PipelineStage (
-  pipelineFitEvent INTEGER REFERENCES FitEvent,
-  transformStage INTEGER REFERENCES TransformEvent,
-  fitStage INTEGER REFERENCES FitEvent,
-  stageNumber INTEGER 
-);
-\end{minted}
+this is a bit inelegant. A cleaner solution would be the table shown in Listing \ref{listing:pipelinestagemodified}.
 
 In this case, every Estimator and every Transformer in the Pipeline would produce a PipelineStage. For the Estimators,
 the fitStage would point to their creation of a Transformer by applying their TransformerSpec on their input DataFrame.
@@ -447,22 +353,7 @@ with Scala code like the following:
 \end{minted}
 
 The Scala code sample above stores an Annotation in ModelDB S+C, which involves
-the following tables:
-
-\begin{minted}{sql}
-CREATE TABLE Annotation (
-  posted TIMESTAMP
-);
-
-CREATE TABLE AnnotationFragment (
-  annotation INTEGER REFERENCES Annotation,
-  fragmentIndex INTEGER,
-  transformer INTEGER REFERENCES Transformer,
-  dataFrame INTEGER REFERENCES DataFrame,
-  spec INTEGER REFERENCES TransformerSpec,
-  message TEXT,
-);
-\end{minted}
+the tables in Listing \ref{listing:annotationevent}.
 
 An Annotation indicates the time it was created and is associated with a number
 of AnnotationFragments. The AnnotationFragments are ordered using the fragmentIndex
@@ -489,18 +380,7 @@ Spark.ML.
 \subsection{Linear Models}
 
 Linear models are defined by their vector of weights. These weight vectors are
-stored with the following table.
-
-\begin{minted}{sql}
-CREATE TABLE LinearModelTerm (
-    model INTEGER REFERENCES Transformer,
-    termIndex INTEGER,
-    coefficient DOUBLE,
-    tStat DOUBLE,
-    stdErr DOUBLE,
-    pValue DOUBLE
-);
-\end{minted}
+stored with the table in Listing \ref{listing:linearmodel}.
 
 A linear model is represented by a Transformer, and its weights are represented
 by the associated LinearModelTerms. Each term indicates the weight (the coefficient) and
@@ -518,34 +398,7 @@ columns can be stored in MetricEvents rather than as columns).
 
 \subsection{Tree Models}
 A decision tree consists of nodes and edges (or links) between them. ModelDB S+C represents
-this using the following tables:
-
-\begin{minted}{sql}
-CREATE TABLE TreeNode (
-  -- 1 if node is leaf, 0 if node is internal
-  isLeaf INTEGER, 
-  -- Internal nodes obviously do not use their predictions
-  prediction DOUBLE, 
-  -- Impurity of node.
-  impurity DOUBLE, 
-  -- Information gain at node. NULL for leaf nodes.
-  gain DOUBLE, 
-  -- Index of feature that the internal node is splitting. 
-  -- NULL if this is a leaf node.
-  splitIndex INTEGER, 
-  -- NULL for the root node
-  rootNode INTEGER REFERENCES TreeNode 
-);
-
-DROP TABLE IF EXISTS TreeLink;
-CREATE TABLE TreeLink (
-  parent INTEGER REFERENCES TreeNode,
-  child INTEGER REFERENCES TreeNode,
-  -- 1 if the child is a left child 
-  -- 0 if the child is a right child.
-  isLeft INTEGER NOT NULL 
-);
-\end{minted}
+this using the the tables in Listing \ref{listing:treenode}.
 
 Nodes indicate whether they are leaves. Leaf nodes indicate their prediction, 
 impurity, and the root node of the tree (unless they are the root). 
@@ -563,22 +416,7 @@ column that indicates the index (0 being leftmost) of the child.
 Random forests and gradient boosted trees are ensembles of decision trees, where
 each tree is given some weight. In fact, a decision tree can be thought of as an
 ensemble consisting of a single tree that gets all the weight. With this in mind, ModelDB S+C
-defines the following tables:
-
-\begin{minted}{sql}
-CREATE TABLE TreeModel (
-  model INTEGER REFERENCES Transformer,
-  -- Should be "Decision Tree", "GBT", or "Random Forest"
-  modelType TEXT NOT NULL 
-);
-
-CREATE TABLE TreeModelComponent (
-  model INTEGER REFERENCES Transformer,
-  componentIndex INTEGER,
-  componentWeight DOUBLE,
-  rootNode INTEGER REFERENCES TreeNode
-);
-\end{minted}
+defines the tables in Listing \ref{listing:treemodel}.
 
 A TreeModel simply indicates the associated Transformer and the type of the model.
 The model is associated with a number of trees through the TreeModelComponent, which
