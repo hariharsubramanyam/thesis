@@ -92,13 +92,13 @@
 \contentsline {subsection}{\numberline {6.3.2}Time and Space Overhead}{84}
 \contentsline {subsection}{\numberline {6.3.3}Computation Time of API Methods}{85}
 \contentsline {subsection}{\numberline {6.3.4}Compare ModelDB S+C Models to PMML}{85}
-\contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{85}
+\contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{86}
 \contentsline {section}{\numberline {6.4}Time Overhead Results}{86}
 \contentsline {section}{\numberline {6.5}Storage Overhead Results}{88}
 \contentsline {section}{\numberline {6.6}API Method Time Results}{92}
-\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{94}
-\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{95}
-\contentsline {section}{\numberline {6.9}Improvements}{96}
+\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{95}
+\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{96}
+\contentsline {section}{\numberline {6.9}Improvements}{97}
 \contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{99}
 \contentsline {section}{\numberline {7.1}Scikit-learn Client}{101}
 \contentsline {section}{\numberline {7.2}Command Line Toolkit}{101}

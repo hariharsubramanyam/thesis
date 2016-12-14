@@ -27,7 +27,26 @@ The chapter also discusses performance improvements that can further improve Mod
 regard to the above questions.
 
 \section{Datasets}
-ModelDB S+C was evaluated on real datasets, which are described below:
+ \begin{table}
+   \centering
+    \begin{tabular}{ | l | l | l | l |}
+      \hline
+      Dataset Name & Problem Type & Number of Rows & Number of Features \\ \hline
+      IMDB & Regression & 5,043 & 28 \\ \hline
+      Animal Shelter & Multiclass Classification & 26,729 & 10 \\ \hline
+      Housing Prices & Regression & 1,460 & 81 \\ \hline
+      Iris & Multiclass Classification & 150 & 5 \\  \hline
+      Titanic & Binary Classification & 1,309 & 14  \\  \hline
+      SMS Spam & Binary Classification & 5,574 & N/A (text) \\  \hline
+      Flight Delays & Binary Classification & 7,453,215 & 29 \\ 
+      \hline
+   \end{tabular}
+   \caption{Datasets used in evaluation}
+   \label{tab:datasets}
+ \end{table}
+
+ModelDB S+C was evaluated on real datasets, which are described below and outlined
+in Table \ref{tab:datasets}.
 
 The \textbf{IMDB} dataset \cite{imdb} includes features like genre, number of
 reviews, language, and more for over 5000 movies in the IMDB Movie Database. The dataset
