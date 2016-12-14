@@ -25,12 +25,12 @@ following steps:
   \item Evaluate the model on the test set
 \end{enumerate}
 
-Over many cycles, the data scientist will have created and evaluated many models,
-applied various preprocessing pipelines, and tried numerous feature sets and hyperparameter
+Over many cycles, the data scientist will create and evaluate many models,
+apply various preprocessing pipelines, and try numerous feature sets and hyperparameter
 configurations. Currently, recording the operations performed in these cycles requires
 a lot of manual effort. The data scientist must write their intermediate data files, models, evaluation metrics,
 and preprocessing code to different files. They may invent some ad-hoc directory layout 
-and a set of naming conventions to organize this information~\cite{kaggledirectory}. Even if the data scientist
+and naming conventions to organize this information~\cite{kaggledirectory}. Even if the data scientist
 diligently records all their cycles, it is not easy for them to glean information from their
 recorded data without writing some custom scripts.
 
@@ -47,8 +47,8 @@ questions, but currently it is difficult and time-consuming to do.
 
 \section{ModelDB Server and ModelDB Spark Client}
 
-ModelDB Server and ModelDB Spark Client aim to simplify the challenge of recording, storing,
-and learning from the model building process. 
+This challenge of recording, storing, and learning from the model building process is precisely
+the problem that ModelDB Server and ModelDB Spark Client aim to solve.
 
 ModelDB Spark Client is a lighweight library for Apache Spark's machine learning framework (Spark.ML) 
 that allows the user to collect information about their machine learning operations with minimal changes to their code. 
@@ -88,7 +88,7 @@ Concretely, this thesis makes the following contributions:
 For the rest of this paper, ModelDB Server and the Spark Client will be referred
 to as ModelDB S+C.
 
-\section{Outline of this Paper}
+\section{Outline of this Thesis}
 
 Chapter 2 covers related work. It first discusses machine learning in general,
 exposing the key concepts that are relevant in the model building process. The
