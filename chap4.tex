@@ -5,7 +5,39 @@ query it or build applications on top of it. Nevertheless, ModelDB Server provid
 a number of algorithms that can be run on the database to glean useful information
 about the model building process.
 
-This chapter covers some of the algorithms used in ModelDB Server.
+This chapter covers some of the algorithms used in ModelDB Server. 
+
+The first section discusses storage algorithms, which describe how operations are stored in the database while
+respecting the constraints between events and primitives. It begins by discussing the
+storage algorithms for the three primitives and core
+Syncable Events. Then, the storage algorithms for some
+of the more complicated Syncable Events, such as RandomSplitEvent, GridSearchCrossValidationEvent,
+and PipelineEvent are discuseed. Finally, the storage algorithms for linear and tree models are
+covered.
+
+The second section covers algorithms that operate on the DataFrame ancestry forest, which consists
+of the DataFrames and the links between them, as reflected in the TransformEvents. The section explains
+how the forest can be used to find the ancestry of a given DataFrame or model, the common ancestor of two
+DataFrames, and the models that derived from a given DataFrame. The section concludes by showing how the
+forest can be used to extract machine learning pipelines from ModelDB Server.
+
+The third section focuses on algorithms that operate on the feature-sets of models. It first discusses how
+it is possible to find the original DataFrame columns that were used to generate the features used by a given model.
+Next, it explains how to find models that use all the features in a given feature set. 
+
+The fourth section discusses algorithms that operate on multiple models. It begins by
+discussing how the feature-sets of two models can be compared. Next, it explains
+how the DataFrame ancestry forest can be used to find a common DataFrame from
+which two models are derived. Afterwards, it shows how the hyperparameters of two
+models can be compared. The section concludes by explaining how models can be ranked
+and how ModelDB S+C can find models similar to a given model.
+
+The fifth section focuses on algorithms for linear and tree models. It explains
+how features can be ordered by importance, how models can be compared by convergence time,
+and how feature importance can be compared between models.
+
+The final section briefly mentions some other algorithms that ModelDB S+C provides, but which,
+for brevity, are not covered at length in this thesis document.
 
 \section{Storage Algorithms}
 Before discussing the algorithms that glean information about model building, it
