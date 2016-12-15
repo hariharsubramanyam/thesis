@@ -96,11 +96,11 @@ This is again done to maximize flexibility. ModelDB S+C does not impose any rest
 on the kinds of Transformers that can be stored, as different machine learning libraries
 may store different kinds of transformers. By storing the filepath to the serialized Transformer,
 the user is able to load the Transformer into their machine learning library of choice and use
-it to make predictions. Many machine learning libraries, including Spark.ML and Scikit-learn offer
+it to transform data or make predictions. Many machine learning libraries, including Spark.ML and Scikit-learn offer
 facilities for serializing and deserializing Transformers. Transformers include features, which are the
 columns they expect as inputs. Each feature has a name, index (in the feature vector), and importance. 
 Notice that a Transformer does not have to be a machine learning model, like a logistic regression model. 
-It can also be a data pre-processor, like
+It can also be a data preprocessor, like
 a one-hot encoder. One reasonable criticism of the Transformer table is that its simplicity 
 prevents the user from storing useful model parameters, like the weights of a linear regression model,
 that they may want to query. This is not an issue, however, because it is possible to create
@@ -109,7 +109,7 @@ and TreeModel, which will be described later in this chapter).
 
 \subsection{TransformerSpec}
 The final primitive in ModelDB S+C is the TransformerSpec. Some Transformers, which
-ModelDB S+C calls models are created by fitting a DataFrame where the fitting is 
+ModelDB S+C calls models, are created by fitting a DataFrame where the fitting is 
 guided by a set of hyperparameters. These hyperparameters are stored in a 
 TransformerSpec, whose tables are shown in Listing \ref{listing:transformerspec}.
 
@@ -147,7 +147,7 @@ is called a Syncable Event ("Syncable" because it is shared between server and c
 "Event" because it is a specific operation performed at a specific time). The following
 sections describe several of these Syncable Events. Each Syncable Event receives its own
 table (or few tables) in the database and Syncable Events can be composed together to
-create other events. All of the Syncable Events that have that ModelDB S+C has stored
+create other events. All of the Syncable Events that ModelDB S+C has stored
 are referenced in the Event table, which is shown in Listing \ref{listing:event}.
 
 An Event includes a type (e.g. "fit", "transform") and the ID of the event
@@ -159,7 +159,7 @@ The three foundational Syncable Events are TransformEvent, FitEvent, and MetricE
 \subsection{TransformEvent}
 A TransformEvent represents the creation of a new DataFrame from an old DataFrame by
 applying a Transformer. This is a very general idea and can be used to represent both
-data pre-processing steps and prediction-making with a model.
+data preprocessing steps and prediction-making with a model.
 
 The TransformEvent table has the schema shown in Listing \ref{listing:transformevent}.
 
@@ -221,7 +221,7 @@ the problem of evaluating a model's prediction accuracy. In this case, the trans
 evaluated, the df could be the DataFrame for which the model made predictions, the metricType could be "accuracy",
 and the metricValue could be the actual accuracy score.
 
-TransformEvent, FitEvent, and MetricEvent are the fundamental Syncable Events in ModelDB S+C. They build on the
+TransformEvent, FitEvent, and MetricEvent are the fundamental Syncable Events in ModelDB S+C. They build on 
 ModelDB S+C's three primitives: DataFrame, Transformer, and TransformerSpec. While these Syncable Events are powerful on
 their own, they can also be combined together to represent higher level events.
 
@@ -234,10 +234,10 @@ Cross validation is a model selection operation that is an integral part of the
 model building process. Recall that cross validation involves considering a hyperparameter
 configuration, breaking a DataFrame into pieces (folds), training a model for each fold (it
 is trained on all folds except one), and evaluating a model for each fold (it is evaluated on
-the fold that was left out for training). This operation is represented using 
+the fold that was left out of training). This operation is represented using 
 the tables shown in Listing \ref{listing:crossvalidationevent}.
 
-The two simple tables above are all that is needed to allow ModelDB S+C to store
+Two simple tables are all that is needed to allow ModelDB S+C to store
 cross validation events. They are deceptively simple because ModelDB S+C leverages
 the three primitives and three core Syncable Events heavily when representing cross validation.
 To illustrate, consider the diagrammatic representation of cross validation in Figure
@@ -256,7 +256,7 @@ To illustrate, consider the diagrammatic representation of cross validation in F
 
 To understand Figure \ref{fig:cross_validation_event}, it is best to start at the CrossValidationEvent.
 The CrossValidationEvent points to the TransformerSpec (i.e. hyperparameter configuration) that is being evaluated
-as well as to the full DataFrame that is being evaluated. There is one CrossValidationFold that points to the
+as well as to the full DataFrame that is being used to train models. There is one CrossValidationFold that points to the
 CrossValidationEvent. The fold points to the MetricEvent that contains its evaluation metric. The MetricEvent
 points to the model (Transformer) that was trained when the fold was excluded and to the validation DataFrame
 on which the metric was computed. The validation DataFrame was produced from the original DataFrame using a special
@@ -293,7 +293,7 @@ from an input DataFrame and Estimator objects that apply a TransformerSpec on a 
 a Transformer. Spark.ML and Python Scikit-learn both include Transformers and Estimators. The user
 arranges Estimators and Transformers into a chain, called a Pipeline, feeds in a DataFrame, and the result is a chain
 of Transformers. This chain of Transformers, or Pipeline Model, can be used in other parts of the 
-program. Notice that if the final piece of the Pipeline an Estimator that produces a model, then
+program. Notice that if the final piece of the Pipeline is an Estimator that produces a model, then
 the user may be able to represent their entire machine learning system using a Pipeline Model. They can also
 add post-processing steps by adding more Transformers at the end.
 
@@ -301,9 +301,9 @@ add post-processing steps by adding more Transformers at the end.
   \centering
   \includegraphics[height=3.0in]{preprocessing_pipeline}
   \caption{
-    Creation of a pre-processing pipeline. First, the user chains together some
+    Creation of a preprocessing pipeline. First, the user chains together some
     Transformers and Estimators (objects that can apply their TransformerSpec to
-    create a Transformer from a DataFrame). Next, the user feed a DataFrame into the pipeline. The
+    create a Transformer from a DataFrame). Next, the user feeds a DataFrame into the pipeline. The
     Transformers transform their input DataFrame, produce an output DataFrame, and
     pass the output on to the next step in the pipeline. The Estimators use the input DataFrame
     to create a Transformer, and then they replace themselves with this Transformer - the
@@ -359,7 +359,7 @@ An Annotation indicates the time it was created and is associated with a number
 of AnnotationFragments. The AnnotationFragments are ordered using the fragmentIndex
 column. A fragment can either contain text, a reference to a Transformer, a reference
 to a DataFrame, or a reference to a TransformerSpec (in Spark.ML code, this would
-correspond to an Estimator), The Scala code above would result in the creation
+correspond to an Estimator). The Scala code above would result in the creation
 of five AnnotationFragments, where the first, third, and fifth store text, the second
 refers to a DataFrame, and the fourth refers to a Transformer.
 
@@ -385,7 +385,7 @@ stored with the table in Listing \ref{listing:linearmodel}.
 A linear model is represented by a Transformer, and its weights are represented
 by the associated LinearModelTerms. Each term indicates the weight (the coefficient) and
 some statistics about the weight (t-statistic, standard error, and p-value). The position
-of the weight in the weight vector is given by termIndex (which is 0 if there is an intercept
+of the weight in the weight vector is given by termIndex (which is 0 for an intercept
 term).
 
 This table makes it possible to run some useful queries (e.g. build confidence intervals
@@ -409,7 +409,7 @@ child to forward an input example to), but this is not utilized in ModelDB S+C s
 it is currently omitted. 
 
 The TreeLink table simply indicates a parent child relationship. Spark.ML's 
-decision trees are binary trees, and ModelDB S+C uses the same. However, for 
+decision trees are binary trees, so ModelDB S+C also assumes decision trees are binary. However, for 
 generalization to non-binary trees, the isLeft column could be replaced by a childIndex
 column that indicates the index (0 being leftmost) of the child.
 
@@ -432,7 +432,7 @@ ModelDB Syncer is a client side abstraction for recording events and sending the
 to ModelDB Server. When operations (e.g. creation of a model, splitting of a DataFrame)
 are detected by the ModelDB Spark Client, a SyncableEvent object is created and sent to
 a global ModelDB Syncer object. This ModelDB Syncer maintains an ordered buffer of Syncable Events
-that it periodically flushes to the ModelDB Server. Each Syncable Event is imbued with logic for converting
+that it periodically flushes to ModelDB Server. Each Syncable Event is imbued with logic for converting
 the Spark objects it represents into the corresponding ModelDB S+C abstraction and sending that information to
 ModelDB Server. The ModelDB Syncer performs other roles as well, such as maintaining a mapping between Spark
 objects and their IDs in ModelDB S+C. ModelDB Syncer is described in greater detail in the Implementation chapter.
