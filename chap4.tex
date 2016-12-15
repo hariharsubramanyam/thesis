@@ -12,7 +12,7 @@ respecting the constraints between events and primitives. It begins by discussin
 storage algorithms for the three primitives and core
 Syncable Events. Then, the storage algorithms for some
 of the more complicated Syncable Events, such as RandomSplitEvent, GridSearchCrossValidationEvent,
-and PipelineEvent are discuseed. Finally, the storage algorithms for linear and tree models are
+and PipelineEvent are discussed. Finally, the storage algorithms for linear and tree models are
 covered.
 
 The second section covers algorithms that operate on the DataFrame ancestry forest, which consists
@@ -21,12 +21,12 @@ how the forest can be used to find the ancestry of a given DataFrame or model, t
 DataFrames, and the models that derived from a given DataFrame. The section concludes by showing how the
 forest can be used to extract machine learning pipelines from ModelDB Server.
 
-The third section focuses on algorithms that operate on the feature-sets of models. It first discusses how
+The third section focuses on algorithms that operate on the feature sets of models. It first discusses how
 it is possible to find the original DataFrame columns that were used to generate the features used by a given model.
 Next, it explains how to find models that use all the features in a given feature set. 
 
 The fourth section discusses algorithms that operate on multiple models. It begins by
-discussing how the feature-sets of two models can be compared. Next, it explains
+discussing how the feature sets of two models can be compared. Next, it explains
 how the DataFrame ancestry forest can be used to find a common DataFrame from
 which two models are derived. Afterwards, it shows how the hyperparameters of two
 models can be compared. The section concludes by explaining how models can be ranked
@@ -58,7 +58,7 @@ HyperParameters for a TransformerSpec) associated with the primitive.
 The core Syncable Events are TransformEvent, FitEvent, and MetricEvent. They
 are defined as compositions of the three primitives. Similarly, the algorithms
 that store the core Syncable Events to the database utilize the storage algorithms
-for the primitive events.
+for the primitives.
 
 Consider the TransformEvent. When ModelDB Server is asked to store a TransformEvent, it
 first stores the input DataFrame, output DataFrame, and Transforer using the corresponding
@@ -74,7 +74,7 @@ In order to store an Annotation, the client sends ModelDB Server a list containi
 the annotation fragments (each is a Transformer, TransformerSpec, DataFrame, or a String).
 ModelDB Server first stores the primitives that the fragments refer to. Then, it stores
 an entry in Annotation. Next, it stores an AnnotationFragment for each fragment. Finally,
-it makes an entry in the Event table. ModelDB Server also verifies that each fragment refer
+it makes an entry in the Event table. ModelDB Server also verifies that each fragment refers
 to exactly one primitive or contain a String. This check could also potentially be done at the database level.
 
 \subsection{RandomSplitEvent}
@@ -96,7 +96,7 @@ single-output limitation. A RandomSplitEvent has a single input and multiple out
 \subsection{PipelineEvent}
 Recall that PipelineEvent represents the creation of a Pipeline Model from a Pipeline.
 A Pipeline is a chain of Transformers and Estimators (i.e. an object that applies a TransformerSpec
-to a DataFrame create a Transformer). When a DataFrame is fed into the Pipeline, a Pipeline Model (a
+to a DataFrame in order to create a Transformer). When a DataFrame is fed into the Pipeline, a Pipeline Model (a
 chain of Transformers) is produced.  The storage algorithm is shown below:
 
 \begin{algorithm}[H]
@@ -112,7 +112,7 @@ chain of Transformers) is produced.  The storage algorithm is shown below:
 
  $currentDataFrame \gets pe.inputDataFrame$ 
 
- \For{each $stage$ in increasing stageNumber} {
+ \For{each $stage$, taken in increasing stageNumber} {
    \eIf{$stage$ is a fit stage} {
      Store a FitEvent for the stage where $currentDataFrame$ is the the input DataFrame
      for the FitEvent.
@@ -226,7 +226,7 @@ simply chains of Transformers (some of which were produced by fitting a Transfor
 the user implictly creates Pipeline Models as they make FitEvents and TransformEvents. ModelDB Server offers a mechanism
 for extracting pipelines from $\mathcal{F}$. The algorithm for extracting a pipeline is specified below.
 
-First the user specifies the ID, $mId$, of a model (i.e. Transformer with assocaited FitEvent) that they'd like to extract
+First the user specifies the ID, $mId$, of a model (i.e. Transformer with associated FitEvent) that they'd like to extract
 a pipeline for.
 
 Second, the FitEvent table is scanned to find the DataFrame $df$ that is associated with the Transformer with ID $mId$.
@@ -235,7 +235,7 @@ Third, the ancestry of $df$ is computed, and all the TransformEvents along the c
 
 Fourth, the Transformer for each TransformEvent in $transformEvents$ is extracted and put into a list (call it $transformers$).
 
-Fifth, the FitEvent table is scanned and the TransformerSpec is extracted for all the FitEvents who have a Transformer appearing in $transformer$ 
+Fifth, the FitEvent table is scanned and the TransformerSpec is extracted for all the FitEvents who have a Transformer appearing in $transformers$ 
 (call the resulting list of TransformerSpecs $specs$).
 
 Finally, $transformers$ and $specs$ are returned to the user, sorted by the position of their corresponding TransformEvent in the ancestry chain.
@@ -244,7 +244,7 @@ Finally, $transformers$ and $specs$ are returned to the user, sorted by the posi
 The Feature table lists the features that are used by a model (i.e. Transformer with associated FitEvent).
 There are a number of useful operations we can perform using this table.
 
-\subsection{Original Feature-set of Model}
+\subsection{Original Feature Set of Model}
 Suppose that there is a DataFrame $df1$ with the columns $labScore$ and $homeworkScore$. Then,
 suppose that $df1$ is transformed to produce $df2$, which contains a column called $assignmentScore$ that is
 computed by combining $labScore$ and $homeworkScore$ in some way. Finally, suppose that a model, $m$, is created to
@@ -284,7 +284,7 @@ Finally, $originalFeatures$ is returned.
 The above algorithm simply starts with the model's described feature columns and walks up the ancestry chain trying to find
 the columns that originated these columns.
 
-\subsection{Models using a Given Feature-set}
+\subsection{Models using a Given Feature Set}
 ModelDB Server can also find models that use any of the features listed in a given set of features, $featureSet$. Basically,
 the Feature table is scanned for rows whose feature name is included in $featureSet$. The Transformer IDs for these
 Feature rows are extracted, de-duplicated, and returned to the user.
@@ -319,7 +319,7 @@ Then, the common ancestor DataFrame (using the algorithm described earlier in
 this chapter) of $df1$ and $df2$ is computed and returned.
 
 \subsection{Compare Hyperparameters of Two Models}
-Models of the same type (e.g. Random Forest) can have wildly different performance
+Models of the same type (e.g. random forest) can have wildly different performance
 outcomes on the same training DataFrame because they have different hyperparameters.
 ModelDB Server makes it possible to compare the hyperparameters of two models given their
 IDs (call them $mId1$ and $mId2$).
@@ -346,7 +346,7 @@ according to a given metric type (e.g. accuracy) when evaluated on a given DataF
 
 \subsection{Find Similar Models}
 A user may want to find other models similar to a given model. ModelDB Server
-allows the user to do search for models that match the given model's type (e.g. 
+allows the user to search for models that match the given model's type (e.g. 
 Random Forest), problem type (e.g. regression, binary classification), performance,
 and more.
 
@@ -357,7 +357,7 @@ summarizes a few of the algorithms that can be run on these models.
 \subsection{Features ordered by Importance}
 One operation of great value in model building is computing the most important
 features in a model. ModelDB Server stores an importance column in the Feature
-vector for its linear and tree models. Thus, it simply sorts the features in
+table for its linear and tree models. Thus, it simply sorts the features in
 descending importance and returns them to the user.
 
 For linear models, ModelDB Server only computes feature importance if the linear model

@@ -59,7 +59,7 @@
 \contentsline {subsection}{\numberline {4.2.4}Descendent Models of DataFrame}{60}
 \contentsline {subsection}{\numberline {4.2.5}Pipeline Extraction}{61}
 \contentsline {section}{\numberline {4.3}Feature Algorithms}{61}
-\contentsline {subsection}{\numberline {4.3.1}Original Feature-set of Model}{62}
+\contentsline {subsection}{\numberline {4.3.1}Original Feature Set of Model}{62}
 \contentsline {subsection}{\numberline {4.3.2}Models using a Given Feature-set}{63}
 \contentsline {section}{\numberline {4.4}Multi-model Algorithms}{63}
 \contentsline {subsection}{\numberline {4.4.1}Compare Features of Two Models}{63}
