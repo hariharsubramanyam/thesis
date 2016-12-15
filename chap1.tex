@@ -88,6 +88,48 @@ Concretely, this thesis makes the following contributions:
 For the rest of this paper, ModelDB Server and the Spark Client will be referred
 to as ModelDB S+C.
 
+\section{Usage Scenario}
+To motivate why ModelDB S+C would be useful, consider the sample usage scenario
+described below.
+
+Data scientist Alice is trying to build a model that can predict the click through rate
+of an advertisement based on various features of the advertisement (e.g. target demographic,
+color scheme). She uses Spark and ModelDB S+C. Alice first applies various preprocessing steps to
+her data, which are recorded and stored in ModelDB Server. At one point, she realizes that there
+is a bug in one of her dataset's columns, so she uses ModelDB Server's ancestry API to determine
+all the operations she has applied to her dataset - with this information, she realizes she forgot a preprocessing step, so
+she makes sure to apply it.
+Next, Alice trains a few models on the dataset and computes various evaluation metrics on them. Using
+ModelDB Server's API, she can rank these models along various metrics and identify which one performed
+best overall. Alice selects the the best model and uses ModelDB Server's API to 
+rank its features by importances. She sees that it is one of the few 
+models she created that uses the "color scheme" feature, so she suspects 
+that this feature may be important. So, Alice uses ModelDB S+C's annotation API and 
+annotates the model with the text "Model works really well, I think the color scheme feature is
+important for accurate prediction" so that her colleagues will be informed if they later train
+similar models. Alice trains a new model and finds that its performance
+is worse. To debug the issue, she uses ModelDB Server's API to compare the model
+to the best one she has trained so far. She sees that there's a difference in the number of iterations
+the models were trained for. Alice trains the new model for a greater number of iterations and finds
+that the performance of the model has greatly improved. Happy with the results, she uses ModelDB's visualization
+tool (part of the overall ModelDB system, it is built on ModelDB Server) to graphically view all the operations 
+she performed so that she refer to it as she writes about her process and shares her results with her colleagues.
+
+Later, data scientist Bob comes along and is also looking for a system to predict 
+ad clickthrough rate. He uses ModelDB Server's API to find all the models that 
+descended from the ads dataset. He uses ModelDB Server's API to group these models
+based on their problem type, and he focuses on the ones that were used for predicting click
+through rate. Then, he uses ModelDB Server's API to rank these models and find the best performing
+model. The best performing model turns out to be one that would be difficult to scale for Bob's
+use case, so he uses ModelDB Server's API to find a similar model to the best one. This yields
+Alice's model, which is similar in performance, but much easier to scale. ModelDB S+C stores serialized models, so
+Bob loads Alice's model and uses it to make a few predictions. Happy with the results, Bob
+decides to evaluate the model on the latest installment of the ads dataset. However, he doesn't
+know how to preprocess the data. Fortunately, Bob is able to use ModelDB Server's API to extract the 
+preprocessing pipeline that was applied to the model's original dataset, and he loads each of
+the data preprocessors and preprocesses his data. Then, he feeds in his dataset and evaluates
+the model. Happy with its performance, he decides to use it in his system.
+
 \section{Outline of this Thesis}
 
 Chapter 2 covers related work. It first discusses machine learning in general,
