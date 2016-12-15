@@ -6,7 +6,7 @@
 %% prompt when you run the file main.tex through LaTeX.
 \chapter{Introduction}
 \section{The Model Building Process}
-Machine learning models have been used in to solve problems in a large number of
+Machine learning models have been used to solve problems in a large number of
 domains. They can be used to recommend movies~\cite{netflixprize}, 
 classify tumors as benign or malignant~\cite{tumorprediction}, recognize faces~\cite{deepface}, and more. 
 Building these highly predictive machine learning models, however, is not easy. 
@@ -17,7 +17,7 @@ following steps:
 
 \begin{enumerate}
   \item Apply preprocessing operations to the data.
-  \item Split the data into training and test sets.
+  \item Split the data into train and test sets.
   \item Select a model type and optimization criterion for training.
   \item Define a hyperparameter search grid for the model.
   \item Use cross validation to evaluate hyperparameter configurations and select a 
@@ -50,7 +50,7 @@ questions, but currently it is difficult and time-consuming to do.
 This challenge of recording, storing, and learning from the model building process is precisely
 the problem that ModelDB Server and ModelDB Spark Client aim to solve.
 
-ModelDB Spark Client is a lighweight library for Apache Spark's machine learning framework (Spark.ML) 
+ModelDB Spark Client is a lightweight library for Apache Spark's machine learning library (Spark.ML) 
 that allows the user to collect information about their machine learning operations with minimal changes to their code. 
 
 The Spark Client sends the information it collects to ModelDB Server, which 
@@ -59,7 +59,7 @@ models in its filesystem.
 
 The abstractions used in ModelDB Server are library agnostic. This means ModelDB Server 
 and its database schema are not tied to any particular machine learning library, making
-it possible to develop clients for other popular machine learning libraries like Python Scikit-learn.
+it possible to develop clients for other popular machine learning libraries like Scikit-learn for Python.
 
 ModelDB Server also exposes an API that allows the user to glean information about their
 operations and models. This allows users to compare models, find
@@ -86,23 +86,23 @@ Concretely, this thesis makes the following contributions:
 \end{enumerate}
 
 For the rest of this paper, ModelDB Server and the Spark Client will be referred
-to as ModelDB S+C.
+to collectively as ModelDB S+C.
 
 \section{Usage Scenario}
-To motivate why ModelDB S+C would be useful, consider the sample usage scenario
+To motivate why ModelDB S+C would be useful, consider the usage scenario
 described below.
 
 Data scientist Alice is trying to build a model that can predict the click through rate
 of an advertisement based on various features of the advertisement (e.g. target demographic,
 color scheme). She uses Spark and ModelDB S+C. Alice first applies various preprocessing steps to
 her data, which are recorded and stored in ModelDB Server. At one point, she realizes that there
-is a bug in one of her dataset's columns, so she uses ModelDB Server's ancestry API to determine
-all the operations she has applied to her dataset - with this information, she realizes she forgot a preprocessing step, so
+is a bug in one of her dataset's columns, so she uses ModelDB Server's API to determine
+all the operations she has applied to her dataset. With this information, she realizes she forgot a preprocessing step, so
 she makes sure to apply it.
 Next, Alice trains a few models on the dataset and computes various evaluation metrics on them. Using
 ModelDB Server's API, she can rank these models along various metrics and identify which one performed
-best overall. Alice selects the the best model and uses ModelDB Server's API to 
-rank its features by importances. She sees that it is one of the few 
+best overall. Alice selects the best model and uses ModelDB Server's API to 
+rank its features by importance. She sees that it is one of the few 
 models she created that uses the "color scheme" feature, so she suspects 
 that this feature may be important. So, Alice uses ModelDB S+C's annotation API and 
 annotates the model with the text "Model works really well, I think the color scheme feature is
@@ -113,7 +113,7 @@ to the best one she has trained so far. She sees that there's a difference in th
 the models were trained for. Alice trains the new model for a greater number of iterations and finds
 that the performance of the model has greatly improved. Happy with the results, she uses ModelDB's visualization
 tool (part of the overall ModelDB system, it is built on ModelDB Server) to graphically view all the operations 
-she performed so that she refer to it as she writes about her process and shares her results with her colleagues.
+she performed so that she can refer to it as she writes about her process and shares her results with her colleagues.
 
 Later, data scientist Bob comes along and is also looking for a system to predict 
 ad clickthrough rate. He uses ModelDB Server's API to find all the models that 
@@ -141,7 +141,7 @@ machine learning libraries and their abstractions and concludes by discussing ot
 learning support systems.
 
 Chapter 3 covers the abstractions used in ModelDB S+C.
-It begins with a discussion of Transformer, TransformerSpec, and DataFrame, which 
+It begins with a discussion of Transformer, TransformerSpec, and DataFrame, which are
 the primitives that are used to create the other abstractions. Next, the chapter
 introduces the Syncable Event abstraction, which represents a machine learning
 operation that can be logged. Then, some of the simple Syncable Events, like FitEvent,
@@ -151,24 +151,26 @@ abstractions for representing linear and tree models. Finally, the ModelDBSyncer
 a client side abstraction for sending events to ModelDB Server, is discussed.
 
 Chapter 4 covers algorithms used in ModelDB S+C. It 
-begins with storage algorithms which capture the complexities involved in storing
+begins with storage algorithms that capture the complexities involved in storing
 and connecting the Syncable Events. The next topic is ancestry algorithms, which
-operate on the ancestry chain of DataFrames. The chapter then talks about algorithms
-that operate on the feature sets of models and and algorithms that compare, rank,
+operate on the ancestry forest of DataFrames. The chapter then talks about algorithms
+that operate on the feature sets of models and algorithms that compare, rank,
 and group models. Finally, the chapter discusses algorithms for linear models
 and tree models.
 
 Chapter 5 covers implementation. It starts with an overall view of the system,
 including ModelDB Server, the database, the model filesystem, Spark, and more. 
-Then, attention shifts to an outline of the ModelDB Server's implementation. Next,
+Then, attention shifts to an outline of ModelDB Server's implementation. Next,
 the chapter discusses the Spark Client implementation. The chapter concludes with
 a discussion of how applications can be built on top of ModelDB Server.
 
 Chapter 6 is the evaluation. It first describes an experiment run to measure the
 time and space overhead of collecting operations and models from Spark and recording
-them in the ModelDB Server. The chapter then describes an experiment to measure
+them in ModelDB Server. The chapter then describes an experiment to measure
 the time taken to run some of the more complicated API methods exposed by ModelDB Server.
-Finally, the chapter presents the results of the experiments and discusses potential performance
+The chapter then considers real machine learning workflows, and examines how well ModelDB S+C is
+able to capture the operations performed.
+Finally, the chapter discusses potential performance
 improvements.
 
 Chapter 7 describes the role of ModelDB S+C in ModelDB,
