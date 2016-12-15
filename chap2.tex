@@ -1,7 +1,7 @@
 \chapter{Related Work}
 
 \section{Machine Learning}
-There are many classes problems that machine learning can be used to solve, such
+There are many classes of problems that machine learning can be used to solve, such
 as the following~\cite{introtoml}:
 
 \begin{itemize}
@@ -11,7 +11,7 @@ as the following~\cite{introtoml}:
     ranking, and regression.
   \item \textbf{Unsupervised Learning}: Find structure or regularity in a given
     set of input vectors. This includes problems like density estimation and 
-    clustering
+    clustering.
   \item \textbf{Reinforcement Learning}: Develop a policy that allows an agent
     to observe the state of its environment and take the actions that will 
     achieve a large cumulative reward in the long run~\cite{introtorl}.
@@ -21,10 +21,10 @@ ModelDB S+C can store operations and models for supervised
 and unsupervised learning problems. Reinforcement learning, however, is out
 of scope for this thesis.
 
-For a supervised learning problems, suppose there is a dataset $\mathcal{D}$ that
+For a supervised learning problem, suppose there is a dataset $\mathcal{D}$ that
 consists of $n$ pairs of $(\textbf{x}^{(i)}, y^{(i)})$. There is a
-pair for each $i \in \{{1...n}\}$. The $\textbf{x}^{(i)}$ are $p$-dimensional feature
-vectors that decribe the $i^{th}$ example. So, $\textbf{x}^{(i)} \in \mathbb{R}^{p}$. 
+pair for each $i \in \{{1...n}\}$. $\textbf{x}^{(i)}$ is a $p$-dimensional feature
+vector that decribes the $i^{th}$ example. So, $\textbf{x}^{(i)} \in \mathbb{R}^{p}$. 
 $y^{(i)}$ is either the class label associated with the $i^{th}$ example or
 the regression target for that example. That is, $y^{(i)} \in \{1...C\}$ for classification
 and $y^{(i)} \in \mathbb{R}$ for regression. The $\textbf{x}^{(i)}$ vectors
@@ -33,8 +33,8 @@ can also be expressed as a $n \times p$ matrix $\textbf{X}$.
 A machine learning model is a function $f(\textbf{x}; \boldsymbol{\theta})$ where
 $\boldsymbol{\theta}$ is a vector of model parameters (e.g. the weights of a linear regression
 model or the encoded splits of a decision tree model). This function accepts an 
-input vector $\textbf{x} \in \mathbb{R}^{p}$ and produces a real output (e.g. for regression)
-or probability of being in a specific class (e.g. for classification).
+input vector $\textbf{x} \in \mathbb{R}^{p}$ and produces a real output (for regression)
+or probability of being in a specific class (for classification).
 
 When training a model, it is useful to split the dataset $\mathcal{D}$ into
 a training set $\mathcal{D}_{train}$ and testing set $\mathcal{D}_{test}$. This ensures
@@ -52,7 +52,7 @@ is the one that yielded the model that performed best on the validation set.
 Using a technique called cross validation can make better use of the data. In 
 $k$-fold cross validation, $\mathcal{D}_{train}$ is broken into $k$ pieces (or folds) of roughly
 equal size. Then, for a given hyperparameter configuration, a total of $k$ models are trained, each 
-trained on all but one of the folds. Each model is evaluated on the fold that was left out,
+trained on all but one of the folds. Each model is evaluated on the fold that was left out of its training,
 and the resulting evaluation metrics are aggregated (e.g. averaged) to produce the evaluation
 metric for the hyperparameter configuration. The hyperparameter configuration with the
 largest evaluation metric is chosen as the best hyperparameter configuration. Then, a final
@@ -84,14 +84,14 @@ in the case of classification or a real value in the case of regression. For a g
 the decision tree considers a different feature at each internal node. The input vector is forwarded
 to a child node based on the value of the feature. This child node, if it is an internal node, then considers another
 feature and performs the same process. Eventually, the input vector arrives at a leaf node. Each leaf node corresponds to
-a region of the input space, and thus has an associated value (e.g. class label or real number), which is taken
+a region of the input space, and thus has an associated value (i.e. class label or real number), which is taken
 to be the prediction for the input vector. An illustration of this is shown in Figure \ref{fig:sample_decision_tree}.
 
 \begin{figure}
   \centering
   \includegraphics[height=3.0in]{sample_decision_tree}
   \caption{This is a decision tree model that could be used to predict whether the
-  weather will be snowy (output 1), rainy (output 1), or neither (output 2) by
+  weather will be snowy (output 1), rainy (output 2), or neither (output 3) by
   looking at the cloud cover and temperature. The tree first checks if the cloud cover
   is high. If not, then it predicts there will be neither rain nor snow. Otherwise, the
   tree checks if the temperature is below 0. If so, then it predicts snow. Otherwise, it
@@ -203,7 +203,7 @@ nodes are DataFrames and the edges are Transformers. Tensorflow's computation
 graph is useful for performing efficient training of models. However, since 
 ModelDB S+C does not actually do any training of models and instead just 
 captures operations like transformations and model-fitting, its graph is 
-different than TensorFlows. Additionally, Tensorflow requires the user to 
+different than TensorFlow's. Additionally, Tensorflow requires the user to 
 specifiy their computation graph up-front in order for
 the library to determine how to train the model. ModelDB S+C, on 
 the other hand, builds up its graph over time as the user performs operations.
@@ -217,12 +217,12 @@ is the only one with a significantly different set of abstractions than ModelDB 
 ModelDB S+C does not actually train any machine learning models and it does not 
 make any predictions. Rather, it collects, stores, and analyzes data about 
 the model building process. In this way, ModelDB S+C supports the process of
-model building rather performing the process itself. This section describes
-other systems which support the model building process.
+model building rather than performing the process itself. This section describes
+other systems that support the model building process.
 
 \subsection{ModelHub}
 ModelHub \cite{modelhub} is similar to the overall ModelDB system in that it also
-aims to to provide a suite of systems like model version control, a command line
+aims to provide a suite of systems like model version control, a command line
 toolkit, and a model exploration API, to support the model building process. ModelHub
 focuses on deep learning and provides specialized tools for that domain, however, 
 while ModelDB is aimed at machine learning models in general. Additionally, while
@@ -274,12 +274,12 @@ store the data associated with the model building process.
 \subsection{PMML}
 PMML \cite{pmml} is an XML-like markup language for representing machine learning models. While it
 can describe a wide range of machine learning models, it cannot represent general model building operations
-like ModelDB Server's database does. It is not possible to run queries on PMML either, but ModelDB Server
+like ModelDB Server's database does. It is not possible to run queries on PMML either. ModelDB Server, on the other hand,
 exposes an API for querying model building operations and stores operation data in a SQL database. PMML can,
 however, complement ModelDB Server because a user can choose to store their serialized models in PMML form.
 
 \subsection{Longview}
 Longview is a predictive DBMS. It allows users to store machine learning models in a relational database
-and access them via a user defined function in their queries. Unlike ModelDB Server and Spark Client, it
+and access them via a user defined function in their queries. Unlike ModelDB S+C, it
 cannot work with a user's existing code, and instead requires them to use Longview for all their
 model training. Finally, Longview does not store machine learning operations like ModelDB Server does.
