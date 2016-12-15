@@ -22,7 +22,7 @@ following steps:
   \item Define a hyperparameter search grid for the model.
   \item Use cross validation to evaluate hyperparameter configurations and select a 
     promising model.
-  \item Evaluate the model on the test set
+  \item Evaluate the model on the test set.
 \end{enumerate}
 
 Over many cycles, the data scientist will create and evaluate many models,
@@ -116,7 +116,7 @@ tool (part of the overall ModelDB system, it is built on ModelDB Server) to grap
 she performed so that she can refer to it as she writes about her process and shares her results with her colleagues.
 
 Later, data scientist Bob comes along and is also looking for a system to predict 
-ad clickthrough rate. He uses ModelDB Server's API to find all the models that 
+ad click through rate. He uses ModelDB Server's API to find all the models that 
 descended from the ads dataset. He uses ModelDB Server's API to group these models
 based on their problem type, and he focuses on the ones that were used for predicting click
 through rate. Then, he uses ModelDB Server's API to rank these models and find the best performing
@@ -147,7 +147,7 @@ introduces the Syncable Event abstraction, which represents a machine learning
 operation that can be logged. Then, some of the simple Syncable Events, like FitEvent,
 which represents the fitting of a model, are described. Next, more complicated Syncable
 Events, like PipelineEvent are discussed. The chapter then moves on to discuss the
-abstractions for representing linear and tree models. Finally, the ModelDBSyncer,
+abstractions for representing linear and tree models. Finally, the ModelDB Syncer,
 a client side abstraction for sending events to ModelDB Server, is discussed.
 
 Chapter 4 covers algorithms used in ModelDB S+C. It 
@@ -161,7 +161,7 @@ and tree models.
 Chapter 5 covers implementation. It starts with an overall view of the system,
 including ModelDB Server, the database, the model filesystem, Spark, and more. 
 Then, attention shifts to an outline of ModelDB Server's implementation. Next,
-the chapter discusses the Spark Client implementation. The chapter concludes with
+the chapter discusses the Spark Client's implementation. The chapter concludes with
 a discussion of how applications can be built on top of ModelDB Server.
 
 Chapter 6 is the evaluation. It first describes an experiment run to measure the
@@ -179,4 +179,4 @@ a command line toolkit, a prediction store, and a visualization application.
 
 Chapter 8 covers potential future work that could be done on ModelDB S+C.
 
-Chapter 9 concludes the paper.
+Chapter 9 concludes the thesis.

@@ -164,7 +164,7 @@ predictions.
 Scikit-learn \cite{scikitlearn} is a machine learning library for Python. It expects data to
 be given as matrices (two dimensional arrays in the numpy Python library) and DataFrames (from the Python
 Pandas library). Both of these abstractions map nicely to ModelDB S+C's DataFrame.
-A matrix can be thought of a DataFrame where all columns are numeric and where the column names are ignored.
+A matrix can be thought of as a DataFrame where all columns are numeric and where the column names are ignored.
 
 Scikit-learn includes the concept of an Estimator, which contains logic for training a model and stores the hyperparameters.
 This maps well to ModelDB S+C's TransformerSpec. The logic for training the model is not necessary for ModelDB S+C. Scikit-learn
