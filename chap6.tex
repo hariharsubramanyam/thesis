@@ -63,7 +63,7 @@ dataset also includes the animal's outcome (e.g. adopted, returned to owner, tra
 for each animal. A machine learning model could solve a multi-class classification problem on this dataset
 in which it predicts the most likely outcome for a given animal. Such a model could 
 be used to identify the most likely outcome for an animal newly admitted into the
-an animal shelter. This dataset was used when measuring the time/space overhead
+animal shelter. This dataset was used when measuring the time/space overhead
 of ModelDB S+C.
 
 The \textbf{Housing Prices} dataset \cite{housing} includes features like square
@@ -79,7 +79,7 @@ like petal length, sepal width, and more for 150 Iris plans. The dataset also
 includes the species of the Iris plant. A machine learning model could solve a 
 multi-class classification problem on this dataset in which it predicts the species
 of a given Iris plant. Such a model may be useful for botanists looking to classify
-their plants. This dataset was used when measuring the size of ModelDB S+C models
+their plants. This dataset was used when comparing the size of ModelDB S+C models
 to PMML models (the PMML website includes model files for the Iris dataset).
 
 The \textbf{Titanic} dataset \cite{titanic} is a famous dataset includes features like 
@@ -97,7 +97,7 @@ app's spam filter. This dataset was used when evaluating ModelDB S+C on an exist
 machine learning workflow.
 
 The \textbf{Flight Delays} dataset \cite{airline} includes features like carrier, departure
-time, and more for over 14 million airplane departures. It also includes a field indicating whether
+time, and more for over 7 million airplane departures. It also includes a field indicating whether
 the plane was delayed. A machine learning model could solve a binary classification problem on this dataset in which
 it predicts whether a given airplane is delayed. Such a model could be used by airports and airlines
 to anticipate delays for particular airplanes. This dataset was used when evaluating ModelDB S+C
@@ -147,14 +147,14 @@ running time for each method was recorded.
 
 \subsection{Compare ModelDB S+C Models to PMML}
 The PMML website \cite{pmmlwebsite} includes sample files for a 200 tree random forest model
-and logistic regression model run that were trained on the Iris dataset. So, this
-experiment trained a random forest model and a one vs. rest logistic regression model
+and logistic regression model that were trained on the Iris dataset. So, this
+experiment trained a 200 tree random forest model and a one vs. rest logistic regression model
 in Spark.ML (with ModelDB S+C enabled). The sizes of the model files and database
 were recorded.
 
 \subsection{Evaluating Existing Workflows}
 Three machine learning workflows were collected from the Internet. The first \cite{flightworkflow}, from
-a Hortonworks article, uses the Flight Delays dataset to build a regression model to predict
+a Hortonworks article, uses the Flight Delays dataset to build a classification model to predict
 delays. The second \cite{titanicworkflow} and third \cite{spamworkflow} are from ZeppelinHub, a website that allows users to share their
 machine learning workflows as Zeppelin notebooks. The second workflow trains two models
 to predict passenger survival status for the Titanic dataset and the third builds a spam classifier
@@ -267,10 +267,10 @@ trains a number of random forest models. Consider
 a random forest with 20 decision trees where each tree has depth 7. Further assume
 that each decision tree is a binary tree. This means that each tree has on the
 order of $2^{7} = 128$ nodes (and roughly the same number of links). Thus, the
-random forest has $20 \times 128 = 2650$ nodes (and roughly the same number of links).
+random forest has $20 \times 128 = 2560$ nodes (and roughly the same number of links).
 If 3-fold grid search cross validation is conducted with 8 hyperparameter configurations (a $4 \times 2$ 
-search grid), and a total of 3 such grid search cross validations are performend, 
-this becomes $2650 \times 8 \times 3 \times 3 = 190,800$ nodes (and roughly the same number of links).
+search grid), and a total of 3 such grid search cross validations are performed, 
+this becomes $2560 \times 8 \times 3 \times 3 = 184,320$ nodes (and roughly the same number of links).
 Therefore, it is no surprise that the TreeNode and TreeLink tables are so large.
 
 ModelDB S+C provides two mechanisms to reduce database size. First, as described before, it
@@ -322,7 +322,7 @@ all the produced Transformers, the model sizes in Figure \ref{fig:modelsizes_sma
   \label{fig:modelsizes_small}
 \end{figure}
 
-The models in \ref{fig:modelsizes_small} take up much less space.
+The models in Figure \ref{fig:modelsizes_small} take up much less space.
 
 \section{API Method Time Results}
 The IMDB exploratory workflow took about 490 seconds (a little over 8 minutes)
@@ -360,7 +360,7 @@ a random forest model and one vs. rest logistic regression model were trained on
 dataset. The results are shown in Table \ref{tab:pmml}. Note that the one vs. rest classifier
 actually trains multiple logistic regression models. A one vs. rest classifier was used
 because Spark.ML does not currently support the multi-class logistic regression model. To
-compensate, only one logistic regression model is counted for the sizing below, rather than
+compensate, only one logistic regression model is counted for the sizing, rather than
 all of them.
 
  \begin{table}
@@ -379,7 +379,7 @@ all of them.
  So, for the logistic regression model, ModelDB S+C uses $16 + 12 = 28$ KB, which is
  higher than the $4$ KB required for PMML. This is because the logistic regression model
  is quite simple, which allows the PMML file to be small. ModelDB S+C must store information
- about the DataFrame, TransformerSpec, DataFrameColumn, and Hyperparameters in its database and
+ about the DataFrame, TransformerSpec, DataFrameColumns, and Hyperparameters in its database and
  it stores some metadata for the deserializer in the model file. These two factors cause ModelDB S+C
  to use more storage space than the PMML file does.
 
@@ -390,7 +390,7 @@ all of them.
  the model file), which keeps the overall storage space small. PMML, on the other hand, is an XML-like language, which becomes
  quite verbose for a large model like the random forest.
 
- Overall, it seems that ModelDB S+C does not require hugely more storage space than PMML for storing models. 
+ Overall, it seems that ModelDB S+C does not require significantly more storage space than PMML for storing models. 
  While it may require more storage space in some cases, it is worth it because PMML cannot be queried like the SQLite
  database can and Spark.ML cannot deserialize PMML models and use them in the program. One advantage that PMML
  has is that it is a human readable file (The Parquet file and SQLite file are not human readable) and it is more well-known. 
