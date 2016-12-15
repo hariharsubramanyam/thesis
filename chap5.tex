@@ -10,7 +10,7 @@ The overall architecture for ModelDB S+C is shown below in Figure
   \includegraphics[height=4.0in]{system_architecture}
   \caption{
     The overall architecture of ModelDB S+C. The arrows indicates the flow
-    of operations + models data. Notice that the data originates at the Spark workers and
+    of operation + model data. Notice that the data originates at the Spark workers and
     finds its way into the SQLite database or model filesystem.
   }
   \label{fig:system_architecture}
@@ -27,10 +27,10 @@ model filesystem, which contains the serialized model files. Instead, the Spark 
 to the model filesystem. The reasoning for this decision will be discussed later in this chapter.
 
 Recall that ModelDB Server also exposes an API for gleaning information about the model building process.
-Spark Client includes convenience functions that the user can call to get this information. In this case,
+ModelDB Spark Client includes convenience functions that the user can call to get this information. In this case,
 the arrows would be reversed. When the Spark Client makes a request (via Apache Thrift) to ModelDB Server to run an API 
 method, ModelDB Server reads the database, performs the appropriate computations, and responds to the Spark Client. The
-Spark Client then extracts the desired information from the response, and returns it to be used in user's driver node
+Spark Client then extracts the desired information from the response, and returns it to be used in the user's driver node
 program.
 
 The two key pieces of this diagram are the ModelDB Server and Spark Client. Both
@@ -47,22 +47,22 @@ achieved by using the JOOQ library. This library asks the user to provide a conf
 file that specifies the database and runs a code generator to create Java classes that
 ModelDB Server can use to interact with the database. Changing this configuration file
 (and making appropriate changes to the database schema, in order to correct for slight differences
-in SQL between languages) can allow ModelDB Server to use a different SQL database than
+in the SQL language) can allow ModelDB Server to use a different SQL database than
 SQLite. In addition, ModelDB Server is designed to avoid using any esoteric SQLite data types,
-functions, or features. Some problems which could be solved by appealing to to a special 
+functions, or features. Some problems which could be solved by appealing to a special 
 database function are instead solved in ModelDB Server. This places minimal requirements on 
 the SQL database that ModelDB Server uses.
 
 \subsection{Model Filesystem}
 ModelDB Server allows the user to store their serialized model files in a filesystem. However,
-as shown in \ref{fig:system_architecture}, the ModelDB Server does not ever communicate with this
+as shown in Figure \ref{fig:system_architecture}, the ModelDB Server does not ever communicate with this
 filesystem. Instead, the flow is as follows.
 
 First, the user calls a function in ModelDB Spark Client to indicate that they'd like to save a model and optionally
 provides a filename that they would like to use.
 
 Second, the Spark Client indicates to the ModelDB Server that it would like to store the given model under the
-given filena,e.
+given filename.
 
 Third, ModelDB Server generates a filepath (incorporating the user's requested filename, if one is provied)
 for the model, updates the model's entry in Transformer table 
@@ -77,12 +77,12 @@ first sending it to the server and having the server store the model. Second, so
 libraries (e.g. Spark.ML) store models in a directory structure rather than as a file, and having the
 client store the model directly to the given filepath makes this possible. Finally, by pushing the storage
 logic to the client, the client could allow the user to provide logic that stores a serialized model
-to a completely different filesystem (perhaps their own experimental filesystem). 
+to a brand new or esoteric filesystem (perhaps their own experimental filesystem). 
 
 \subsection{Configuration}
 All the configuration for ModelDB Server (e.g. port to launch server on, prefix for
 filepath generation) is defined in a single configuration file, and some sensible defaults
-are provided so that ModelDB Server is usuable right out of the box rather than requiring
+are provided so that ModelDB Server is usable right out of the box rather than requiring
 configuration before use.
 
 \subsection{Stateless, Separated, Logic}
@@ -95,16 +95,16 @@ for which unit tests can be easily written without having to worry about complex
 come with using Apache Thrift. Second, it allows ModelDB Server to be used as a library, 
 so that other programs could import and use it without having to launch a Thrift server. 
 Finally, it makes the server stateless, which can be useful if
-future work adds support to scale ModelDB Server to multiple servers.
+future work adds support to scale ModelDB Server to multiple machines.
 
 The ModelDB Server algorithms described in Chapter 4 are each implemented as a single function
-or group of functions. They do not persist state between executions and they are expect to have all
+or group of functions. They do not persist state between executions and they are expected to have all
 their dependencies injected as arguments. The abstractions described in Chapter 3 are implemented as 
 SQL tables and also have corresponding Thrift structures to allow them to be sent and received via Thrift
 calls.
 
 \section{Spark Client}
-The Spark Client is written in Scala, primarily because Spark is written in Java.
+The Spark Client is written in Scala, primarily because Spark is written in Scala.
 Before discussing the implementation details, it is worth seeing a sample usage
 of the Spark Client.
 
@@ -176,8 +176,8 @@ import and set up the ModelDB Syncer (the first two lines) and append the suffix
 Spark Client provides "Sync" variants of many Spark.ML methods such as evaluate(),
 transform(), fit(), save(), and randomSplit(). Additionally, the ModelDBSyncer
 object (called "syncer" in the code sample above) exposes a number of methods for
-interacting with ModelDB Server as well (e.g. deserialize a model stored on the
-Server, compute ancestry of a DataFrame).
+interacting with ModelDB Server as well (e.g. deserialize a model stored in the ModelDB S+C
+filesystem, compute ancestry of a DataFrame).
 
 ModelDB Spark Client uses the same types as Spark.ML, so it should interact nicely
 with other Spark.ML code and with other libraries that build on Spark.ML. Additionally,
@@ -234,7 +234,7 @@ modify any existing code in Spark.ML. For example, consider the following Spark.
 val model = estimator.fit(dataframe)
 \end{minted}
 
-The above method call uses an Estimator to train a model (a Transformer) on a DataFrame.
+The method invocation above uses an Estimator to train a model (a Transformer) on a DataFrame.
 
 
 ModelDB Spark Client includes the following method, which involves the same estimator, dataframe,
@@ -245,11 +245,11 @@ val model = estimator.fitSync(dataframe)
 \end{minted}
 
 This is almost identical in function to Spark.ML's fit method, except that it logs a FitEvent
-(or a GridSearchCrossValidationEvent, PipelineEvent if estimator is a CrossValidator or Pipeline,
+(or a GridSearchCrossValidationEvent or PipelineEvent if estimator is a CrossValidator or Pipeline,
 respectively) to ModelDB Server.
 
 To make the above code possible, ModelDB Spark Client uses a combination of Scala implicit classes
-and Scala traits. A Scala trait is similar to an interface in Java or C\#, but it also provide default
+and Scala traits. A Scala trait is similar to an interface in Java or C\#, but it also can provide default
 implementations for interface methods. A Scala implicit class serves a purpose similar to Java's autoboxing
 and unboxing features.
 
@@ -285,7 +285,7 @@ This technique is used many times in ModelDB Spark Client (e.g. for transformSyn
 
 ModelDB Spark Client also includes a class called FeatureVectorizer which is a convenience class
 for building pre-processing pipelines. The user specifies a DataFrame and indicates the categorical and numerical columns
-they'd like to use. Then, FeatureVectorizer builds a PipelineModel that performs common preprocessing steps (e.g. string indexing,
+they would like to use. Then, FeatureVectorizer builds a PipelineModel that performs common preprocessing steps (e.g. string indexing,
 one-hot encoding, standardization of numerical columns) and creates an output DataFrame with a "features" column that can
 be used by a machine learning Estimator or Model.
 

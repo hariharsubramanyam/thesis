@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {3-2}{\ignorespaces Creation of a preprocessing pipeline. First, the user chains together some Transformers and Estimators (objects that can apply their TransformerSpec to create a Transformer from a DataFrame). Next, the user feeds a DataFrame into the pipeline. The Transformers transform their input DataFrame, produce an output DataFrame, and pass the output on to the next step in the pipeline. The Estimators use the input DataFrame to create a Transformer, and then they replace themselves with this Transformer - the Transformer then transforms the input DataFrame and passes the output to the next step. }}{47}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces The overall architecture of ModelDB S+C. The arrows indicates the flow of operations + models data. Notice that the data originates at the Spark workers and finds its way into the SQLite database or model filesystem. }}{68}
+\contentsline {figure}{\numberline {5-1}{\ignorespaces The overall architecture of ModelDB S+C. The arrows indicates the flow of operation + model data. Notice that the data originates at the Spark workers and finds its way into the SQLite database or model filesystem. }}{68}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6-1}{\ignorespaces Time overhead of ModelDB S+C. }}{84}
 \contentsline {figure}{\numberline {6-2}{\ignorespaces Average time overhead percentage by event. }}{86}
