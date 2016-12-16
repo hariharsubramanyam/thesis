@@ -95,11 +95,11 @@
 \contentsline {subsection}{\numberline {6.3.4}Compare ModelDB S+C Models to PMML}{83}
 \contentsline {subsection}{\numberline {6.3.5}Evaluating Existing Workflows}{84}
 \contentsline {section}{\numberline {6.4}Time Overhead Results}{84}
-\contentsline {section}{\numberline {6.5}Storage Overhead Results}{86}
-\contentsline {section}{\numberline {6.6}API Method Time Results}{90}
-\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{93}
-\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{94}
-\contentsline {section}{\numberline {6.9}Improvements}{95}
+\contentsline {section}{\numberline {6.5}Storage Overhead Results}{87}
+\contentsline {section}{\numberline {6.6}API Method Time Results}{91}
+\contentsline {section}{\numberline {6.7}Model Files Compared to PMML Results}{92}
+\contentsline {section}{\numberline {6.8}Evaluating Existing Workflows Results}{93}
+\contentsline {section}{\numberline {6.9}Improvements}{94}
 \contentsline {chapter}{\numberline {7}Role in Overall ModelDB System}{97}
 \contentsline {section}{\numberline {7.1}Scikit-learn Client}{99}
 \contentsline {section}{\numberline {7.2}Command Line Toolkit}{99}
